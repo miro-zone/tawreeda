@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>توريدة (Tawreeda) | كتالوج جملة المواد الغذائية وإدارة التوزيع</title>
+  <meta name="description" content="توريدة - نظام فوري لطلبات الجملة وإدارة الأسعار والمخزون وتحميل سيارات التوزيع لتجار المواد الغذائية والسوبر ماركت في مصر." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'Segoe UI', 'Tahoma', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Cairo', 'Tajawal', 'Segoe UI', 'Tahoma', sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      overscroll-behavior-y: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    /* Custom Toggle Switch */
+    .toggle-track {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 50px;
+      height: 28px;
+      border-radius: 9999px;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease;
+    }
+    .toggle-track[data-checked="true"] .toggle-thumb {
+      transform: translateX(-22px);
+    }
+    /* Drawer & Modal Animations */
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0.7; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-slide-up {
+      animation: slideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.18s ease-out forwards;
+    }
+    /* Print styling for Truck Loading Sheet */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; }
+      #print-area { box-shadow: none !important; border: 1px solid #cbd5e1 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-900 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- Top Sticky Role Switcher & Demo Bar -->
+  <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md no-print">
+    <div class="max-w-4xl mx-auto px-3 sm:px-4 py-2.5">
+      <div class="flex items-center justify-between gap-2 mb-2.5">
+        <!-- Brand -->
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center shadow-sm flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg font-extrabold tracking-tight leading-none">توريدة</span>
+              <span class="text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded-md">نسخة تجريبية</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-tight mt-0.5">نظام جملة الجملة الفوري</p>
+          </div>
+        </div>
+
+        <!-- Reset Demo Data Button -->
+        <button
+          id="btn-reset-demo"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 min-h-[36px] rounded-lg text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+          title="إعادة ضبط الأسعار والمخزون والأوردرات للحالة التجريبية"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+          <span>إعادة ضبط البيانات التجريبية</span>
+        </button>
+      </div>
+
+      <!-- Role Switcher Segmented Control -->
+      <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-800 rounded-xl border border-slate-700/80" role="tablist" aria-label="تبديل الواجهة">
+        <button
+          id="role-customer"
+          type="button"
+          role="tab"
+          class="min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all"
+        >
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+          </svg>
+          <span class="truncate">واجهة العميل (السوبر ماركت)</span>
+        </button>
+
+        <button
+          id="role-merchant"
+          type="button"
+          role="tab"
+          class="min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all"
+        >
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+          </svg>
+          <span class="truncate">لوحة تحكم التاجر (الأدمن)</span>
+          <span id="header-orders-badge" class="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 text-xs font-extrabold rounded-full bg-amber-400 text-slate-900 tabular-nums">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main id="app-main" class="max-w-4xl mx-auto px-3 sm:px-4 pt-3 pb-32">
+    <!-- Dynamically Rendered View -->
+  </main>
+
+  <!-- Sticky Bottom Cart Bar (Customer View) -->
+  <div id="sticky-cart-bar" class="fixed bottom-0 inset-x-0 z-30 hidden no-print">
+    <div class="max-w-4xl mx-auto px-3 pb-3 pt-1">
+      <div class="bg-slate-900 text-white rounded-2xl shadow-xl border border-slate-700/80 p-3 sm:p-3.5">
+        <!-- Free Delivery Mini Progress -->
+        <div id="cart-delivery-progress" class="mb-2.5"></div>
+        <div class="flex items-center justify-between gap-3">
+          <div class="min-w-0">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+              <span class="text-xs text-slate-300 font-semibold">الإجمالي:</span>
+              <span id="cart-bar-total" class="text-xl sm:text-2xl font-black text-emerald-400 tabular-nums">0 ج</span>
+            </div>
+            <div id="cart-bar-summary" class="text-xs text-slate-300 font-medium flex items-center gap-2 flex-wrap mt-0.5"></div>
+          </div>
+          <button
+            id="btn-open-checkout"
+            type="button"
+            class="min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-900/30 flex items-center gap-2 transition-all flex-shrink-0"
+          >
+            <span>مراجعة وإرسال الطلب</span>
+            <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Save Prices Bar (Merchant Tab 1) -->
+  <div id="floating-save-bar" class="fixed bottom-0 inset-x-0 z-30 hidden no-print">
+    <div class="max-w-4xl mx-auto px-3 pb-3">
+      <div class="bg-slate-900 text-white rounded-2xl shadow-xl border border-emerald-500/40 p-3 flex items-center justify-between gap-3 animate-slide-up">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+            </svg>
+          </span>
+          <div class="min-w-0">
+            <p class="text-sm font-bold leading-tight">تعديلات أسعار غير محفوظة</p>
+            <p id="unsaved-count-text" class="text-xs text-slate-300 mt-0.5">0 أصناف تم تعديلها</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button
+            id="btn-discard-prices"
+            type="button"
+            class="min-h-[44px] px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-colors"
+          >إلغاء</button>
+          <button
+            id="btn-save-prices"
+            type="button"
+            class="min-h-[44px] px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 text-xs sm:text-sm font-extrabold shadow-md flex items-center gap-1.5 transition-all"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span>حفظ التعديلات وتحديث الكتالوج</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal / Drawer Root -->
+  <div id="modal-root" class="fixed inset-0 z-50 hidden no-print" aria-modal="true" role="dialog"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-20 inset-x-0 z-50 flex flex-col items-center gap-2 px-4 pointer-events-none no-print"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // =========================================================================
+      // CONSTANTS & SAFE STORAGE
+      // =========================================================================
+      const STORAGE_KEY = 'tawreeda_mvp_state_v1';
+      const FREE_DELIVERY_THRESHOLD = 3000;
+      const WHATSAPP_NUMBER = '201000000000'; // Demo distributor WhatsApp number
+
+      const CATEGORIES = [
+        'شيبسي وسناكس',
+        'بسكويت وويفر',
+        'عصائر ومشروبات',
+        'معلبات ونواشف',
+      ];
+
+      const memoryStorage = {};
+      const safeStorage = {
+        get(key) {
+          try {
+            return window.localStorage.getItem(key);
+          } catch (_) {
+            return memoryStorage[key] || null;
+          }
+        },
+        set(key, val) {
+          try {
+            window.localStorage.setItem(key, val);
+          } catch (_) {
+            memoryStorage[key] = val;
+          }
+        },
+        remove(key) {
+          try {
+            window.localStorage.removeItem(key);
+          } catch (_) {
+            delete memoryStorage[key];
+          }
+        },
+      };
+
+      // =========================================================================
+      // SEED DATA (Authentic Egyptian FMCG Wholesale Catalog)
+      // =========================================================================
+      function createSeedProducts() {
+        return [
+          {
+            id: 'p-chipsy',
+            name: 'شيبسي عائلي أطعمة مشكلة (12 كيس)',
+            category: 'شيبسي وسناكس',
+            cartonPrice: 165,
+            originalCartonPrice: null,
+            packetPrice: 85,
+            unitsPerCarton: 12,
+            unitsPerPacket: 6,
+            unitCost: 13.75,
+            unitLabel: 'كيس',
+            promoText: 'عرض 10+1 (كرتونة هدية على كل 10 كراتين)',
+            bonusBuy: 10,
+            bonusFree: 1,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-ulker',
+            name: 'بسكويت أولكر ساندوتش شوكولاتة (24 باكو)',
+            category: 'بسكويت وويفر',
+            cartonPrice: 120,
+            originalCartonPrice: null,
+            packetPrice: 62,
+            unitsPerCarton: 24,
+            unitsPerPacket: 12,
+            unitCost: 5,
+            unitLabel: 'باكو',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-indomie',
+            name: 'إندومي خضار جامبو (40 كيس)',
+            category: 'معلبات ونواشف',
+            cartonPrice: 340,
+            originalCartonPrice: null,
+            packetPrice: 175,
+            unitsPerCarton: 40,
+            unitsPerPacket: 20,
+            unitCost: 8.5,
+            unitLabel: 'كيس',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-juhayna',
+            name: 'عصير جهينة بيور 1 لتر (12 علبة)',
+            category: 'عصائر ومشروبات',
+            cartonPrice: 288,
+            originalCartonPrice: 320,
+            packetPrice: null,
+            unitsPerCarton: 12,
+            unitsPerPacket: null,
+            unitCost: 24,
+            unitLabel: 'علبة',
+            promoText: 'حرق سعر - صلاحية قريبة',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: true,
+          },
+          {
+            id: 'p-molto',
+            name: 'مولتو ميني شوكولاتة (20 كيس)',
+            category: 'بسكويت وويفر',
+            cartonPrice: 190,
+            originalCartonPrice: null,
+            packetPrice: 98,
+            unitsPerCarton: 20,
+            unitsPerPacket: 10,
+            unitCost: 9.5,
+            unitLabel: 'كيس',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: false,
+            isClearance: false,
+          },
+          {
+            id: 'p-sunshine',
+            name: 'تونة صن شاين قطع سهلة الفتح (24 علبة)',
+            category: 'معلبات ونواشف',
+            cartonPrice: 1152,
+            originalCartonPrice: null,
+            packetPrice: 588,
+            unitsPerCarton: 24,
+            unitsPerPacket: 12,
+            unitCost: 48,
+            unitLabel: 'علبة',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-vitrac',
+            name: 'مربى فيتراك فراولة 430 جم (12 برطمان)',
+            category: 'معلبات ونواشف',
+            cartonPrice: 420,
+            originalCartonPrice: null,
+            packetPrice: 216,
+            unitsPerCarton: 12,
+            unitsPerPacket: 6,
+            unitCost: 35,
+            unitLabel: 'برطمان',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-elarosa',
+            name: 'شاي العروسة ناعم 40 جم (48 باكو)',
+            category: 'عصائر ومشروبات',
+            cartonPrice: 480,
+            originalCartonPrice: null,
+            packetPrice: 246,
+            unitsPerCarton: 48,
+            unitsPerPacket: 24,
+            unitCost: 10,
+            unitLabel: 'باكو',
+            promoText: 'عرض 10+1 (كرتونة هدية على كل 10 كراتين)',
+            bonusBuy: 10,
+            bonusFree: 1,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-tiger',
+            name: 'تايجر شيبس كبير أطعمة (12 كيس)',
+            category: 'شيبسي وسناكس',
+            cartonPrice: 156,
+            originalCartonPrice: null,
+            packetPrice: 80,
+            unitsPerCarton: 12,
+            unitsPerPacket: 6,
+            unitCost: 13,
+            unitLabel: 'كيس',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: false,
+          },
+          {
+            id: 'p-lambada',
+            name: 'بسكويت لمبادا ويفر شوكولاتة (24 باكو)',
+            category: 'بسكويت وويفر',
+            cartonPrice: 132,
+            originalCartonPrice: null,
+            packetPrice: 68,
+            unitsPerCarton: 24,
+            unitsPerPacket: 12,
+            unitCost: 5.5,
+            unitLabel: 'باكو',
+            promoText: '',
+            bonusBuy: 0,
+            bonusFree: 0,
+            inStock: true,
+            isClearance: false,
+          },
+        ];
+      }
+
+      function createSeedOrders() {
+        return [
+          {
+            id: 'ORD-1001',
+            number: 1001,
+            createdAt: '08:15 ص',
+            shopName: 'سوبر ماركت البركة',
+            address: 'شارع فيصل الرئيسي - محطة المساحة',
+            phone: '01012345678',
+            paymentMethod: 'كاش عند الاستلام',
+            notes: 'التسليم قبل الساعة 12 ظهراً',
+            status: 'pending', // 'pending' | 'dispatched'
+            totalAmount: 3246,
+            totalCartons: 15,
+            totalPackets: 0,
+            totalBonusCartons: 1,
+            items: [
+              {
+                productId: 'p-chipsy',
+                name: 'شيبسي عائلي أطعمة مشكلة (12 كيس)',
+                cartons: 10,
+                packets: 0,
+                cartonPrice: 165,
+                packetPrice: 85,
+                bonusCartons: 1,
+                lineTotal: 1650,
+              },
+              {
+                productId: 'p-indomie',
+                name: 'إندومي خضار جامبو (40 كيس)',
+                cartons: 3,
+                packets: 0,
+                cartonPrice: 340,
+                packetPrice: 175,
+                bonusCartons: 0,
+                lineTotal: 1020,
+              },
+              {
+                productId: 'p-juhayna',
+                name: 'عصير جهينة بيور 1 لتر (12 علبة)',
+                cartons: 2,
+                packets: 0,
+                cartonPrice: 288,
+                packetPrice: null,
+                bonusCartons: 0,
+                lineTotal: 576,
+              },
+            ],
+          },
+          {
+            id: 'ORD-1002',
+            number: 1002,
+            createdAt: '09:05 ص',
+            shopName: 'ماركت أولاد سالم',
+            address: 'حدائق الأهرام - البوابة الرابعة',
+            phone: '01198765432',
+            paymentMethod: 'آجل (على الحساب)',
+            notes: '',
+            status: 'pending',
+            totalAmount: 3639,
+            totalCartons: 10,
+            totalPackets: 4,
+            totalBonusCartons: 0,
+            items: [
+              {
+                productId: 'p-chipsy',
+                name: 'شيبسي عائلي أطعمة مشكلة (12 كيس)',
+                cartons: 5,
+                packets: 0,
+                cartonPrice: 165,
+                packetPrice: 85,
+                bonusCartons: 0,
+                lineTotal: 825,
+              },
+              {
+                productId: 'p-indomie',
+                name: 'إندومي خضار جامبو (40 كيس)',
+                cartons: 0,
+                packets: 4,
+                cartonPrice: 340,
+                packetPrice: 175,
+                bonusCartons: 0,
+                lineTotal: 700,
+              },
+              {
+                productId: 'p-ulker',
+                name: 'بسكويت أولكر ساندوتش شوكولاتة (24 باكو)',
+                cartons: 3,
+                packets: 0,
+                cartonPrice: 120,
+                packetPrice: 62,
+                bonusCartons: 0,
+                lineTotal: 360,
+              },
+              {
+                productId: 'p-sunshine',
+                name: 'تونة صن شاين قطع سهلة الفتح (24 علبة)',
+                cartons: 2,
+                packets: 0,
+                cartonPrice: 1152,
+                packetPrice: 588,
+                bonusCartons: 0,
+                lineTotal: 2304,
+              },
+            ],
+          },
+        ];
+      }
+
+      // Fix exact math on seed order 1002: 825 + 700 + 360 + 2304 = 4189
+      function getInitialPersistedState() {
+        const orders = createSeedOrders();
+        orders.forEach((o) => {
+          o.totalAmount = o.items.reduce((sum, it) => sum + it.lineTotal, 0);
+        });
+        return {
+          products: createSeedProducts(),
+          orders,
+          nextOrderNumber: 1003,
+          pickingChecked: {},
+        };
+      }
+
+      function loadPersistedState() {
+        const raw = safeStorage.get(STORAGE_KEY);
+        if (!raw) {
+          const fresh = getInitialPersistedState();
+          safeStorage.set(STORAGE_KEY, JSON.stringify(fresh));
+          return fresh;
+        }
+        try {
+          const parsed = JSON.parse(raw);
+          if (!parsed || !Array.isArray(parsed.products) || !Array.isArray(parsed.orders)) {
+            throw new Error('Invalid state shape');
+          }
+          return {
+            products: parsed.products,
+            orders: parsed.orders,
+            nextOrderNumber: parsed.nextOrderNumber || 1003,
+            pickingChecked: parsed.pickingChecked || {},
+          };
+        } catch (_) {
+          const fresh = getInitialPersistedState();
+          safeStorage.set(STORAGE_KEY, JSON.stringify(fresh));
+          return fresh;
+        }
+      }
+
+      // =========================================================================
+      // APPLICATION STATE
+      // =========================================================================
+      const persisted = loadPersistedState();
+
+      const state = {
+        products: persisted.products,
+        orders: persisted.orders,
+        nextOrderNumber: persisted.nextOrderNumber,
+        pickingChecked: persisted.pickingChecked,
+
+        // UI State
+        role: 'customer', // 'customer' | 'merchant'
+        merchantTab: 'inventory', // 'inventory' | 'orders'
+        searchQuery: '',
+        merchantSearchQuery: '',
+        activeCategory: 'الكل', // 'الكل' | 'عروض' | category name
+        selectedUnitByProduct: {}, // { [productId]: 'carton' | 'packet' }
+        cart: {}, // { [productId]: { cartons: number, packets: number } }
+        pendingPriceEdits: {}, // { [productId]: { cartonPrice?: string, packetPrice?: string } }
+        expandedOrders: {}, // { [orderId]: boolean }
+        pickingFilter: 'pending', // 'pending' | 'all'
+        checkoutDraft: {
+          shopName: '',
+          address: '',
+          phone: '',
+          paymentMethod: 'كاش عند الاستلام',
+          notes: '',
+        },
+      };
+
+      function persistState() {
+        safeStorage.set(
+          STORAGE_KEY,
+          JSON.stringify({
+            products: state.products,
+            orders: state.orders,
+            nextOrderNumber: state.nextOrderNumber,
+            pickingChecked: state.pickingChecked,
+          })
+        );
+      }
+
+      // =========================================================================
+      // HELPERS & FORMATTING
+      // =========================================================================
+      function formatMoney(num) {
+        const n = Number(num) || 0;
+        return n.toLocaleString('en-US', {
+          minimumFractionDigits: n % 1 === 0 ? 0 : 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function parseBonusRule(promoText) {
+        if (!promoText) return { bonusBuy: 0, bonusFree: 0 };
+        const match = promoText.match(/(\d+)\s*\+\s*(\d+)/);
+        if (match) {
+          return {
+            bonusBuy: parseInt(match[1], 10) || 0,
+            bonusFree: parseInt(match[2], 10) || 0,
+          };
+        }
+        return { bonusBuy: 0, bonusFree: 0 };
+      }
+
+      function calcBonusCartons(product, cartonsQty) {
+        if (!product.bonusBuy || !product.bonusFree || cartonsQty < product.bonusBuy) return 0;
+        return Math.floor(cartonsQty / product.bonusBuy) * product.bonusFree;
+      }
+
+      function calcUnitCostForMode(product, mode) {
+        if (mode === 'packet' && product.packetPrice != null) {
+          if (product.unitsPerPacket && product.unitsPerPacket > 0) {
+            return +(product.packetPrice / product.unitsPerPacket).toFixed(2);
+          }
+          if (product.unitsPerCarton && product.unitsPerCarton > 0) {
+            return +(product.packetPrice / (product.unitsPerCarton / 2)).toFixed(2);
+          }
+        }
+        if (product.unitsPerCarton && product.unitsPerCarton > 0) {
+          return +(product.cartonPrice / product.unitsPerCarton).toFixed(2);
+        }
+        return Number(product.unitCost) || 0;
+      }
+
+      function getNowArabicTime() {
+        const now = new Date();
+        let h = now.getHours();
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const period = h >= 12 ? 'م' : 'ص';
+        h = h % 12 || 12;
+        return `${String(h).padStart(2, '0')}:${m} ${period}`;
+      }
+
+      function getCartSummary() {
+        let totalAmount = 0;
+        let totalCartons = 0;
+        let totalPackets = 0;
+        let totalBonusCartons = 0;
+        const lines = [];
+
+        state.products.forEach((p) => {
+          const entry = state.cart[p.id];
+          if (!entry) return;
+          if (!p.inStock) return; // Automatically exclude out-of-stock items
+          const cartons = entry.cartons || 0;
+          const packets = p.packetPrice != null ? (entry.packets || 0) : 0;
+          if (cartons <= 0 && packets <= 0) return;
+
+          const bonusCartons = calcBonusCartons(p, cartons);
+          const lineTotal = cartons * p.cartonPrice + packets * (p.packetPrice || 0);
+          totalAmount += lineTotal;
+          totalCartons += cartons;
+          totalPackets += packets;
+          totalBonusCartons += bonusCartons;
+
+          lines.push({
+            productId: p.id,
+            name: p.name,
+            cartons,
+            packets,
+            cartonPrice: p.cartonPrice,
+            packetPrice: p.packetPrice,
+            bonusCartons,
+            lineTotal,
+            product: p,
+          });
+        });
+
+        return {
+          lines,
+          totalAmount,
+          totalCartons,
+          totalPackets,
+          totalBonusCartons,
+          hasItems: lines.length > 0,
+        };
+      }
+
+      function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const styles = {
+          success: 'bg-slate-900 text-white border-emerald-500/60',
+          warning: 'bg-amber-950 text-amber-100 border-amber-500/60',
+          info: 'bg-slate-800 text-white border-slate-600',
+        };
+        const icon =
+          type === 'warning'
+            ? `<svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>`
+            : `<svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+
+        const el = document.createElement('div');
+        el.className = `pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border shadow-lg text-xs sm:text-sm font-bold animate-fade-in ${styles[type] || styles.success}`;
+        el.innerHTML = `${icon}<span>${escapeHtml(message)}</span>`;
+        container.appendChild(el);
+
+        setTimeout(() => {
+          el.style.opacity = '0';
+          el.style.transition = 'opacity 0.2s ease';
+          setTimeout(() => el.remove(), 220);
+        }, 2800);
+      }
+
+      function buildWhatsAppMessage(order) {
+        const lines = [
+          `📦 *طلب توريد جديد - توريدة*`,
+          `🏪 *اسم المحل:* ${order.shopName}`,
+          `📍 *العنوان:* ${order.address}`,
+        ];
+        if (order.phone) lines.push(`📞 *الموبايل:* ${order.phone}`);
+        lines.push(`💳 *طريقة الدفع:* ${order.paymentMethod}`);
+        lines.push(`🧾 *رقم الفاتورة:* #${order.number}`);
+        lines.push(`━━━━━━━━━━━━━━`);
+        lines.push(`*الأصناف المطلوبة:*`);
+
+        order.items.forEach((item, idx) => {
+          lines.push(`${idx + 1}. *${item.name}*`);
+          if (item.cartons > 0) {
+            lines.push(`   • ${item.cartons} كرتونة × ${formatMoney(item.cartonPrice)} ج = ${formatMoney(item.cartons * item.cartonPrice)} ج`);
+          }
+          if (item.packets > 0 && item.packetPrice != null) {
+            lines.push(`   • ${item.packets} شرنك × ${formatMoney(item.packetPrice)} ج = ${formatMoney(item.packets * item.packetPrice)} ج`);
+          }
+          if (item.bonusCartons > 0) {
+            lines.push(`   🎁 *بونص هدية: +${item.bonusCartons} كرتونة مجاناً*`);
+          }
+        });
+
+        lines.push(`━━━━━━━━━━━━━━`);
+        const qtyParts = [];
+        if (order.totalCartons > 0) qtyParts.push(`${order.totalCartons} كرتونة`);
+        if (order.totalPackets > 0) qtyParts.push(`${order.totalPackets} شرنك`);
+        if (order.totalBonusCartons > 0) qtyParts.push(`+${order.totalBonusCartons} كرتونة هدية 🎁`);
+        lines.push(`📊 *إجمالي الكمية:* ${qtyParts.join(' • ')}`);
+        lines.push(`💰 *الإجمالي المطلوب:* ${formatMoney(order.totalAmount)} جنيه`);
+        if (order.totalAmount >= FREE_DELIVERY_THRESHOLD) {
+          lines.push(`🚚 *التوصيل:* مجاني ✓`);
+        } else {
+          lines.push(`🚚 *التوصيل:* يحدد حسب المنطقة (التوصيل مجاني فوق ${formatMoney(FREE_DELIVERY_THRESHOLD)} ج)`);
+        }
+        if (order.notes) {
+          lines.push(`📝 *ملاحظات:* ${order.notes}`);
+        }
+        lines.push(`━━━━━━━━━━━━━━`);
+        lines.push(`مكتب الحاج محمود لتوزيع المواد الغذائية`);
+        return lines.join('\n');
+      }
+
+      function buildPickingListText(aggregatedItems, filterMode) {
+        const title = filterMode === 'pending' ? 'الطلبات قيد التحميل' : 'إجمالي أوردرات اليوم';
+        const lines = [
+          `🚛 *ورقة تحميل العربية للمخزن - توريدة*`,
+          `📋 *النطاق:* ${title}`,
+          `━━━━━━━━━━━━━━`,
+        ];
+        aggregatedItems.forEach((item, i) => {
+          const parts = [];
+          if (item.cartons > 0) parts.push(`${item.cartons} كرتونة`);
+          if (item.packets > 0) parts.push(`${item.packets} شرنك`);
+          if (item.bonusCartons > 0) parts.push(`+${item.bonusCartons} كرتونة هدية`);
+          lines.push(`${i + 1}. ${item.name} ⬅️ *${parts.join(' + ')}*`);
+        });
+        lines.push(`━━━━━━━━━━━━━━`);
+        lines.push(`مكتب الحاج محمود لتوزيع المواد الغذائية`);
+        return lines.join('\n');
+      }
+
+      // =========================================================================
+      // RENDER HEADER & GLOBAL BARS
+      // =========================================================================
+      function updateHeaderUI() {
+        const btnCustomer = document.getElementById('role-customer');
+        const btnMerchant = document.getElementById('role-merchant');
+        const ordersBadge = document.getElementById('header-orders-badge');
+
+        const pendingCount = state.orders.filter((o) => o.status === 'pending').length;
+        ordersBadge.textContent = state.orders.length;
+        ordersBadge.title = `${pendingCount} أوردرات قيد التحميل من إجمالي ${state.orders.length}`;
+
+        if (state.role === 'customer') {
+          btnCustomer.className =
+            'min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all bg-emerald-500 text-slate-950 shadow-sm';
+          btnMerchant.className =
+            'min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all text-slate-300 hover:text-white hover:bg-slate-700/60';
+        } else {
+          btnCustomer.className =
+            'min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all text-slate-300 hover:text-white hover:bg-slate-700/60';
+          btnMerchant.className =
+            'min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all bg-white text-slate-900 shadow-sm';
+        }
+      }
+
+      function updateStickyCartBar() {
+        const bar = document.getElementById('sticky-cart-bar');
+        const summary = getCartSummary();
+
+        if (state.role !== 'customer' || !summary.hasItems) {
+          bar.classList.add('hidden');
+          return;
+        }
+
+        bar.classList.remove('hidden');
+        document.getElementById('cart-bar-total').textContent = `${formatMoney(summary.totalAmount)} ج`;
+
+        const parts = [];
+        if (summary.totalCartons > 0) parts.push(`<span>${summary.totalCartons} كرتونة</span>`);
+        if (summary.totalPackets > 0) parts.push(`<span>${summary.totalPackets} شرنك</span>`);
+        if (summary.totalBonusCartons > 0) {
+          parts.push(
+            `<span class="inline-flex items-center gap-1 bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full font-bold">🎁 +${summary.totalBonusCartons} كرتونة هدية</span>`
+          );
+        }
+        document.getElementById('cart-bar-summary').innerHTML = parts.join('<span class="text-slate-600">•</span>');
+
+        const deliveryEl = document.getElementById('cart-delivery-progress');
+        const pct = Math.min(100, Math.round((summary.totalAmount / FREE_DELIVERY_THRESHOLD) * 100));
+        if (summary.totalAmount >= FREE_DELIVERY_THRESHOLD) {
+          deliveryEl.innerHTML = `
+            <div class="flex items-center justify-between text-[11px] font-bold text-emerald-300 mb-1">
+              <span>🚚 مبروك! طلبك مؤهل للتوصيل المجاني لباب المحل</span>
+              <span>100%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-full bg-emerald-400 rounded-full transition-all duration-300" style="width: 100%"></div>
+            </div>
+          `;
+        } else {
+          const remaining = FREE_DELIVERY_THRESHOLD - summary.totalAmount;
+          deliveryEl.innerHTML = `
+            <div class="flex items-center justify-between text-[11px] font-semibold text-slate-300 mb-1">
+              <span>فاضلك <strong class="text-amber-300 tabular-nums">${formatMoney(remaining)} ج</strong> وتاخد توصيل مجاني</span>
+              <span class="tabular-nums">${pct}%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+            </div>
+          `;
+        }
+      }
+
+      function updateFloatingSaveBar() {
+        const bar = document.getElementById('floating-save-bar');
+        const editCount = Object.keys(state.pendingPriceEdits).length;
+        if (state.role !== 'merchant' || state.merchantTab !== 'inventory' || editCount === 0) {
+          bar.classList.add('hidden');
+          return;
+        }
+        bar.classList.remove('hidden');
+        document.getElementById('unsaved-count-text').textContent =
+          editCount === 1 ? 'تم تعديل سعر صنف واحد' : `تم تعديل أسعار ${editCount} أصناف`;
+      }
+
+      // =========================================================================
+      // VIEW 1: CUSTOMER STOREFRONT
+      // =========================================================================
+      function getFilteredCustomerProducts() {
+        const q = state.searchQuery.trim().toLowerCase();
+        const filtered = state.products.filter((p) => {
+          if (state.activeCategory === 'عروض') {
+            if (!p.isClearance && !p.promoText) return false;
+          } else if (state.activeCategory !== 'الكل') {
+            if (p.category !== state.activeCategory) return false;
+          }
+          if (q) {
+            const hay = `${p.name} ${p.category} ${p.promoText || ''}`.toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+
+        // Sort: Available Clearance first -> Available Normal/Promo -> Out of Stock last
+        return filtered.sort((a, b) => {
+          const score = (item) => {
+            if (!item.inStock) return 3;
+            if (item.isClearance) return 0;
+            if (item.promoText) return 1;
+            return 2;
+          };
+          return score(a) - score(b);
+        });
+      }
+
+      function renderCustomerView() {
+        const dealsCount = state.products.filter((p) => p.inStock && (p.isClearance || p.promoText)).length;
+        const products = getFilteredCustomerProducts();
+
+        const categoryPills = [
+          { id: 'الكل', label: 'الكل' },
+          { id: 'عروض', label: `🔥 عروض وحرق أسعار (${dealsCount})`, isSpecial: true },
+          ...CATEGORIES.map((c) => ({ id: c, label: c })),
+        ];
+
+        return `
+          <!-- Merchant Store Banner -->
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 mb-3.5">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h1 class="text-base sm:text-xl font-black text-slate-900 leading-snug">
+                  مكتب الحاج محمود لتوزيع المواد الغذائية - جملة الجملة
+                </h1>
+                <div class="mt-2 inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1.5 rounded-xl text-xs font-bold">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                  <span>الأسعار محدثة لحظياً - التوصيل مجاني للطلبات فوق 3,000 ج</span>
+                </div>
+              </div>
+              <div class="hidden sm:flex flex-col items-end text-left flex-shrink-0">
+                <span class="text-xs font-bold text-slate-500">الأصناف المتاحة</span>
+                <span class="text-lg font-black text-emerald-600 tabular-nums">${state.products.filter((p) => p.inStock).length} / ${state.products.length}</span>
+              </div>
+            </div>
+
+            <!-- Instant Search Bar -->
+            <div class="relative mt-3.5">
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+              </div>
+              <input
+                id="customer-search-input"
+                type="search"
+                value="${escapeHtml(state.searchQuery)}"
+                placeholder="ابحث باسم الصنف... مثلاً: شيبسي، إندومي، تونة"
+                class="w-full min-h-[48px] pr-11 pl-10 py-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-semibold text-slate-900 placeholder:text-slate-400 transition-all"
+              />
+              <button id="btn-clear-search" type="button" class="${
+                state.searchQuery ? '' : 'hidden '
+              }absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 hover:text-slate-700" aria-label="مسح البحث">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <!-- Horizontal Scrollable Category Pills -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-3 pb-0.5 -mx-1 px-1">
+              ${categoryPills
+                .map((pill) => {
+                  const isActive = state.activeCategory === pill.id;
+                  let cls = '';
+                  if (pill.isSpecial) {
+                    cls = isActive
+                      ? 'bg-gradient-to-l from-red-600 to-orange-500 text-white border-transparent shadow-sm'
+                      : 'bg-orange-50 text-red-700 border-orange-300 hover:bg-orange-100';
+                  } else {
+                    cls = isActive
+                      ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+                  }
+                  return `
+                    <button
+                      type="button"
+                      data-category="${escapeHtml(pill.id)}"
+                      class="category-pill min-h-[40px] px-3.5 py-1.5 rounded-full border text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex-shrink-0 ${cls}"
+                    >${escapeHtml(pill.label)}</button>
+                  `;
+                })
+                .join('')}
+            </div>
+          </section>
+
+          <!-- Product Cards Grid -->
+          <section id="customer-products-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            ${
+              products.length === 0
+                ? `<div class="md:col-span-2 bg-white rounded-2xl border border-slate-200 p-8 text-center">
+                    <p class="text-base font-bold text-slate-700">مفيش أصناف مطابقة للبحث ده</p>
+                    <p class="text-xs text-slate-500 mt-1">جرب تكتب اسم تاني أو اختار قسم "الكل"</p>
+                    <button id="btn-reset-filters" type="button" class="mt-4 min-h-[44px] px-5 py-2 rounded-xl bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700">عرض كل الأصناف</button>
+                  </div>`
+                : products.map(renderCustomerProductCard).join('')
+            }
+          </section>
+        `;
+      }
+
+      function renderCustomerProductCard(p) {
+        const hasPacket = p.packetPrice != null && p.packetPrice > 0;
+        const selectedMode =
+          hasPacket && state.selectedUnitByProduct[p.id] === 'packet' ? 'packet' : 'carton';
+        const cartEntry = state.cart[p.id] || { cartons: 0, packets: 0 };
+        const activeQty = selectedMode === 'carton' ? cartEntry.cartons : cartEntry.packets;
+        const currentPrice = selectedMode === 'carton' ? p.cartonPrice : p.packetPrice;
+        const unitCost = calcUnitCostForMode(p, selectedMode);
+        const earnedBonus = p.inStock ? calcBonusCartons(p, cartEntry.cartons) : 0;
+        const toNextBonus =
+          p.inStock && p.bonusBuy > 0 && cartEntry.cartons > 0
+            ? p.bonusBuy - (cartEntry.cartons % p.bonusBuy)
+            : 0;
+
+        const savings =
+          p.isClearance && p.originalCartonPrice && p.originalCartonPrice > p.cartonPrice
+            ? p.originalCartonPrice - p.cartonPrice
+            : 0;
+
+        const cardBorder = !p.inStock
+          ? 'border-slate-200 opacity-75'
+          : p.isClearance
+          ? 'border-orange-300 shadow-md shadow-orange-100/70'
+          : cartEntry.cartons > 0 || cartEntry.packets > 0
+          ? 'border-emerald-400 shadow-sm'
+          : 'border-slate-200 shadow-sm';
+
+        return `
+          <article class="bg-white rounded-2xl border ${cardBorder} overflow-hidden flex flex-col justify-between transition-all" data-product-card="${p.id}">
+            <!-- Clearance Top Banner -->
+            ${
+              p.isClearance && p.inStock
+                ? `<div class="bg-gradient-to-l from-red-600 to-orange-500 text-white px-3.5 py-2 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-1.5 text-xs font-extrabold">
+                      <span>🔥</span>
+                      <span>تصفية سريعة - خصم خاص (صلاحية قريبة)</span>
+                    </div>
+                    ${
+                      savings > 0
+                        ? `<span class="text-[11px] font-black bg-white text-red-700 px-2 py-0.5 rounded-full tabular-nums">وفر ${formatMoney(savings)} ج</span>`
+                        : `<span class="text-[11px] font-black bg-white/20 text-white px-2 py-0.5 rounded-full">حرق سعر</span>`
+                    }
+                  </div>`
+                : ''
+            }
+
+            <!-- Out of Stock Top Banner -->
+            ${
+              !p.inStock
+                ? `<div class="bg-slate-200 text-slate-700 px-3.5 py-2 flex items-center justify-between gap-2">
+                    <span class="text-xs font-extrabold flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                      خلصان حالاً - بيتوفر بكرة
+                    </span>
+                    <span class="text-[11px] font-bold text-slate-500">غير متاح للطلب</span>
+                  </div>`
+                : ''
+            }
+
+            <div class="p-3.5 sm:p-4 flex-1 flex flex-col">
+              <!-- Category & Name -->
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="inline-block text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md mb-1.5">${escapeHtml(p.category)}</span>
+                  <h2 class="text-base font-extrabold text-slate-900 leading-snug">${escapeHtml(p.name)}</h2>
+                </div>
+                ${
+                  p.inStock && (cartEntry.cartons > 0 || cartEntry.packets > 0)
+                    ? `<div class="flex flex-col items-end gap-1 flex-shrink-0">
+                        ${
+                          cartEntry.cartons > 0
+                            ? `<span class="text-[11px] font-extrabold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-lg tabular-nums">${cartEntry.cartons} كرتونة</span>`
+                            : ''
+                        }
+                        ${
+                          cartEntry.packets > 0
+                            ? `<span class="text-[11px] font-extrabold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-lg tabular-nums">${cartEntry.packets} شرنك</span>`
+                            : ''
+                        }
+                      </div>`
+                    : ''
+                }
+              </div>
+
+              <!-- Promo Badge (Non-Clearance or Bonus) -->
+              ${
+                p.promoText && !p.isClearance && p.inStock
+                  ? `<div class="mt-2.5 flex items-center gap-1.5 bg-amber-50 border border-amber-300 text-amber-900 px-2.5 py-1.5 rounded-xl text-xs font-extrabold">
+                      <span>🎁</span>
+                      <span>${escapeHtml(p.promoText)}</span>
+                    </div>`
+                  : ''
+              }
+
+              <!-- Unit Selector (Carton vs Packet) -->
+              <div class="mt-3 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  data-select-unit="carton"
+                  data-pid="${p.id}"
+                  ${!p.inStock ? 'disabled' : ''}
+                  class="min-h-[54px] px-2.5 py-2 rounded-xl border-2 text-right transition-all flex flex-col justify-center ${
+                    selectedMode === 'carton'
+                      ? 'border-emerald-600 bg-emerald-50/70'
+                      : 'border-slate-200 bg-slate-50 hover:border-slate-300'
+                  } ${!p.inStock ? 'cursor-not-allowed' : 'cursor-pointer'}"
+                >
+                  <div class="flex items-center justify-between w-full">
+                    <span class="text-xs font-bold ${selectedMode === 'carton' ? 'text-emerald-900' : 'text-slate-600'}">الكرتونة</span>
+                    ${
+                      p.isClearance && p.originalCartonPrice && p.originalCartonPrice > p.cartonPrice
+                        ? `<span class="text-[11px] text-slate-400 line-through tabular-nums">${formatMoney(p.originalCartonPrice)} ج</span>`
+                        : ''
+                    }
+                  </div>
+                  <div class="text-base font-black tabular-nums ${selectedMode === 'carton' ? 'text-emerald-700' : 'text-slate-900'}">
+                    ${formatMoney(p.cartonPrice)} <span class="text-xs font-bold">ج</span>
+                  </div>
+                </button>
+
+                ${
+                  hasPacket
+                    ? `<button
+                        type="button"
+                        data-select-unit="packet"
+                        data-pid="${p.id}"
+                        ${!p.inStock ? 'disabled' : ''}
+                        class="min-h-[54px] px-2.5 py-2 rounded-xl border-2 text-right transition-all flex flex-col justify-center ${
+                          selectedMode === 'packet'
+                            ? 'border-emerald-600 bg-emerald-50/70'
+                            : 'border-slate-200 bg-slate-50 hover:border-slate-300'
+                        } ${!p.inStock ? 'cursor-not-allowed' : 'cursor-pointer'}"
+                      >
+                        <span class="text-xs font-bold ${selectedMode === 'packet' ? 'text-emerald-900' : 'text-slate-600'}">الشرنك / الباكت</span>
+                        <div class="text-base font-black tabular-nums ${selectedMode === 'packet' ? 'text-emerald-700' : 'text-slate-900'}">
+                          ${formatMoney(p.packetPrice)} <span class="text-xs font-bold">ج</span>
+                        </div>
+                      </button>`
+                    : `<div class="min-h-[54px] px-2.5 py-2 rounded-xl border border-dashed border-slate-200 bg-slate-50 flex flex-col justify-center items-center text-center">
+                        <span class="text-[11px] font-bold text-slate-400">يباع بالكرتونة فقط</span>
+                        <span class="text-[10px] text-slate-400">غير متاح شرنك</span>
+                      </div>`
+                }
+              </div>
+
+              <!-- Single Piece Cost Highlight -->
+              <div class="mt-2.5 flex items-center justify-between bg-slate-50 border border-slate-200/80 rounded-xl px-3 py-2">
+                <span class="text-xs font-bold text-slate-600">تقف عليك بـ</span>
+                <span class="text-sm font-black text-slate-900 tabular-nums">
+                  ${formatMoney(unitCost)} جنيه <span class="text-xs font-semibold text-slate-500">/ لل${escapeHtml(p.unitLabel || 'قطعة')}</span>
+                </span>
+              </div>
+
+              <!-- Bonus Earned / Progress Nudge -->
+              ${
+                earnedBonus > 0
+                  ? `<div class="mt-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-extrabold flex items-center justify-between">
+                      <span>🎉 كسبت +${earnedBonus} كرتونة هدية مجاناً!</span>
+                      ${toNextBonus > 0 && toNextBonus <= 3 ? `<span class="text-[11px] font-bold text-emerald-700">باقي ${toNextBonus} لهدية تانية</span>` : ''}
+                    </div>`
+                  : toNextBonus > 0 && toNextBonus < p.bonusBuy
+                  ? `<div class="mt-2 px-3 py-1.5 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-800 text-[11px] font-bold flex items-center justify-between">
+                      <span>فاضلك ${toNextBonus} كرتونة وتاخد ${p.bonusFree} كرتونة هدية 🎁</span>
+                      <button type="button" data-quick-add="${toNextBonus}" data-pid="${p.id}" data-unit="carton" class="underline font-extrabold text-amber-900 mr-2">كمّل العرض</button>
+                    </div>`
+                  : ''
+              }
+
+              <!-- Quantity Controls -->
+              <div class="mt-auto pt-3">
+                ${
+                  !p.inStock
+                    ? `<button type="button" disabled class="w-full min-h-[46px] rounded-xl bg-slate-200 text-slate-500 font-extrabold text-sm cursor-not-allowed">
+                        خلصان حالاً - غير متاح للطلب
+                      </button>`
+                    : activeQty === 0
+                    ? `<div class="flex items-center gap-2">
+                        <button
+                          type="button"
+                          data-qty-delta="1"
+                          data-pid="${p.id}"
+                          data-unit="${selectedMode}"
+                          class="flex-1 min-h-[46px] px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-sm shadow-sm flex items-center justify-center gap-2 transition-all"
+                        >
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                          <span>أضف ${selectedMode === 'carton' ? 'كرتونة' : 'شرنك'} (${formatMoney(currentPrice)} ج)</span>
+                        </button>
+                        ${
+                          selectedMode === 'carton' && p.bonusBuy > 0
+                            ? `<button
+                                type="button"
+                                data-quick-add="${p.bonusBuy}"
+                                data-pid="${p.id}"
+                                data-unit="carton"
+                                title="إضافة ${p.bonusBuy} كراتين للاستفادة من العرض"
+                                class="min-h-[46px] px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 font-extrabold text-xs whitespace-nowrap transition-colors"
+                              >+${p.bonusBuy} للعرض</button>`
+                            : ''
+                        }
+                      </div>`
+                    : `<div class="flex items-center justify-between gap-2 bg-slate-50 p-1 rounded-xl border border-emerald-300">
+                        <button
+                          type="button"
+                          data-qty-delta="1"
+                          data-pid="${p.id}"
+                          data-unit="${selectedMode}"
+                          aria-label="زيادة الكمية"
+                          class="w-12 h-[44px] rounded-lg bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xl flex items-center justify-center transition-all"
+                        >+</button>
+                        <div class="text-center flex-1">
+                          <div class="text-base font-black text-slate-900 tabular-nums leading-tight">${activeQty} <span class="text-xs font-bold text-slate-600">${selectedMode === 'carton' ? 'كرتونة' : 'شرنك'}</span></div>
+                          <div class="text-[11px] font-bold text-emerald-700 tabular-nums">${formatMoney(activeQty * currentPrice)} ج</div>
+                        </div>
+                        <button
+                          type="button"
+                          data-qty-delta="-1"
+                          data-pid="${p.id}"
+                          data-unit="${selectedMode}"
+                          aria-label="تقليل الكمية"
+                          class="w-12 h-[44px] rounded-lg bg-white hover:bg-red-50 active:scale-95 text-slate-800 hover:text-red-600 border border-slate-300 font-black text-xl flex items-center justify-center transition-all"
+                        >−</button>
+                      </div>`
+                }
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      // =========================================================================
+      // VIEW 2: MERCHANT DASHBOARD
+      // =========================================================================
+      function renderMerchantView() {
+        const pendingOrders = state.orders.filter((o) => o.status === 'pending').length;
+
+        return `
+          <!-- Merchant Sub-Tabs -->
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-2 mb-3.5 no-print">
+            <div class="grid grid-cols-2 gap-1.5">
+              <button
+                id="merchant-tab-inventory"
+                type="button"
+                class="min-h-[48px] px-3 py-2 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all ${
+                  state.merchantTab === 'inventory'
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                }"
+              >
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                </svg>
+                <span>إدارة الأسعار والمخزون</span>
+              </button>
+
+              <button
+                id="merchant-tab-orders"
+                type="button"
+                class="min-h-[48px] px-3 py-2 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all ${
+                  state.merchantTab === 'orders'
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                }"
+              >
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
+                </svg>
+                <span>أوردرات اليوم وتحميل العربية</span>
+                ${
+                  pendingOrders > 0
+                    ? `<span class="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 text-xs font-black rounded-full ${
+                        state.merchantTab === 'orders' ? 'bg-amber-400 text-slate-950' : 'bg-red-500 text-white'
+                      } tabular-nums">${pendingOrders}</span>`
+                    : ''
+                }
+              </button>
+            </div>
+          </section>
+
+          ${state.merchantTab === 'inventory' ? renderMerchantInventoryTab() : renderMerchantOrdersTab()}
+        `;
+      }
+
+      // ---- Merchant Tab 1: Quick Price & Stock Manager ----
+      function renderMerchantInventoryTab() {
+        const total = state.products.length;
+        const available = state.products.filter((p) => p.inStock).length;
+        const outOfStock = total - available;
+        const clearance = state.products.filter((p) => p.isClearance && p.inStock).length;
+
+        const q = state.merchantSearchQuery.trim().toLowerCase();
+        const filtered = state.products.filter((p) => {
+          if (!q) return true;
+          return `${p.name} ${p.category}`.toLowerCase().includes(q);
+        });
+
+        return `
+          <!-- Quick Stats & Add New Item -->
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3.5 sm:p-4 mb-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+              <div>
+                <h1 class="text-base sm:text-lg font-black text-slate-900">تحديث الأسعار والمخزون لحظياً</h1>
+                <p class="text-xs text-slate-500 mt-0.5">عدّل أي سعر مباشرة أو فعّل "خلصان / حرق سعر" لينعكس فوراً عند السوبر ماركت</p>
+              </div>
+              <button
+                id="btn-open-add-product"
+                type="button"
+                class="min-h-[44px] px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-sm transition-all"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                <span>إضافة صنف جديد</span>
+              </button>
+            </div>
+
+            <!-- Compact Inventory KPIs -->
+            <div class="grid grid-cols-3 gap-2 mb-3">
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 text-center">
+                <div class="text-lg font-black text-emerald-700 tabular-nums">${available}</div>
+                <div class="text-[11px] font-bold text-emerald-900">صنف متاح</div>
+              </div>
+              <div class="bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-center">
+                <div class="text-lg font-black text-slate-700 tabular-nums">${outOfStock}</div>
+                <div class="text-[11px] font-bold text-slate-600">خلصان</div>
+              </div>
+              <div class="bg-orange-50 border border-orange-200 rounded-xl p-2.5 text-center">
+                <div class="text-lg font-black text-orange-700 tabular-nums">${clearance}</div>
+                <div class="text-[11px] font-bold text-orange-900">حرق أسعار</div>
+              </div>
+            </div>
+
+            <!-- Search in Merchant List -->
+            <div class="relative">
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+              </div>
+              <input
+                id="merchant-search-input"
+                type="search"
+                value="${escapeHtml(state.merchantSearchQuery)}"
+                placeholder="فلترة الأصناف للتعديل السريع..."
+                class="w-full min-h-[44px] pr-10 pl-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:bg-white outline-none text-sm font-semibold text-slate-900"
+              />
+            </div>
+          </section>
+
+          <!-- Editable Product Rows -->
+          <section class="space-y-3">
+            ${filtered.map(renderMerchantProductRow).join('')}
+          </section>
+        `;
+      }
+
+      function renderMerchantProductRow(p) {
+        const pending = state.pendingPriceEdits[p.id] || {};
+        const cartonVal = pending.cartonPrice !== undefined ? pending.cartonPrice : p.cartonPrice;
+        const packetVal =
+          pending.packetPrice !== undefined
+            ? pending.packetPrice
+            : p.packetPrice != null
+            ? p.packetPrice
+            : '';
+
+        const isDirty = pending.cartonPrice !== undefined || pending.packetPrice !== undefined;
+        const liveUnitCost =
+          p.unitsPerCarton && Number(cartonVal) > 0
+            ? +(Number(cartonVal) / p.unitsPerCarton).toFixed(2)
+            : p.unitCost;
+
+        return `
+          <div class="bg-white rounded-2xl border ${
+            isDirty
+              ? 'border-amber-400 ring-2 ring-amber-200/60'
+              : p.isClearance
+              ? 'border-orange-300'
+              : !p.inStock
+              ? 'border-slate-200 bg-slate-50/70'
+              : 'border-slate-200'
+          } shadow-sm p-3.5 sm:p-4 transition-all" data-merchant-row="${p.id}">
+            <!-- Row Header -->
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div>
+                <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                  <span class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">${escapeHtml(p.category)}</span>
+                  ${
+                    !p.inStock
+                      ? `<span class="text-[11px] font-extrabold bg-slate-200 text-slate-700 px-2 py-0.5 rounded-md">خلصان</span>`
+                      : ''
+                  }
+                  ${
+                    p.isClearance
+                      ? `<span class="text-[11px] font-extrabold bg-orange-100 text-red-700 px-2 py-0.5 rounded-md">🔥 حرق سعر - مثبت بالأعلى</span>`
+                      : ''
+                  }
+                  ${
+                    p.promoText && !p.isClearance
+                      ? `<span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-md">🎁 ${escapeHtml(p.promoText)}</span>`
+                      : ''
+                  }
+                </div>
+                <h2 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">${escapeHtml(p.name)}</h2>
+              </div>
+              <div class="text-left flex-shrink-0">
+                <span class="text-[11px] text-slate-500 block">سعر القطعة</span>
+                <span id="live-unit-cost-${p.id}" class="text-sm font-black text-emerald-700 tabular-nums">${formatMoney(liveUnitCost)} ج</span>
+              </div>
+            </div>
+
+            <!-- Inline Price Inputs -->
+            <div class="grid grid-cols-2 gap-2.5 mb-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1" for="price-carton-${p.id}">سعر الكرتونة (ج)</label>
+                <div class="relative">
+                  <input
+                    id="price-carton-${p.id}"
+                    type="number"
+                    inputmode="decimal"
+                    min="1"
+                    step="any"
+                    value="${escapeHtml(cartonVal)}"
+                    data-price-input="carton"
+                    data-pid="${p.id}"
+                    class="w-full min-h-[44px] px-3 py-2 rounded-xl border-2 ${
+                      pending.cartonPrice !== undefined
+                        ? 'border-amber-400 bg-amber-50/40'
+                        : 'border-slate-200 bg-slate-50 focus:bg-white focus:border-emerald-500'
+                    } outline-none text-base font-black text-slate-900 tabular-nums transition-colors"
+                  />
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">ج</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1" for="price-packet-${p.id}">سعر الشرنك / الباكت (ج)</label>
+                <div class="relative">
+                  <input
+                    id="price-packet-${p.id}"
+                    type="number"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    value="${escapeHtml(packetVal)}"
+                    placeholder="كرتونة فقط"
+                    data-price-input="packet"
+                    data-pid="${p.id}"
+                    class="w-full min-h-[44px] px-3 py-2 rounded-xl border-2 ${
+                      pending.packetPrice !== undefined
+                        ? 'border-amber-400 bg-amber-50/40'
+                        : 'border-slate-200 bg-slate-50 focus:bg-white focus:border-emerald-500'
+                    } outline-none text-base font-black text-slate-900 placeholder:text-xs placeholder:font-semibold placeholder:text-slate-400 tabular-nums transition-colors"
+                  />
+                  ${
+                    packetVal !== ''
+                      ? `<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">ج</span>`
+                      : ''
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Two Instant Toggle Switches -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2.5 border-t border-slate-100">
+              <!-- Toggle 1: In Stock / Out of Stock -->
+              <div class="flex items-center justify-between gap-2 bg-slate-50 rounded-xl px-3 py-2 min-h-[48px]">
+                <div>
+                  <span class="text-xs font-extrabold ${p.inStock ? 'text-emerald-800' : 'text-slate-600'}">
+                    ${p.inStock ? 'متاح في المخزن' : 'خلصان (مخفي الطلب)'}
+                  </span>
+                  <span class="block text-[10px] text-slate-500">تحديث فوري في الكتالوج</span>
+                </div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked="${p.inStock}"
+                  aria-label="تبديل حالة التوفر"
+                  data-toggle-stock="${p.id}"
+                  data-checked="${p.inStock}"
+                  class="toggle-track ${p.inStock ? 'bg-emerald-500' : 'bg-slate-300'}"
+                >
+                  <span class="toggle-thumb"></span>
+                </button>
+              </div>
+
+              <!-- Toggle 2: Clearance Mode -->
+              <div class="flex items-center justify-between gap-2 ${
+                p.isClearance ? 'bg-orange-50 border border-orange-200' : 'bg-slate-50'
+              } rounded-xl px-3 py-2 min-h-[48px]">
+                <div>
+                  <span class="text-xs font-extrabold ${p.isClearance ? 'text-red-700' : 'text-slate-700'}">
+                    🔥 حرق سعر - صلاحية قريبة
+                  </span>
+                  <span class="block text-[10px] ${p.isClearance ? 'text-orange-700' : 'text-slate-500'}">
+                    تثبيت بأعلى القائمة بشارة خصم
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked="${p.isClearance}"
+                  aria-label="تبديل وضع حرق السعر"
+                  data-toggle-clearance="${p.id}"
+                  data-checked="${p.isClearance}"
+                  class="toggle-track ${p.isClearance ? 'bg-orange-500' : 'bg-slate-300'}"
+                >
+                  <span class="toggle-thumb"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // ---- Merchant Tab 2: Today's Orders & Truck Loading List ----
+      function getAggregatedPickingList(orders) {
+        const map = {};
+        orders.forEach((order) => {
+          order.items.forEach((item) => {
+            const key = item.productId || item.name;
+            if (!map[key]) {
+              map[key] = {
+                key,
+                name: item.name,
+                cartons: 0,
+                packets: 0,
+                bonusCartons: 0,
+                orderCount: 0,
+              };
+            }
+            map[key].cartons += item.cartons || 0;
+            map[key].packets += item.packets || 0;
+            map[key].bonusCartons += item.bonusCartons || 0;
+            map[key].orderCount += 1;
+          });
+        });
+        return Object.values(map).sort((a, b) => b.cartons + b.bonusCartons - (a.cartons + a.bonusCartons));
+      }
+
+      function renderMerchantOrdersTab() {
+        const totalOrders = state.orders.length;
+        const pendingOrders = state.orders.filter((o) => o.status === 'pending');
+        const dispatchedCount = totalOrders - pendingOrders.length;
+
+        const totalSales = state.orders.reduce((s, o) => s + o.totalAmount, 0);
+        const cashSales = state.orders
+          .filter((o) => o.paymentMethod.includes('كاش'))
+          .reduce((s, o) => s + o.totalAmount, 0);
+        const creditSales = totalSales - cashSales;
+        const cashPct = totalSales > 0 ? Math.round((cashSales / totalSales) * 100) : 0;
+
+        const targetOrders = state.pickingFilter === 'pending' ? pendingOrders : state.orders;
+        const aggregated = getAggregatedPickingList(targetOrders);
+        const totalLoadCartons = aggregated.reduce((s, i) => s + i.cartons, 0);
+        const totalLoadBonus = aggregated.reduce((s, i) => s + i.bonusCartons, 0);
+        const totalLoadPackets = aggregated.reduce((s, i) => s + i.packets, 0);
+        const checkedCount = aggregated.filter((i) => state.pickingChecked[i.key]).length;
+
+        return `
+          <!-- Summary KPI Cards -->
+          <section class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4 no-print">
+            <!-- KPI 1: Orders Count -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">أوردرات اليوم</span>
+                <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+                </span>
+              </div>
+              <div class="text-2xl font-black text-slate-900 mt-1.5 tabular-nums">${totalOrders} <span class="text-sm font-bold text-slate-500">أوردر</span></div>
+              <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
+                <span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">${pendingOrders.length} قيد التحميل</span>
+                <span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">${dispatchedCount} خرج للتوصيل</span>
+              </div>
+            </div>
+
+            <!-- KPI 2: Total Sales -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">إجمالي مبيعات اليوم</span>
+                <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
+                </span>
+              </div>
+              <div class="text-2xl font-black text-emerald-700 mt-1.5 tabular-nums">${formatMoney(totalSales)} <span class="text-sm font-bold">جنيه</span></div>
+              <p class="text-[11px] font-semibold text-slate-500 mt-1.5">متوسط الفاتورة: ${totalOrders > 0 ? formatMoney(Math.round(totalSales / totalOrders)) : 0} ج</p>
+            </div>
+
+            <!-- KPI 3: Cash vs Credit -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-xs font-bold text-slate-500">كاش مقابل آجل (على الحساب)</span>
+              </div>
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between text-xs font-extrabold">
+                  <span class="text-emerald-700">💵 كاش: ${formatMoney(cashSales)} ج</span>
+                  <span class="text-amber-700">📒 آجل: ${formatMoney(creditSales)} ج</span>
+                </div>
+                <div class="w-full h-2.5 bg-amber-200 rounded-full overflow-hidden flex">
+                  <div class="h-full bg-emerald-500 transition-all" style="width: ${cashPct}%"></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-500 tabular-nums">
+                  <span>كاش ${cashPct}%</span>
+                  <span>آجل ${totalSales > 0 ? 100 - cashPct : 0}%</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Aggregated Truck Loading Sheet -->
+          <section id="print-area" class="bg-white rounded-2xl border-2 border-slate-900 shadow-sm overflow-hidden mb-4">
+            <div class="bg-slate-900 text-white p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h2 class="text-base sm:text-lg font-black flex items-center gap-2">
+                    <span>🚛</span>
+                    <span>ورقة تحميل العربية للمخزن</span>
+                  </h2>
+                  <p class="text-xs text-slate-300 mt-0.5">تجميع آلي لكل الأصناف المتشابهة + الكراتين الهدية لتجهيز العربية في دقائق</p>
+                </div>
+                <div class="flex items-center gap-1.5 no-print">
+                  <button
+                    id="btn-copy-picking"
+                    type="button"
+                    class="min-h-[40px] px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold flex items-center gap-1.5 transition-colors"
+                  >
+                    <span>نسخ للمخزن</span>
+                  </button>
+                  <button
+                    id="btn-print-picking"
+                    type="button"
+                    class="min-h-[40px] px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-xs font-bold transition-colors"
+                  >طباعة</button>
+                </div>
+              </div>
+
+              <!-- Filter Toggle & Master Totals -->
+              <div class="mt-3 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                <div class="inline-flex bg-slate-800 p-1 rounded-xl no-print">
+                  <button
+                    type="button"
+                    data-picking-filter="pending"
+                    class="min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                      state.pickingFilter === 'pending' ? 'bg-white text-slate-900' : 'text-slate-300 hover:text-white'
+                    }"
+                  >قيد التحميل فقط (${pendingOrders.length})</button>
+                  <button
+                    type="button"
+                    data-picking-filter="all"
+                    class="min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                      state.pickingFilter === 'all' ? 'bg-white text-slate-900' : 'text-slate-300 hover:text-white'
+                    }"
+                  >كل أوردرات اليوم (${totalOrders})</button>
+                </div>
+
+                <div class="flex items-center gap-2 text-xs font-extrabold flex-wrap">
+                  <span class="bg-slate-800 border border-slate-700 px-2.5 py-1 rounded-lg tabular-nums">📦 ${totalLoadCartons} كرتونة</span>
+                  ${
+                    totalLoadBonus > 0
+                      ? `<span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-lg tabular-nums">🎁 +${totalLoadBonus} هدية</span>`
+                      : ''
+                  }
+                  ${
+                    totalLoadPackets > 0
+                      ? `<span class="bg-sky-400/20 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded-lg tabular-nums">🛍️ ${totalLoadPackets} شرنك</span>`
+                      : ''
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3.5 sm:p-4">
+              ${
+                aggregated.length === 0
+                  ? `<div class="py-8 text-center">
+                      <p class="text-sm font-extrabold text-slate-700">كل الأوردرات تم تحميلها وخرجت للتوصيل ✓</p>
+                      <p class="text-xs text-slate-500 mt-1">يمكنك عرض "كل أوردرات اليوم" لمراجعة إجمالي مبيعات اليوم</p>
+                    </div>`
+                  : `
+                    <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-2.5 no-print">
+                      <span>علّم على كل صنف بعد تحميله في العربية:</span>
+                      <span class="text-emerald-700 tabular-nums">تم تجهيز ${checkedCount} من ${aggregated.length}</span>
+                    </div>
+                    <ul class="divide-y divide-slate-100">
+                      ${aggregated
+                        .map((item) => {
+                          const isChecked = !!state.pickingChecked[item.key];
+                          return `
+                            <li class="py-3 first:pt-1 last:pb-1">
+                              <label class="flex items-center justify-between gap-3 cursor-pointer select-none">
+                                <div class="flex items-center gap-3 min-w-0">
+                                  <input
+                                    type="checkbox"
+                                    data-picking-check="${escapeHtml(item.key)}"
+                                    ${isChecked ? 'checked' : ''}
+                                    class="w-6 h-6 rounded-lg accent-emerald-600 cursor-pointer flex-shrink-0 no-print"
+                                  />
+                                  <div class="min-w-0">
+                                    <p class="text-sm font-extrabold ${isChecked ? 'line-through text-slate-400' : 'text-slate-900'} leading-snug">
+                                      ${escapeHtml(item.name)}
+                                    </p>
+                                    <p class="text-[11px] font-semibold text-slate-500 mt-0.5">مطلوب في ${item.orderCount} ${item.orderCount === 1 ? 'أوردر' : 'أوردرات'}</p>
+                                  </div>
+                                </div>
+
+                                <div class="flex items-center gap-1.5 flex-wrap justify-end flex-shrink-0">
+                                  ${
+                                    item.cartons > 0
+                                      ? `<span class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-black tabular-nums">${item.cartons} كرتونة</span>`
+                                      : ''
+                                  }
+                                  ${
+                                    item.bonusCartons > 0
+                                      ? `<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300 text-xs font-black tabular-nums">+${item.bonusCartons} هدية 🎁</span>`
+                                      : ''
+                                  }
+                                  ${
+                                    item.packets > 0
+                                      ? `<span class="px-2.5 py-1 rounded-lg bg-sky-100 text-sky-900 border border-sky-200 text-xs font-black tabular-nums">${item.packets} شرنك</span>`
+                                      : ''
+                                  }
+                                </div>
+                              </label>
+                            </li>
+                          `;
+                        })
+                        .join('')}
+                    </ul>
+                  `
+              }
+            </div>
+          </section>
+
+          <!-- Individual Orders Feed -->
+          <section class="no-print">
+            <div class="flex items-center justify-between mb-2.5 px-1">
+              <h2 class="text-base font-black text-slate-900">تفاصيل أوردرات العملاء (${state.orders.length})</h2>
+              <span class="text-xs font-bold text-slate-500">الأحدث أولاً</span>
+            </div>
+
+            ${
+              state.orders.length === 0
+                ? `<div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm font-bold text-slate-500">لا توجد أوردرات مستلمة اليوم بعد</div>`
+                : `<div class="space-y-3">
+                    ${state.orders.map(renderOrderAccordionCard).join('')}
+                  </div>`
+            }
+          </section>
+        `;
+      }
+
+      function renderOrderAccordionCard(order) {
+        const isExpanded = !!state.expandedOrders[order.id];
+        const isDispatched = order.status === 'dispatched';
+        const isCash = order.paymentMethod.includes('كاش');
+
+        return `
+          <article class="bg-white rounded-2xl border ${
+            isDispatched ? 'border-emerald-200 bg-emerald-50/20' : 'border-slate-200'
+          } shadow-sm overflow-hidden">
+            <!-- Order Summary Header -->
+            <button
+              type="button"
+              data-toggle-order="${order.id}"
+              class="w-full p-3.5 sm:p-4 text-right flex items-center justify-between gap-3 hover:bg-slate-50/70 transition-colors"
+            >
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-2 flex-wrap mb-1">
+                  <span class="text-xs font-black text-slate-500 tabular-nums">#${order.number}</span>
+                  <span class="text-xs font-bold text-slate-400">• ${escapeHtml(order.createdAt)}</span>
+                  <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full ${
+                    isCash ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'
+                  }">${escapeHtml(order.paymentMethod)}</span>
+                  <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full ${
+                    isDispatched ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-700'
+                  }">${isDispatched ? '✓ خرج للتوصيل' : '⏳ قيد التحميل'}</span>
+                </div>
+                <h3 class="text-sm sm:text-base font-black text-slate-900 truncate">${escapeHtml(order.shopName)}</h3>
+                <p class="text-xs font-semibold text-slate-500 truncate mt-0.5">📍 ${escapeHtml(order.address)}</p>
+              </div>
+
+              <div class="flex items-center gap-2.5 flex-shrink-0">
+                <div class="text-left">
+                  <div class="text-base sm:text-lg font-black text-slate-900 tabular-nums">${formatMoney(order.totalAmount)} <span class="text-xs font-bold">ج</span></div>
+                  <div class="text-[11px] font-bold text-slate-500 tabular-nums">
+                    ${order.items.length} أصناف
+                    ${order.totalBonusCartons > 0 ? `• +${order.totalBonusCartons} هدية` : ''}
+                  </div>
+                </div>
+                <svg class="w-5 h-5 text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </div>
+            </button>
+
+            <!-- Expanded Details -->
+            ${
+              isExpanded
+                ? `<div class="px-3.5 sm:px-4 pb-4 pt-2 border-t border-slate-100 bg-slate-50/50 animate-fade-in">
+                    <div class="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100 mb-3">
+                      ${order.items
+                        .map(
+                          (it) => `
+                            <div class="p-2.5 flex items-center justify-between gap-2 text-xs">
+                              <div>
+                                <div class="font-extrabold text-slate-900">${escapeHtml(it.name)}</div>
+                                <div class="text-slate-600 font-semibold mt-0.5 flex items-center gap-2 flex-wrap">
+                                  ${it.cartons > 0 ? `<span>${it.cartons} كرتونة × ${formatMoney(it.cartonPrice)} ج</span>` : ''}
+                                  ${it.packets > 0 && it.packetPrice != null ? `<span>${it.packets} شرنك × ${formatMoney(it.packetPrice)} ج</span>` : ''}
+                                  ${it.bonusCartons > 0 ? `<span class="text-amber-800 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded font-extrabold">🎁 +${it.bonusCartons} كرتونة هدية</span>` : ''}
+                                </div>
+                              </div>
+                              <div class="font-black text-slate-900 tabular-nums flex-shrink-0">${formatMoney(it.lineTotal)} ج</div>
+                            </div>
+                          `
+                        )
+                        .join('')}
+                    </div>
+
+                    ${
+                      order.notes || order.phone
+                        ? `<div class="mb-3 text-xs text-slate-600 space-y-1 bg-white rounded-xl p-2.5 border border-slate-200">
+                            ${order.phone ? `<div>📞 <strong>موبايل العميل:</strong> <span class="tabular-nums">${escapeHtml(order.phone)}</span></div>` : ''}
+                            ${order.notes ? `<div>📝 <strong>ملاحظات:</strong> ${escapeHtml(order.notes)}</div>` : ''}
+                          </div>`
+                        : ''
+                    }
+
+                    <div class="flex items-center gap-2">
+                      <button
+                        type="button"
+                        data-dispatch-order="${order.id}"
+                        class="flex-1 min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all ${
+                          isDispatched
+                            ? 'bg-slate-200 hover:bg-slate-300 text-slate-800'
+                            : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
+                        }"
+                      >
+                        ${
+                          isDispatched
+                            ? `<span>↩️ إرجاع لقائمة "قيد التحميل"</span>`
+                            : `<span>✓ تم التحميل / خرج للتوصيل</span>`
+                        }
+                      </button>
+                      <a
+                        href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(order))}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="min-h-[44px] px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <span>واتساب</span>
+                      </a>
+                    </div>
+                  </div>`
+                : ''
+            }
+          </article>
+        `;
+      }
+
+      // =========================================================================
+      // MODALS & DRAWERS (Checkout, Order Success, Add Product, Confirm Reset)
+      // =========================================================================
+      function closeModal() {
+        const root = document.getElementById('modal-root');
+        root.classList.add('hidden');
+        root.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      function openModal(html) {
+        const root = document.getElementById('modal-root');
+        root.innerHTML = `
+          <div id="modal-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-[2px] flex items-end sm:items-center justify-center sm:p-4 animate-fade-in">
+            ${html}
+          </div>
+        `;
+        root.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+          if (e.target.id === 'modal-backdrop') closeModal();
+        });
+      }
+
+      function openCheckoutDrawer() {
+        const summary = getCartSummary();
+        if (!summary.hasItems) return;
+
+        openModal(`
+          <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden animate-slide-up">
+            <!-- Drawer Header -->
+            <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <div>
+                <h2 class="text-lg font-black text-slate-900">مراجعة وإرسال الطلب</h2>
+                <p class="text-xs font-semibold text-slate-500">فاتورة فورية عبر واتساب + تسجيل تلقائي في المخزن</p>
+              </div>
+              <button type="button" id="btn-close-modal" class="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-600" aria-label="إغلاق">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <!-- Drawer Body -->
+            <div class="p-5 overflow-y-auto space-y-4">
+              <!-- Order Items Review -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-extrabold text-slate-700">الأصناف المطلوبة (${summary.lines.length})</span>
+                  <button type="button" id="btn-clear-cart" class="text-xs font-bold text-red-600 hover:underline">تفريغ السلة</button>
+                </div>
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 divide-y divide-slate-200/80">
+                  ${summary.lines
+                    .map(
+                      (line) => `
+                        <div class="p-3 flex items-start justify-between gap-2">
+                          <div class="min-w-0">
+                            <p class="text-xs sm:text-sm font-extrabold text-slate-900 leading-snug">${escapeHtml(line.name)}</p>
+                            <div class="mt-1 text-xs font-semibold text-slate-600 flex flex-wrap items-center gap-2">
+                              ${line.cartons > 0 ? `<span class="bg-white border border-slate-200 px-2 py-0.5 rounded-md tabular-nums">${line.cartons} كرتونة × ${formatMoney(line.cartonPrice)} ج</span>` : ''}
+                              ${line.packets > 0 ? `<span class="bg-white border border-slate-200 px-2 py-0.5 rounded-md tabular-nums">${line.packets} شرنك × ${formatMoney(line.packetPrice)} ج</span>` : ''}
+                              ${line.bonusCartons > 0 ? `<span class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-md font-extrabold">🎁 +${line.bonusCartons} كرتونة هدية</span>` : ''}
+                            </div>
+                          </div>
+                          <div class="text-left flex-shrink-0">
+                            <div class="text-sm font-black text-slate-900 tabular-nums">${formatMoney(line.lineTotal)} ج</div>
+                          </div>
+                        </div>
+                      `
+                    )
+                    .join('')}
+                </div>
+              </div>
+
+              <!-- Totals Box -->
+              <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 space-y-1.5">
+                <div class="flex items-center justify-between text-xs font-bold text-emerald-900">
+                  <span>إجمالي الكميات:</span>
+                  <span class="tabular-nums">
+                    ${summary.totalCartons > 0 ? `${summary.totalCartons} كرتونة` : ''}
+                    ${summary.totalCartons > 0 && summary.totalPackets > 0 ? ' + ' : ''}
+                    ${summary.totalPackets > 0 ? `${summary.totalPackets} شرنك` : ''}
+                    ${summary.totalBonusCartons > 0 ? ` (+${summary.totalBonusCartons} هدية 🎁)` : ''}
+                  </span>
+                </div>
+                <div class="flex items-center justify-between text-xs font-bold text-emerald-900">
+                  <span>التوصيل:</span>
+                  <span>${summary.totalAmount >= FREE_DELIVERY_THRESHOLD ? 'مجاني لباب المحل ✓' : `مجاني فوق ${formatMoney(FREE_DELIVERY_THRESHOLD)} ج`}</span>
+                </div>
+                <div class="pt-2 border-t border-emerald-200 flex items-center justify-between">
+                  <span class="text-sm font-black text-emerald-950">الإجمالي المطلوب:</span>
+                  <span class="text-xl font-black text-emerald-700 tabular-nums">${formatMoney(summary.totalAmount)} جنيه</span>
+                </div>
+              </div>
+
+              <!-- Customer Form -->
+              <form id="checkout-form" class="space-y-3.5" novalidate>
+                <div>
+                  <label for="input-shop-name" class="block text-xs font-extrabold text-slate-800 mb-1.5">
+                    اسم السوبر ماركت / المحل <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="input-shop-name"
+                    type="text"
+                    required
+                    value="${escapeHtml(state.checkoutDraft.shopName)}"
+                    placeholder="مثلاً: سوبر ماركت النور - أولاد علي"
+                    class="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-bold text-slate-900"
+                  />
+                </div>
+
+                <div>
+                  <label for="input-shop-address" class="block text-xs font-extrabold text-slate-800 mb-1.5">
+                    العنوان / المنطقة <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="input-shop-address"
+                    type="text"
+                    required
+                    value="${escapeHtml(state.checkoutDraft.address)}"
+                    placeholder="مثلاً: شارع الهرم - محطة الطالبية بجوار صيدلية..."
+                    class="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-bold text-slate-900"
+                  />
+                </div>
+
+                <div>
+                  <label for="input-shop-phone" class="block text-xs font-bold text-slate-700 mb-1.5">
+                    رقم الموبايل للتواصل (اختياري)
+                  </label>
+                  <input
+                    id="input-shop-phone"
+                    type="tel"
+                    inputmode="tel"
+                    value="${escapeHtml(state.checkoutDraft.phone)}"
+                    placeholder="010xxxxxxxx"
+                    class="w-full min-h-[44px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold text-slate-900 tabular-nums"
+                  />
+                </div>
+
+                <!-- Payment Method Radio Cards -->
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800 mb-1.5">طريقة الدفع</span>
+                  <div class="grid grid-cols-2 gap-2.5">
+                    <label class="cursor-pointer">
+                      <input type="radio" name="paymentMethod" value="كاش عند الاستلام" class="peer sr-only" ${
+                        state.checkoutDraft.paymentMethod === 'كاش عند الاستلام' ? 'checked' : ''
+                      } />
+                      <div class="min-h-[54px] p-3 rounded-xl border-2 border-slate-200 peer-checked:border-emerald-600 peer-checked:bg-emerald-50 text-center transition-all flex flex-col justify-center">
+                        <span class="text-xs sm:text-sm font-extrabold text-slate-900">💵 كاش عند الاستلام</span>
+                        <span class="text-[10px] font-semibold text-slate-500 mt-0.5">نقدي للسواق</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer">
+                      <input type="radio" name="paymentMethod" value="آجل (على الحساب)" class="peer sr-only" ${
+                        state.checkoutDraft.paymentMethod === 'آجل (على الحساب)' ? 'checked' : ''
+                      } />
+                      <div class="min-h-[54px] p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 text-center transition-all flex flex-col justify-center">
+                        <span class="text-xs sm:text-sm font-extrabold text-slate-900">📒 آجل (على الحساب)</span>
+                        <span class="text-[10px] font-semibold text-slate-500 mt-0.5">للعملاء المسجلين</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="input-shop-notes" class="block text-xs font-bold text-slate-700 mb-1.5">ملاحظات إضافية (اختياري)</label>
+                  <input
+                    id="input-shop-notes"
+                    type="text"
+                    value="${escapeHtml(state.checkoutDraft.notes)}"
+                    placeholder="مثلاً: التسليم بعد الظهر أو الاتصال قبل الوصول"
+                    class="w-full min-h-[44px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-semibold text-slate-900"
+                  />
+                </div>
+
+                <div id="checkout-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-xs font-extrabold rounded-xl px-3.5 py-2.5"></div>
+
+                <button
+                  type="submit"
+                  class="w-full min-h-[52px] px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-black text-base shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                  <span>تأكيد وإرسال الفاتورة عبر واتساب</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        `);
+
+        document.getElementById('btn-close-modal').addEventListener('click', closeModal);
+        document.getElementById('btn-clear-cart').addEventListener('click', () => {
+          state.cart = {};
+          closeModal();
+          render();
+          showToast('تم تفريغ السلة', 'info');
+        });
+
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const shopName = document.getElementById('input-shop-name').value.trim();
+          const address = document.getElementById('input-shop-address').value.trim();
+          const phone = document.getElementById('input-shop-phone').value.trim();
+          const notes = document.getElementById('input-shop-notes').value.trim();
+          const paymentInput = document.querySelector('input[name="paymentMethod"]:checked');
+          const paymentMethod = paymentInput ? paymentInput.value : 'كاش عند الاستلام';
+
+          state.checkoutDraft = { shopName, address, phone, paymentMethod, notes };
+
+          const errEl = document.getElementById('checkout-error');
+          if (!shopName || !address) {
+            errEl.textContent = 'برجاء إدخال اسم السوبر ماركت والعنوان / المنطقة أولاً لإرسال الطلب.';
+            errEl.classList.remove('hidden');
+            return;
+          }
+
+          const currentSummary = getCartSummary();
+          if (!currentSummary.hasItems) {
+            closeModal();
+            return;
+          }
+
+          const newOrder = {
+            id: `ORD-${state.nextOrderNumber}`,
+            number: state.nextOrderNumber,
+            createdAt: getNowArabicTime(),
+            shopName,
+            address,
+            phone,
+            paymentMethod,
+            notes,
+            status: 'pending',
+            totalAmount: currentSummary.totalAmount,
+            totalCartons: currentSummary.totalCartons,
+            totalPackets: currentSummary.totalPackets,
+            totalBonusCartons: currentSummary.totalBonusCartons,
+            items: currentSummary.lines.map((l) => ({
+              productId: l.productId,
+              name: l.name,
+              cartons: l.cartons,
+              packets: l.packets,
+              cartonPrice: l.cartonPrice,
+              packetPrice: l.packetPrice,
+              bonusCartons: l.bonusCartons,
+              lineTotal: l.lineTotal,
+            })),
+          };
+
+          state.orders.unshift(newOrder);
+          state.nextOrderNumber += 1;
+          state.cart = {};
+          persistState();
+          render();
+
+          const waText = buildWhatsAppMessage(newOrder);
+          const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
+
+          // Attempt to open WhatsApp in new tab
+          try {
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+          } catch (_) {}
+
+          openOrderSuccessModal(newOrder, waText, waUrl);
+          showToast(`تم تسجيل الأوردر #${newOrder.number} بنجاح في لوحة التاجر!`, 'success');
+        });
+      }
+
+      function openOrderSuccessModal(order, waText, waUrl) {
+        openModal(`
+          <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[90vh] flex flex-col overflow-hidden animate-slide-up">
+            <div class="bg-emerald-600 text-white p-5 text-center">
+              <div class="w-12 h-12 rounded-full bg-white/20 mx-auto flex items-center justify-center mb-2">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </div>
+              <h2 class="text-xl font-black">تم تسجيل طلبك رقم #${order.number}</h2>
+              <p class="text-xs font-semibold text-emerald-100 mt-1">تمت إضافة الأوردر لحظياً لورقة تحميل العربية في لوحة تحكم التاجر</p>
+            </div>
+
+            <div class="p-5 overflow-y-auto space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs font-extrabold text-slate-700">معاينة رسالة فاتورة واتساب:</span>
+                  <button type="button" id="btn-copy-invoice" class="text-xs font-extrabold text-emerald-700 hover:underline">نسخ النص</button>
+                </div>
+                <pre class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs font-sans whitespace-pre-wrap text-slate-800 leading-relaxed max-h-56 overflow-y-auto">${escapeHtml(waText)}</pre>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <a
+                  href="${waUrl}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="min-h-[48px] px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-colors"
+                >
+                  <span>فتح واتساب الآن</span>
+                </a>
+                <button
+                  type="button"
+                  id="btn-go-merchant-orders"
+                  class="min-h-[48px] px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-colors"
+                >
+                  <span>عرض في لوحة التاجر</span>
+                </button>
+              </div>
+
+              <button type="button" id="btn-done-modal" class="w-full min-h-[44px] rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-colors">
+                متابعة التسوق
+              </button>
+            </div>
+          </div>
+        `);
+
+        document.getElementById('btn-copy-invoice').addEventListener('click', () => {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(waText).then(() => showToast('تم نسخ الفاتورة ✓'));
+          } else {
+            showToast('انسخ النص مباشرة من المعاينة', 'info');
+          }
+        });
+        document.getElementById('btn-go-merchant-orders').addEventListener('click', () => {
+          closeModal();
+          state.role = 'merchant';
+          state.merchantTab = 'orders';
+          state.expandedOrders[order.id] = true;
+          render();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        document.getElementById('btn-done-modal').addEventListener('click', closeModal);
+      }
+
+      function openAddProductModal() {
+        openModal(`
+          <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden animate-slide-up">
+            <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <div>
+                <h2 class="text-lg font-black text-slate-900">إضافة صنف جديد للكتالوج</h2>
+                <p class="text-xs font-semibold text-slate-500">هيظهر فوراً في واجهة العملاء بمجرد الحفظ</p>
+              </div>
+              <button type="button" id="btn-close-modal" class="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-600" aria-label="إغلاق">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <form id="add-product-form" class="p-5 overflow-y-auto space-y-3.5" novalidate>
+              <div>
+                <label for="new-prod-name" class="block text-xs font-extrabold text-slate-800 mb-1">اسم الصنف والعبوة <span class="text-red-500">*</span></label>
+                <input id="new-prod-name" type="text" required placeholder="مثلاً: بسكويت أهلاوي شوكولاتة (24 باكو)" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold" />
+              </div>
+
+              <div>
+                <label for="new-prod-cat" class="block text-xs font-extrabold text-slate-800 mb-1">القسم</label>
+                <select id="new-prod-cat" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold bg-white">
+                  ${CATEGORIES.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label for="new-prod-carton" class="block text-xs font-extrabold text-slate-800 mb-1">سعر الكرتونة (ج) <span class="text-red-500">*</span></label>
+                  <input id="new-prod-carton" type="number" inputmode="decimal" min="1" step="any" required placeholder="مثلاً: 240" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-black tabular-nums" />
+                </div>
+                <div>
+                  <label for="new-prod-packet" class="block text-xs font-extrabold text-slate-800 mb-1">سعر الشرنك / الباكت (اختياري)</label>
+                  <input id="new-prod-packet" type="number" inputmode="decimal" min="0" step="any" placeholder="اتركه فارغاً للكرتونة فقط" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-black tabular-nums" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label for="new-prod-unitcost" class="block text-xs font-extrabold text-slate-800 mb-1">تكلفة القطعة (ج) <span class="text-red-500">*</span></label>
+                  <input id="new-prod-unitcost" type="number" inputmode="decimal" min="0.25" step="any" required placeholder="مثلاً: 10" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-black tabular-nums" />
+                </div>
+                <div>
+                  <label for="new-prod-promo" class="block text-xs font-extrabold text-slate-800 mb-1">نص العرض / البونص (اختياري)</label>
+                  <input id="new-prod-promo" type="text" placeholder="مثلاً: عرض 10+1" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold" />
+                </div>
+              </div>
+
+              <div id="add-prod-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-xs font-extrabold rounded-xl px-3.5 py-2.5"></div>
+
+              <div class="flex items-center gap-2 pt-2">
+                <button type="submit" class="flex-1 min-h-[48px] px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-sm transition-colors">
+                  حفظ وإضافة للكتالوج
+                </button>
+                <button type="button" id="btn-cancel-add" class="min-h-[48px] px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-colors">
+                  إلغاء
+                </button>
+              </div>
+            </form>
+          </div>
+        `);
+
+        document.getElementById('btn-close-modal').addEventListener('click', closeModal);
+        document.getElementById('btn-cancel-add').addEventListener('click', closeModal);
+
+        document.getElementById('add-product-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('new-prod-name').value.trim();
+          const category = document.getElementById('new-prod-cat').value;
+          const cartonPrice = parseFloat(document.getElementById('new-prod-carton').value);
+          const packetRaw = document.getElementById('new-prod-packet').value.trim();
+          const packetPrice = packetRaw ? parseFloat(packetRaw) : null;
+          const unitCost = parseFloat(document.getElementById('new-prod-unitcost').value);
+          const promoText = document.getElementById('new-prod-promo').value.trim();
+
+          const errEl = document.getElementById('add-prod-error');
+          if (!name || !(cartonPrice > 0) || !(unitCost > 0)) {
+            errEl.textContent = 'برجاء إدخال اسم الصنف وسعر الكرتونة وتكلفة القطعة بشكل صحيح.';
+            errEl.classList.remove('hidden');
+            return;
+          }
+
+          const unitsPerCarton = Math.max(1, Math.round(cartonPrice / unitCost));
+          const unitsPerPacket = packetPrice && packetPrice > 0 ? Math.max(1, Math.round(unitsPerCarton / 2)) : null;
+          const { bonusBuy, bonusFree } = parseBonusRule(promoText);
+
+          const newItem = {
+            id: 'p-' + Date.now(),
+            name,
+            category,
+            cartonPrice,
+            originalCartonPrice: null,
+            packetPrice: packetPrice && packetPrice > 0 ? packetPrice : null,
+            unitsPerCarton,
+            unitsPerPacket,
+            unitCost,
+            unitLabel: 'قطعة',
+            promoText,
+            bonusBuy,
+            bonusFree,
+            inStock: true,
+            isClearance: false,
+          };
+
+          state.products.unshift(newItem);
+          persistState();
+          closeModal();
+          render();
+          showToast(`تمت إضافة "${name}" للكتالوج بنجاح ✓`);
+        });
+      }
+
+      function openResetConfirmModal() {
+        openModal(`
+          <div class="bg-white w-full sm:max-w-sm rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 animate-slide-up">
+            <div class="text-center">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 mx-auto flex items-center justify-center mb-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+              </div>
+              <h2 class="text-lg font-black text-slate-900">إعادة ضبط البيانات التجريبية؟</h2>
+              <p class="text-xs font-semibold text-slate-600 mt-1.5 leading-relaxed">
+                سيتم استرجاع جميع الأسعار وحالات المخزون والأوردرات التجريبية لحالتها الافتراضية لبدء عرض جديد.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 mt-5">
+              <button type="button" id="btn-confirm-reset" class="min-h-[46px] rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-sm transition-colors">
+                نعم، إعادة ضبط
+              </button>
+              <button type="button" id="btn-cancel-reset" class="min-h-[46px] rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-colors">
+                إلغاء
+              </button>
+            </div>
+          </div>
+        `);
+
+        document.getElementById('btn-cancel-reset').addEventListener('click', closeModal);
+        document.getElementById('btn-confirm-reset').addEventListener('click', () => {
+          safeStorage.remove(STORAGE_KEY);
+          const fresh = getInitialPersistedState();
+          state.products = fresh.products;
+          state.orders = fresh.orders;
+          state.nextOrderNumber = fresh.nextOrderNumber;
+          state.pickingChecked = {};
+          state.cart = {};
+          state.pendingPriceEdits = {};
+          state.searchQuery = '';
+          state.merchantSearchQuery = '';
+          state.activeCategory = 'الكل';
+          state.expandedOrders = {};
+          persistState();
+          closeModal();
+          render();
+          showToast('تمت إعادة ضبط البيانات التجريبية بنجاح ✓');
+        });
+      }
+
+      // =========================================================================
+      // MAIN RENDER & EVENT BINDING
+      // =========================================================================
+      function render() {
+        updateHeaderUI();
+        const main = document.getElementById('app-main');
+        main.innerHTML = state.role === 'customer' ? renderCustomerView() : renderMerchantView();
+        updateStickyCartBar();
+        updateFloatingSaveBar();
+        bindViewEvents();
+      }
+
+      function bindViewEvents() {
+        const main = document.getElementById('app-main');
+
+        // ---- Customer View Events ----
+        if (state.role === 'customer') {
+          const searchInput = document.getElementById('customer-search-input');
+          const clearSearchBtn = document.getElementById('btn-clear-search');
+          if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+              state.searchQuery = e.target.value;
+              if (clearSearchBtn) {
+                clearSearchBtn.classList.toggle('hidden', !state.searchQuery);
+              }
+              const listEl = document.getElementById('customer-products-list');
+              const products = getFilteredCustomerProducts();
+              listEl.innerHTML =
+                products.length === 0
+                  ? `<div class="md:col-span-2 bg-white rounded-2xl border border-slate-200 p-8 text-center">
+                      <p class="text-base font-bold text-slate-700">مفيش أصناف مطابقة للبحث ده</p>
+                      <p class="text-xs text-slate-500 mt-1">جرب تكتب اسم تاني أو اختار قسم "الكل"</p>
+                      <button id="btn-reset-filters" type="button" class="mt-4 min-h-[44px] px-5 py-2 rounded-xl bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700">عرض كل الأصناف</button>
+                    </div>`
+                  : products.map(renderCustomerProductCard).join('');
+            });
+          }
+
+          if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+              state.searchQuery = '';
+              render();
+            });
+          }
+
+          main.querySelectorAll('.category-pill').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              state.activeCategory = btn.getAttribute('data-category');
+              render();
+            });
+          });
+        }
+
+        // ---- Merchant View Events ----
+        if (state.role === 'merchant') {
+          const tabInv = document.getElementById('merchant-tab-inventory');
+          const tabOrd = document.getElementById('merchant-tab-orders');
+          if (tabInv) {
+            tabInv.addEventListener('click', () => {
+              state.merchantTab = 'inventory';
+              render();
+            });
+          }
+          if (tabOrd) {
+            tabOrd.addEventListener('click', () => {
+              state.merchantTab = 'orders';
+              render();
+            });
+          }
+
+          const addBtn = document.getElementById('btn-open-add-product');
+          if (addBtn) {
+            addBtn.addEventListener('click', openAddProductModal);
+          }
+
+          const mSearch = document.getElementById('merchant-search-input');
+          if (mSearch) {
+            mSearch.addEventListener('input', (e) => {
+              const pos = e.target.selectionStart;
+              state.merchantSearchQuery = e.target.value;
+              render();
+              const refreshed = document.getElementById('merchant-search-input');
+              if (refreshed) {
+                refreshed.focus();
+                try {
+                  refreshed.setSelectionRange(pos, pos);
+                } catch (_) {}
+              }
+            });
+          }
+
+          const copyPickBtn = document.getElementById('btn-copy-picking');
+          if (copyPickBtn) {
+            copyPickBtn.addEventListener('click', () => {
+              const targetOrders =
+                state.pickingFilter === 'pending'
+                  ? state.orders.filter((o) => o.status === 'pending')
+                  : state.orders;
+              const agg = getAggregatedPickingList(targetOrders);
+              if (agg.length === 0) {
+                showToast('لا توجد أصناف في ورقة التحميل حالياً', 'warning');
+                return;
+              }
+              const txt = buildPickingListText(agg, state.pickingFilter);
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(txt).then(() => showToast('تم نسخ ورقة التحميل لإرسالها للمخزن ✓'));
+              } else {
+                showToast('تم تجهيز ورقة التحميل ✓');
+              }
+            });
+          }
+
+          const printPickBtn = document.getElementById('btn-print-picking');
+          if (printPickBtn) {
+            printPickBtn.addEventListener('click', () => window.print());
+          }
+        }
+      }
+
+      // =========================================================================
+      // DELEGATED INTERACTIONS (Fast & Resilient Across Re-renders)
+      // =========================================================================
+      document.getElementById('app-main').addEventListener('click', (e) => {
+        const target = e.target;
+
+        // Reset customer filters
+        if (target.closest('#btn-reset-filters')) {
+          state.searchQuery = '';
+          state.activeCategory = 'الكل';
+          render();
+          return;
+        }
+
+        // Unit selector on product card
+        const unitBtn = target.closest('[data-select-unit]');
+        if (unitBtn && !unitBtn.disabled) {
+          const pid = unitBtn.getAttribute('data-pid');
+          const unit = unitBtn.getAttribute('data-select-unit');
+          state.selectedUnitByProduct[pid] = unit;
+          render();
+          return;
+        }
+
+        // Quantity +/- buttons
+        const qtyBtn = target.closest('[data-qty-delta]');
+        if (qtyBtn) {
+          const pid = qtyBtn.getAttribute('data-pid');
+          const unit = qtyBtn.getAttribute('data-unit');
+          const delta = parseInt(qtyBtn.getAttribute('data-qty-delta'), 10);
+          adjustCart(pid, unit, delta);
+          return;
+        }
+
+        // Quick-add promo button (+10 or complete promo)
+        const quickBtn = target.closest('[data-quick-add]');
+        if (quickBtn) {
+          const pid = quickBtn.getAttribute('data-pid');
+          const unit = quickBtn.getAttribute('data-unit');
+          const amount = parseInt(quickBtn.getAttribute('data-quick-add'), 10);
+          adjustCart(pid, unit, amount);
+          return;
+        }
+
+        // Merchant: Stock toggle
+        const stockToggle = target.closest('[data-toggle-stock]');
+        if (stockToggle) {
+          const pid = stockToggle.getAttribute('data-toggle-stock');
+          const prod = state.products.find((p) => p.id === pid);
+          if (prod) {
+            prod.inStock = !prod.inStock;
+            if (!prod.inStock && state.cart[pid]) {
+              delete state.cart[pid];
+            }
+            persistState();
+            render();
+            showToast(
+              prod.inStock ? `تم تفعيل "${prod.name}" كمتاح في الكتالوج ✓` : `تم تحويل "${prod.name}" إلى خلصان`,
+              prod.inStock ? 'success' : 'warning'
+            );
+          }
+          return;
+        }
+
+        // Merchant: Clearance toggle
+        const clearanceToggle = target.closest('[data-toggle-clearance]');
+        if (clearanceToggle) {
+          const pid = clearanceToggle.getAttribute('data-toggle-clearance');
+          const prod = state.products.find((p) => p.id === pid);
+          if (prod) {
+            prod.isClearance = !prod.isClearance;
+            if (prod.isClearance && !prod.originalCartonPrice) {
+              // Suggest an original price reference ~10% higher if not already set
+              prod.originalCartonPrice = Math.round(prod.cartonPrice * 1.1);
+            }
+            persistState();
+            render();
+            showToast(
+              prod.isClearance
+                ? `🔥 تم تثبيت "${prod.name}" في أعلى الكتالوج كـ حرق سعر`
+                : `تم إلغاء وضع حرق السعر عن "${prod.name}"`,
+              prod.isClearance ? 'warning' : 'info'
+            );
+          }
+          return;
+        }
+
+        // Merchant: Picking filter toggle
+        const pickFilterBtn = target.closest('[data-picking-filter]');
+        if (pickFilterBtn) {
+          state.pickingFilter = pickFilterBtn.getAttribute('data-picking-filter');
+          render();
+          return;
+        }
+
+        // Merchant: Order accordion toggle
+        const orderToggle = target.closest('[data-toggle-order]');
+        if (orderToggle) {
+          const oid = orderToggle.getAttribute('data-toggle-order');
+          state.expandedOrders[oid] = !state.expandedOrders[oid];
+          render();
+          return;
+        }
+
+        // Merchant: Mark order dispatched / pending
+        const dispatchBtn = target.closest('[data-dispatch-order]');
+        if (dispatchBtn) {
+          const oid = dispatchBtn.getAttribute('data-dispatch-order');
+          const order = state.orders.find((o) => o.id === oid);
+          if (order) {
+            order.status = order.status === 'dispatched' ? 'pending' : 'dispatched';
+            persistState();
+            render();
+            showToast(
+              order.status === 'dispatched'
+                ? `تم تحديث أوردر #${order.number} (${order.shopName}) إلى: خرج للتوصيل ✓`
+                : `تم إرجاع أوردر #${order.number} لقائمة قيد التحميل`,
+              order.status === 'dispatched' ? 'success' : 'info'
+            );
+          }
+          return;
+        }
+      });
+
+      // Delegated inline price editing & picking checkboxes
+      document.getElementById('app-main').addEventListener('input', (e) => {
+        const priceInput = e.target.closest('[data-price-input]');
+        if (priceInput) {
+          const pid = priceInput.getAttribute('data-pid');
+          const field = priceInput.getAttribute('data-price-input'); // 'carton' | 'packet'
+          const prod = state.products.find((p) => p.id === pid);
+          if (!prod) return;
+
+          if (!state.pendingPriceEdits[pid]) state.pendingPriceEdits[pid] = {};
+          const rawVal = priceInput.value;
+
+          if (field === 'carton') {
+            state.pendingPriceEdits[pid].cartonPrice = rawVal;
+            // Live update unit cost text without re-rendering input
+            const num = parseFloat(rawVal);
+            if (num > 0 && prod.unitsPerCarton) {
+              const unitEl = document.getElementById(`live-unit-cost-${pid}`);
+              if (unitEl) unitEl.textContent = `${formatMoney(+(num / prod.unitsPerCarton).toFixed(2))} ج`;
+            }
+          } else {
+            state.pendingPriceEdits[pid].packetPrice = rawVal;
+          }
+
+          // Clean up entry if values match original
+          const edit = state.pendingPriceEdits[pid];
+          const cartonUnchanged =
+            edit.cartonPrice === undefined || String(edit.cartonPrice) === String(prod.cartonPrice);
+          const packetUnchanged =
+            edit.packetPrice === undefined ||
+            String(edit.packetPrice) === String(prod.packetPrice == null ? '' : prod.packetPrice);
+
+          if (cartonUnchanged && packetUnchanged) {
+            delete state.pendingPriceEdits[pid];
+            priceInput.classList.remove('border-amber-400', 'bg-amber-50/40');
+            priceInput.classList.add('border-slate-200', 'bg-slate-50');
+          } else {
+            priceInput.classList.remove('border-slate-200', 'bg-slate-50');
+            priceInput.classList.add('border-amber-400', 'bg-amber-50/40');
+          }
+
+          updateFloatingSaveBar();
+        }
+      });
+
+      document.getElementById('app-main').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target.closest('[data-price-input]')) {
+          if (Object.keys(state.pendingPriceEdits).length > 0) {
+            e.preventDefault();
+            document.getElementById('btn-save-prices').click();
+          }
+        }
+      });
+
+      document.getElementById('app-main').addEventListener('change', (e) => {
+        const check = e.target.closest('[data-picking-check]');
+        if (check) {
+          const key = check.getAttribute('data-picking-check');
+          state.pickingChecked[key] = check.checked;
+          persistState();
+          render();
+        }
+      });
+
+      function adjustCart(pid, unit, delta) {
+        const prod = state.products.find((p) => p.id === pid);
+        if (!prod || !prod.inStock) return;
+
+        if (!state.cart[pid]) state.cart[pid] = { cartons: 0, packets: 0 };
+        const field = unit === 'packet' ? 'packets' : 'cartons';
+        const prevBonus = calcBonusCartons(prod, state.cart[pid].cartons);
+
+        state.cart[pid][field] = Math.max(0, (state.cart[pid][field] || 0) + delta);
+        if (state.cart[pid].cartons === 0 && state.cart[pid].packets === 0) {
+          delete state.cart[pid];
+        } else {
+          const newBonus = calcBonusCartons(prod, state.cart[pid].cartons);
+          if (newBonus > prevBonus) {
+            showToast(`🎁 مبروك! كسبت +${newBonus} كرتونة هدية على ${prod.name.split('(')[0].trim()}`, 'success');
+          }
+        }
+
+        render();
+      }
+
+      // =========================================================================
+      // GLOBAL STATIC BUTTON LISTENERS
+      // =========================================================================
+      document.getElementById('role-customer').addEventListener('click', () => {
+        state.role = 'customer';
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      document.getElementById('role-merchant').addEventListener('click', () => {
+        state.role = 'merchant';
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      document.getElementById('btn-reset-demo').addEventListener('click', openResetConfirmModal);
+
+      document.getElementById('btn-open-checkout').addEventListener('click', openCheckoutDrawer);
+
+      document.getElementById('btn-discard-prices').addEventListener('click', () => {
+        state.pendingPriceEdits = {};
+        render();
+        showToast('تم إلغاء تعديلات الأسعار غير المحفوظة', 'info');
+      });
+
+      document.getElementById('btn-save-prices').addEventListener('click', () => {
+        let updatedCount = 0;
+        Object.entries(state.pendingPriceEdits).forEach(([pid, edit]) => {
+          const prod = state.products.find((p) => p.id === pid);
+          if (!prod) return;
+
+          if (edit.cartonPrice !== undefined) {
+            const val = parseFloat(edit.cartonPrice);
+            if (val > 0) {
+              if (prod.isClearance && val < prod.cartonPrice && !prod.originalCartonPrice) {
+                prod.originalCartonPrice = prod.cartonPrice;
+              }
+              prod.cartonPrice = val;
+              if (prod.unitsPerCarton > 0) {
+                prod.unitCost = +(val / prod.unitsPerCarton).toFixed(2);
+              }
+              updatedCount += 1;
+            }
+          }
+          if (edit.packetPrice !== undefined) {
+            const raw = String(edit.packetPrice).trim();
+            if (raw === '' || parseFloat(raw) <= 0) {
+              prod.packetPrice = null;
+            } else {
+              prod.packetPrice = parseFloat(raw);
+            }
+            if (edit.cartonPrice === undefined) updatedCount += 1;
+          }
+        });
+
+        state.pendingPriceEdits = {};
+        persistState();
+        render();
+        showToast(`تم حفظ الأسعار وتحديث كتالوج العملاء لحظياً (${updatedCount} ${updatedCount === 1 ? 'صنف' : 'أصناف'}) ✓`);
+      });
+
+      // Escape key closes modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const root = document.getElementById('modal-root');
+          if (!root.classList.contains('hidden')) closeModal();
+        }
+      });
+
+      // Initial Boot
+      render();
+    })();
+  </script>
+</body>
+</html>
