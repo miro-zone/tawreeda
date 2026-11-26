@@ -4,21 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>توريدة (Tawreeda) | كتالوج جملة المواد الغذائية وإدارة التوزيع</title>
-  <meta name="description" content="توريدة - نظام فوري لطلبات الجملة وإدارة الأسعار والمخزون وتحميل سيارات التوزيع لتجار المواد الغذائية والسوبر ماركت في مصر." />
+  <meta name="description" content="توريدة - نظام فوري لطلبات الجملة وإدارة الأسعار والمخزون وتحميل سيارات التوزيع وعهدة السواق لتجار المواد الغذائية والسوبر ماركت في مصر." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Cairo', 'Tajawal', 'Segoe UI', 'Tahoma', 'sans-serif'],
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Cairo', 'Tajawal', 'Segoe UI', 'Tahoma', 'sans-serif'],
+            },
           },
         },
-      },
-    };
+      };
+    }
   </script>
   <style>
     * {
@@ -26,7 +28,7 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Cairo', 'Tajawal', 'Segoe UI', 'Tahoma', sans-serif;
+      font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
       background-color: #f1f5f9;
       color: #0f172a;
       overscroll-behavior-y: none;
@@ -41,7 +43,6 @@
     .tabular-nums {
       font-variant-numeric: tabular-nums;
     }
-    /* Custom Toggle Switch */
     .toggle-track {
       position: relative;
       display: inline-flex;
@@ -67,7 +68,6 @@
     .toggle-track[data-checked="true"] .toggle-thumb {
       transform: translateX(-22px);
     }
-    /* Drawer & Modal Animations */
     @keyframes slideUp {
       from { transform: translateY(100%); opacity: 0.7; }
       to { transform: translateY(0); opacity: 1; }
@@ -82,7 +82,6 @@
     .animate-fade-in {
       animation: fadeIn 0.18s ease-out forwards;
     }
-    /* Print styling for Truck Loading Sheet */
     @media print {
       .no-print { display: none !important; }
       body { background: #ffffff !important; }
@@ -96,7 +95,6 @@
   <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md no-print">
     <div class="max-w-4xl mx-auto px-3 sm:px-4 py-2.5">
       <div class="flex items-center justify-between gap-2 mb-2.5">
-        <!-- Brand -->
         <div class="flex items-center gap-2">
           <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center shadow-sm flex-shrink-0">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -112,7 +110,6 @@
           </div>
         </div>
 
-        <!-- Reset Demo Data Button -->
         <button
           id="btn-reset-demo"
           type="button"
@@ -153,19 +150,24 @@
           <span id="header-orders-badge" class="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 text-xs font-extrabold rounded-full bg-amber-400 text-slate-900 tabular-nums">0</span>
         </button>
       </div>
+
+      <!-- Demo Notice Pill -->
+      <div class="mt-2 flex justify-center">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/90 border border-slate-700/90 text-[11px] font-semibold text-slate-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
+          <span>شريط معاينة للعرض فقط — العميل في النسخة الفعلية يشاهد الكتالوج فقط</span>
+        </div>
+      </div>
     </div>
   </header>
 
   <!-- Main Content Container -->
-  <main id="app-main" class="max-w-4xl mx-auto px-3 sm:px-4 pt-3 pb-32">
-    <!-- Dynamically Rendered View -->
-  </main>
+  <main id="app-main" class="max-w-4xl mx-auto px-3 sm:px-4 pt-3 pb-36"></main>
 
   <!-- Sticky Bottom Cart Bar (Customer View) -->
   <div id="sticky-cart-bar" class="fixed bottom-0 inset-x-0 z-30 hidden no-print">
     <div class="max-w-4xl mx-auto px-3 pb-3 pt-1">
       <div class="bg-slate-900 text-white rounded-2xl shadow-xl border border-slate-700/80 p-3 sm:p-3.5">
-        <!-- Free Delivery Mini Progress -->
         <div id="cart-delivery-progress" class="mb-2.5"></div>
         <div class="flex items-center justify-between gap-3">
           <div class="min-w-0">
@@ -178,10 +180,10 @@
           <button
             id="btn-open-checkout"
             type="button"
-            class="min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-900/30 flex items-center gap-2 transition-all flex-shrink-0"
+            class="min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl font-extrabold text-sm sm:text-base shadow-lg flex items-center gap-2 transition-all flex-shrink-0"
           >
-            <span>مراجعة وإرسال الطلب</span>
-            <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <span id="btn-open-checkout-label">مراجعة وإرسال الطلب</span>
+            <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </button>
@@ -230,20 +232,33 @@
   <div id="modal-root" class="fixed inset-0 z-50 hidden no-print" aria-modal="true" role="dialog"></div>
 
   <!-- Toast Notification Container -->
-  <div id="toast-container" class="fixed top-20 inset-x-0 z-50 flex flex-col items-center gap-2 px-4 pointer-events-none no-print"></div>
+  <div id="toast-container" class="fixed top-24 inset-x-0 z-50 flex flex-col items-center gap-2 px-4 pointer-events-none no-print"></div>
 
   <script>
     (function () {
       'use strict';
 
       // =========================================================================
-      // CONSTANTS & SAFE STORAGE
+      // DYNAMIC URL PERSONALIZATION & CONSTANTS
       // =========================================================================
-      const STORAGE_KEY = 'tawreeda_mvp_state_v1';
-      const FREE_DELIVERY_THRESHOLD = 3000;
-      const WHATSAPP_NUMBER = '201000000000'; // Demo distributor WhatsApp number
+      const urlParams = new URLSearchParams(window.location.search);
+      const DEFAULT_STORE_NAME = 'مكتب الحاج محمود لتوزيع المواد الغذائية - جملة الجملة';
+      const DEFAULT_WHATSAPP = '201000000000';
 
-      const CATEGORIES = [
+      const STORE_NAME = (urlParams.get('name') || '').trim() || DEFAULT_STORE_NAME;
+      const cleanedWa = (urlParams.get('wa') || '').replace(/[^\d]/g, '');
+      const WHATSAPP_NUMBER = cleanedWa || DEFAULT_WHATSAPP;
+
+      if (STORE_NAME !== DEFAULT_STORE_NAME) {
+        document.title = `توريدة | ${STORE_NAME}`;
+      }
+
+      const STORAGE_KEY = 'tawreeda_mvp_state_v2';
+      const CUSTOMER_PROFILE_KEY = 'tawreeda_customer_profile_v1';
+      const MIN_ORDER_VALUE = 1000;
+      const FREE_DELIVERY_THRESHOLD = 3000;
+
+      const BASE_CATEGORIES = [
         'شيبسي وسناكس',
         'بسكويت وويفر',
         'عصائر ومشروبات',
@@ -276,7 +291,7 @@
       };
 
       // =========================================================================
-      // SEED DATA (Authentic Egyptian FMCG Wholesale Catalog)
+      // SEED DATA (With Brands + 1 Approved & 1 New Order)
       // =========================================================================
       function createSeedProducts() {
         return [
@@ -284,6 +299,7 @@
             id: 'p-chipsy',
             name: 'شيبسي عائلي أطعمة مشكلة (12 كيس)',
             category: 'شيبسي وسناكس',
+            brand: 'بيبسيكو',
             cartonPrice: 165,
             originalCartonPrice: null,
             packetPrice: 85,
@@ -301,6 +317,7 @@
             id: 'p-ulker',
             name: 'بسكويت أولكر ساندوتش شوكولاتة (24 باكو)',
             category: 'بسكويت وويفر',
+            brand: 'أولكر',
             cartonPrice: 120,
             originalCartonPrice: null,
             packetPrice: 62,
@@ -318,6 +335,7 @@
             id: 'p-indomie',
             name: 'إندومي خضار جامبو (40 كيس)',
             category: 'معلبات ونواشف',
+            brand: 'إندومي',
             cartonPrice: 340,
             originalCartonPrice: null,
             packetPrice: 175,
@@ -335,6 +353,7 @@
             id: 'p-juhayna',
             name: 'عصير جهينة بيور 1 لتر (12 علبة)',
             category: 'عصائر ومشروبات',
+            brand: 'جهينة',
             cartonPrice: 288,
             originalCartonPrice: 320,
             packetPrice: null,
@@ -342,7 +361,7 @@
             unitsPerPacket: null,
             unitCost: 24,
             unitLabel: 'علبة',
-            promoText: 'حرق سعر - صلاحية قريبة',
+            promoText: 'لقطة اليوم / عرض تصفية - كمية محدودة',
             bonusBuy: 0,
             bonusFree: 0,
             inStock: true,
@@ -352,6 +371,7 @@
             id: 'p-molto',
             name: 'مولتو ميني شوكولاتة (20 كيس)',
             category: 'بسكويت وويفر',
+            brand: 'إيديتا',
             cartonPrice: 190,
             originalCartonPrice: null,
             packetPrice: 98,
@@ -369,6 +389,7 @@
             id: 'p-sunshine',
             name: 'تونة صن شاين قطع سهلة الفتح (24 علبة)',
             category: 'معلبات ونواشف',
+            brand: 'أرما',
             cartonPrice: 1152,
             originalCartonPrice: null,
             packetPrice: 588,
@@ -386,6 +407,7 @@
             id: 'p-vitrac',
             name: 'مربى فيتراك فراولة 430 جم (12 برطمان)',
             category: 'معلبات ونواشف',
+            brand: 'فيتراك',
             cartonPrice: 420,
             originalCartonPrice: null,
             packetPrice: 216,
@@ -403,6 +425,7 @@
             id: 'p-elarosa',
             name: 'شاي العروسة ناعم 40 جم (48 باكو)',
             category: 'عصائر ومشروبات',
+            brand: 'العروسة',
             cartonPrice: 480,
             originalCartonPrice: null,
             packetPrice: 246,
@@ -420,6 +443,7 @@
             id: 'p-tiger',
             name: 'تايجر شيبس كبير أطعمة (12 كيس)',
             category: 'شيبسي وسناكس',
+            brand: 'بيبسيكو',
             cartonPrice: 156,
             originalCartonPrice: null,
             packetPrice: 80,
@@ -437,6 +461,7 @@
             id: 'p-lambada',
             name: 'بسكويت لمبادا ويفر شوكولاتة (24 باكو)',
             category: 'بسكويت وويفر',
+            brand: 'لمبادا',
             cartonPrice: 132,
             originalCartonPrice: null,
             packetPrice: 68,
@@ -456,53 +481,6 @@
       function createSeedOrders() {
         return [
           {
-            id: 'ORD-1001',
-            number: 1001,
-            createdAt: '08:15 ص',
-            shopName: 'سوبر ماركت البركة',
-            address: 'شارع فيصل الرئيسي - محطة المساحة',
-            phone: '01012345678',
-            paymentMethod: 'كاش عند الاستلام',
-            notes: 'التسليم قبل الساعة 12 ظهراً',
-            status: 'pending', // 'pending' | 'dispatched'
-            totalAmount: 3246,
-            totalCartons: 15,
-            totalPackets: 0,
-            totalBonusCartons: 1,
-            items: [
-              {
-                productId: 'p-chipsy',
-                name: 'شيبسي عائلي أطعمة مشكلة (12 كيس)',
-                cartons: 10,
-                packets: 0,
-                cartonPrice: 165,
-                packetPrice: 85,
-                bonusCartons: 1,
-                lineTotal: 1650,
-              },
-              {
-                productId: 'p-indomie',
-                name: 'إندومي خضار جامبو (40 كيس)',
-                cartons: 3,
-                packets: 0,
-                cartonPrice: 340,
-                packetPrice: 175,
-                bonusCartons: 0,
-                lineTotal: 1020,
-              },
-              {
-                productId: 'p-juhayna',
-                name: 'عصير جهينة بيور 1 لتر (12 علبة)',
-                cartons: 2,
-                packets: 0,
-                cartonPrice: 288,
-                packetPrice: null,
-                bonusCartons: 0,
-                lineTotal: 576,
-              },
-            ],
-          },
-          {
             id: 'ORD-1002',
             number: 1002,
             createdAt: '09:05 ص',
@@ -510,9 +488,12 @@
             address: 'حدائق الأهرام - البوابة الرابعة',
             phone: '01198765432',
             paymentMethod: 'آجل (على الحساب)',
-            notes: '',
-            status: 'pending',
-            totalAmount: 3639,
+            notes: 'يرجى التأكيد قبل خروج العربية',
+            status: 'new', // Waiting for merchant approval
+            actualCashCollected: null,
+            remainingCredit: null,
+            settledAt: null,
+            totalAmount: 4189,
             totalCartons: 10,
             totalPackets: 4,
             totalBonusCartons: 0,
@@ -559,10 +540,59 @@
               },
             ],
           },
+          {
+            id: 'ORD-1001',
+            number: 1001,
+            createdAt: '08:15 ص',
+            shopName: 'سوبر ماركت البركة',
+            address: 'شارع فيصل الرئيسي - محطة المساحة',
+            phone: '01012345678',
+            paymentMethod: 'كاش عند الاستلام',
+            notes: 'التسليم قبل الساعة 12 ظهراً',
+            status: 'approved', // Approved and ready in Warehouse Picking List
+            actualCashCollected: null,
+            remainingCredit: null,
+            settledAt: null,
+            totalAmount: 3246,
+            totalCartons: 15,
+            totalPackets: 0,
+            totalBonusCartons: 1,
+            items: [
+              {
+                productId: 'p-chipsy',
+                name: 'شيبسي عائلي أطعمة مشكلة (12 كيس)',
+                cartons: 10,
+                packets: 0,
+                cartonPrice: 165,
+                packetPrice: 85,
+                bonusCartons: 1,
+                lineTotal: 1650,
+              },
+              {
+                productId: 'p-indomie',
+                name: 'إندومي خضار جامبو (40 كيس)',
+                cartons: 3,
+                packets: 0,
+                cartonPrice: 340,
+                packetPrice: 175,
+                bonusCartons: 0,
+                lineTotal: 1020,
+              },
+              {
+                productId: 'p-juhayna',
+                name: 'عصير جهينة بيور 1 لتر (12 علبة)',
+                cartons: 2,
+                packets: 0,
+                cartonPrice: 288,
+                packetPrice: null,
+                bonusCartons: 0,
+                lineTotal: 576,
+              },
+            ],
+          },
         ];
       }
 
-      // Fix exact math on seed order 1002: 825 + 700 + 360 + 2304 = 4189
       function getInitialPersistedState() {
         const orders = createSeedOrders();
         orders.forEach((o) => {
@@ -586,8 +616,11 @@
         try {
           const parsed = JSON.parse(raw);
           if (!parsed || !Array.isArray(parsed.products) || !Array.isArray(parsed.orders)) {
-            throw new Error('Invalid state shape');
+            throw new Error('Invalid state');
           }
+          parsed.products.forEach((p) => {
+            if (!p.brand) p.brand = 'توريد عام';
+          });
           return {
             products: parsed.products,
             orders: parsed.orders,
@@ -601,10 +634,32 @@
         }
       }
 
+      function loadSavedCustomerProfile() {
+        const raw = safeStorage.get(CUSTOMER_PROFILE_KEY);
+        if (!raw) return null;
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.shopName) return parsed;
+        } catch (_) {}
+        return null;
+      }
+
+      function saveCustomerProfile(profile) {
+        safeStorage.set(
+          CUSTOMER_PROFILE_KEY,
+          JSON.stringify({
+            shopName: profile.shopName || '',
+            address: profile.address || '',
+            phone: profile.phone || '',
+          })
+        );
+      }
+
       // =========================================================================
       // APPLICATION STATE
       // =========================================================================
       const persisted = loadPersistedState();
+      const savedProfile = loadSavedCustomerProfile();
 
       const state = {
         products: persisted.products,
@@ -612,21 +667,32 @@
         nextOrderNumber: persisted.nextOrderNumber,
         pickingChecked: persisted.pickingChecked,
 
-        // UI State
-        role: 'customer', // 'customer' | 'merchant'
-        merchantTab: 'inventory', // 'inventory' | 'orders'
+        role: 'customer',
+        merchantTab: 'inventory',
         searchQuery: '',
         merchantSearchQuery: '',
-        activeCategory: 'الكل', // 'الكل' | 'عروض' | category name
-        selectedUnitByProduct: {}, // { [productId]: 'carton' | 'packet' }
-        cart: {}, // { [productId]: { cartons: number, packets: number } }
-        pendingPriceEdits: {}, // { [productId]: { cartonPrice?: string, packetPrice?: string } }
-        expandedOrders: {}, // { [orderId]: boolean }
-        pickingFilter: 'pending', // 'pending' | 'all'
+        activeCategory: 'الكل',
+        selectedUnitByProduct: {},
+        cart: {},
+        pendingPriceEdits: {},
+        expandedOrders: {},
+
+        // Bulk Price Update UI State
+        bulkPanelOpen: true,
+        bulkScopeType: 'brand', // 'all' | 'category' | 'brand'
+        bulkScopeValue: 'بيبسيكو',
+        bulkOperation: 'increase', // 'increase' | 'decrease'
+        bulkUnit: 'percent', // 'percent' | 'fixed'
+        bulkValue: '5',
+        lastBulkSnapshot: null,
+        undoTimerId: null,
+
+        // Customer Checkout Draft
+        savedCustomerProfile: savedProfile,
         checkoutDraft: {
-          shopName: '',
-          address: '',
-          phone: '',
+          shopName: savedProfile ? savedProfile.shopName : '',
+          address: savedProfile ? savedProfile.address : '',
+          phone: savedProfile ? savedProfile.phone : '',
           paymentMethod: 'كاش عند الاستلام',
           notes: '',
         },
@@ -664,9 +730,42 @@
           .replace(/'/g, '&#39;');
       }
 
+      function normalizeArabicDigits(str) {
+        return String(str == null ? '' : str)
+          .replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+          .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+      }
+
+      function cleanNumericValue(str) {
+        const cleaned = normalizeArabicDigits(str).replace(/[^\d.-]/g, '');
+        const num = parseFloat(cleaned);
+        return Number.isFinite(num) ? num : NaN;
+      }
+
+      function normalizeNameKey(name) {
+        return String(name || '').trim().replace(/\s+/g, ' ').toLowerCase();
+      }
+
+      function getAllCategories() {
+        const set = new Set(BASE_CATEGORIES);
+        state.products.forEach((p) => {
+          if (p.category && p.category.trim()) set.add(p.category.trim());
+        });
+        return Array.from(set);
+      }
+
+      function getAllBrands() {
+        const set = new Set();
+        state.products.forEach((p) => {
+          if (p.brand && p.brand.trim()) set.add(p.brand.trim());
+        });
+        return Array.from(set);
+      }
+
       function parseBonusRule(promoText) {
         if (!promoText) return { bonusBuy: 0, bonusFree: 0 };
-        const match = promoText.match(/(\d+)\s*\+\s*(\d+)/);
+        const normalized = normalizeArabicDigits(promoText);
+        const match = normalized.match(/(\d+)\s*\+\s*(\d+)/);
         if (match) {
           return {
             bonusBuy: parseInt(match[1], 10) || 0,
@@ -714,8 +813,7 @@
 
         state.products.forEach((p) => {
           const entry = state.cart[p.id];
-          if (!entry) return;
-          if (!p.inStock) return; // Automatically exclude out-of-stock items
+          if (!entry || !p.inStock) return;
           const cartons = entry.cartons || 0;
           const packets = p.packetPrice != null ? (entry.packets || 0) : 0;
           if (cartons <= 0 && packets <= 0) return;
@@ -750,9 +848,15 @@
         };
       }
 
-      function showToast(message, type = 'success') {
+      function showToast(message, type = 'success', options = {}) {
         const container = document.getElementById('toast-container');
         if (!container) return;
+
+        if (options.replaceId) {
+          const existing = document.getElementById(options.replaceId);
+          if (existing) existing.remove();
+        }
+
         const styles = {
           success: 'bg-slate-900 text-white border-emerald-500/60',
           warning: 'bg-amber-950 text-amber-100 border-amber-500/60',
@@ -764,15 +868,33 @@
             : `<svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
 
         const el = document.createElement('div');
-        el.className = `pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border shadow-lg text-xs sm:text-sm font-bold animate-fade-in ${styles[type] || styles.success}`;
-        el.innerHTML = `${icon}<span>${escapeHtml(message)}</span>`;
+        if (options.replaceId) el.id = options.replaceId;
+        el.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-2.5 rounded-xl border shadow-xl text-xs sm:text-sm font-bold animate-fade-in max-w-md ${styles[type] || styles.success}`;
+        el.innerHTML = `${icon}<span class="leading-snug">${escapeHtml(message)}</span>`;
+
+        if (options.actionLabel && typeof options.onAction === 'function') {
+          const actionBtn = document.createElement('button');
+          actionBtn.type = 'button';
+          actionBtn.className =
+            'mr-1 px-3 py-1.5 min-h-[34px] rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black whitespace-nowrap transition-colors flex-shrink-0';
+          actionBtn.textContent = options.actionLabel;
+          actionBtn.addEventListener('click', () => {
+            options.onAction();
+            el.remove();
+          });
+          el.appendChild(actionBtn);
+        }
+
         container.appendChild(el);
 
-        setTimeout(() => {
+        const duration = options.duration || 2800;
+        const timerId = setTimeout(() => {
           el.style.opacity = '0';
           el.style.transition = 'opacity 0.2s ease';
           setTimeout(() => el.remove(), 220);
-        }, 2800);
+        }, duration);
+
+        return { element: el, timerId };
       }
 
       function buildWhatsAppMessage(order) {
@@ -816,15 +938,14 @@
           lines.push(`📝 *ملاحظات:* ${order.notes}`);
         }
         lines.push(`━━━━━━━━━━━━━━`);
-        lines.push(`مكتب الحاج محمود لتوزيع المواد الغذائية`);
+        lines.push(STORE_NAME);
         return lines.join('\n');
       }
 
-      function buildPickingListText(aggregatedItems, filterMode) {
-        const title = filterMode === 'pending' ? 'الطلبات قيد التحميل' : 'إجمالي أوردرات اليوم';
+      function buildPickingListText(aggregatedItems) {
         const lines = [
           `🚛 *ورقة تحميل العربية للمخزن - توريدة*`,
-          `📋 *النطاق:* ${title}`,
+          `📋 *النطاق:* الأوردرات المعتمدة قيد التحميل`,
           `━━━━━━━━━━━━━━`,
         ];
         aggregatedItems.forEach((item, i) => {
@@ -835,21 +956,303 @@
           lines.push(`${i + 1}. ${item.name} ⬅️ *${parts.join(' + ')}*`);
         });
         lines.push(`━━━━━━━━━━━━━━`);
-        lines.push(`مكتب الحاج محمود لتوزيع المواد الغذائية`);
+        lines.push(STORE_NAME);
         return lines.join('\n');
       }
 
       // =========================================================================
-      // RENDER HEADER & GLOBAL BARS
+      // BULK PRICE UPDATE HELPERS
+      // =========================================================================
+      function getBulkMatchingProducts() {
+        if (state.bulkScopeType === 'all') return state.products;
+        if (state.bulkScopeType === 'category') {
+          return state.products.filter((p) => p.category === state.bulkScopeValue);
+        }
+        if (state.bulkScopeType === 'brand') {
+          return state.products.filter((p) => p.brand === state.bulkScopeValue);
+        }
+        return [];
+      }
+
+      function getBulkPreviewText() {
+        const matched = getBulkMatchingProducts();
+        const val = parseFloat(state.bulkValue);
+        if (matched.length === 0) {
+          return 'لا توجد أصناف مطابقة للنطاق المختار حالياً.';
+        }
+        const scopeDesc =
+          state.bulkScopeType === 'all'
+            ? 'من كل الكتالوج'
+            : state.bulkScopeType === 'category'
+            ? `من فئة "${state.bulkScopeValue}"`
+            : `من شركة "${state.bulkScopeValue}"`;
+        const opWord = state.bulkOperation === 'increase' ? 'بزيادة' : 'بخصم';
+        const sign = state.bulkOperation === 'increase' ? '+' : '-';
+        const unitLabel = state.bulkUnit === 'percent' ? '%' : ' جنيه';
+        const displayVal = Number.isFinite(val) && val > 0 ? `${sign}${val}${unitLabel}` : '(أدخل القيمة)';
+        return `سيتم تعديل ${matched.length} ${matched.length === 1 ? 'صنف' : 'أصناف'} ${scopeDesc} ${opWord} ${displayVal}`;
+      }
+
+      function applyBulkPriceUpdate() {
+        const val = parseFloat(normalizeArabicDigits(state.bulkValue));
+        if (!Number.isFinite(val) || val <= 0) {
+          showToast('برجاء إدخال رقم صحيح أكبر من صفر للتعديل الجماعي', 'warning');
+          return;
+        }
+        const matched = getBulkMatchingProducts();
+        if (matched.length === 0) {
+          showToast('لا توجد أصناف مطابقة للتعديل', 'warning');
+          return;
+        }
+
+        const sign = state.bulkOperation === 'increase' ? 1 : -1;
+        const snapshot = state.products.map((p) => ({
+          id: p.id,
+          cartonPrice: p.cartonPrice,
+          packetPrice: p.packetPrice,
+          unitCost: p.unitCost,
+          originalCartonPrice: p.originalCartonPrice,
+        }));
+
+        matched.forEach((p) => {
+          const oldCarton = p.cartonPrice;
+          let newCarton =
+            state.bulkUnit === 'percent'
+              ? Math.round(oldCarton * (1 + (sign * val) / 100))
+              : Math.round(oldCarton + sign * val);
+          newCarton = Math.max(1, newCarton);
+
+          const ratio = oldCarton > 0 ? newCarton / oldCarton : 1;
+          p.cartonPrice = newCarton;
+
+          if (p.packetPrice != null && p.packetPrice > 0) {
+            let newPacket = Math.max(1, Math.round(p.packetPrice * ratio));
+            // Keep single-piece cost of packet >= single-piece cost of carton
+            if (p.unitsPerCarton > 0 && p.unitsPerPacket > 0) {
+              const minPacket = Math.ceil((newCarton / p.unitsPerCarton) * p.unitsPerPacket);
+              if (newPacket < minPacket) newPacket = minPacket;
+            }
+            if (newPacket >= newCarton && newCarton > 1) {
+              newPacket = Math.max(1, Math.round(newCarton * 0.52));
+            }
+            p.packetPrice = newPacket;
+          }
+
+          if (p.unitsPerCarton > 0) {
+            p.unitCost = +(newCarton / p.unitsPerCarton).toFixed(2);
+          } else {
+            p.unitCost = +(Math.max(0.25, (p.unitCost || 1) * ratio)).toFixed(2);
+          }
+
+          delete state.pendingPriceEdits[p.id];
+        });
+
+        state.lastBulkSnapshot = snapshot;
+        if (state.undoTimerId) clearTimeout(state.undoTimerId);
+        persistState();
+        render();
+
+        const unitSym = state.bulkUnit === 'percent' ? '%' : ' ج';
+        const opSym = sign > 0 ? '+' : '-';
+        const toastObj = showToast(
+          `تم تعديل أسعار ${matched.length} ${matched.length === 1 ? 'صنف' : 'أصناف'} (${opSym}${val}${unitSym}) وتحديث الكتالوج ✓`,
+          'success',
+          {
+            replaceId: 'bulk-undo-toast',
+            duration: 6000,
+            actionLabel: 'تراجع (Undo)',
+            onAction: () => {
+              if (!state.lastBulkSnapshot) return;
+              const snapMap = new Map(state.lastBulkSnapshot.map((s) => [s.id, s]));
+              state.products.forEach((p) => {
+                const orig = snapMap.get(p.id);
+                if (orig) {
+                  p.cartonPrice = orig.cartonPrice;
+                  p.packetPrice = orig.packetPrice;
+                  p.unitCost = orig.unitCost;
+                  p.originalCartonPrice = orig.originalCartonPrice;
+                }
+              });
+              state.lastBulkSnapshot = null;
+              if (state.undoTimerId) clearTimeout(state.undoTimerId);
+              persistState();
+              render();
+              showToast('تم التراجع واسترجاع الأسعار السابقة بالكامل ✓', 'info');
+            },
+          }
+        );
+        if (toastObj) state.undoTimerId = toastObj.timerId;
+      }
+
+      // =========================================================================
+      // CSV EXPORT, TEMPLATE & SAFE PARSER
+      // =========================================================================
+      const CSV_HEADERS = ['اسم الصنف', 'الفئة', 'الشركة', 'سعر الكرتونة', 'سعر الشرنك', 'تكلفة القطعة', 'نص العرض'];
+
+      function csvEscapeField(val) {
+        const s = String(val == null ? '' : val);
+        if (/[",\r\n;]/.test(s)) {
+          return `"${s.replace(/"/g, '""')}"`;
+        }
+        return s;
+      }
+
+      function triggerCsvDownload(filename, rows) {
+        const csvLines = rows.map((row) => row.map(csvEscapeField).join(',')).join('\r\n');
+        const blob = new Blob(['\uFEFF' + csvLines], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }, 200);
+      }
+
+      function downloadCsvTemplate() {
+        const rows = [
+          CSV_HEADERS,
+          ['شيبسي عائلي أطعمة مشكلة (12 كيس)', 'شيبسي وسناكس', 'بيبسيكو', '170', '88', '14.17', 'عرض 10+1 (كرتونة هدية على كل 10 كراتين)'],
+          ['بسكويت نواعم فانيليا (24 باكو)', 'بسكويت وويفر', 'بيسكو مصر', '144', '75', '6', ''],
+        ];
+        triggerCsvDownload('tawreeda_template.csv', rows);
+        showToast('تم تحميل قالب CSV جاهز بترميز عربي صحيح (UTF-8) ✓');
+      }
+
+      function exportCurrentCatalogCsv() {
+        const rows = [
+          CSV_HEADERS,
+          ...state.products.map((p) => [
+            p.name,
+            p.category,
+            p.brand || '',
+            p.cartonPrice,
+            p.packetPrice != null ? p.packetPrice : '',
+            p.unitCost,
+            p.promoText || '',
+          ]),
+        ];
+        const dateTag = new Date().toISOString().slice(0, 10);
+        triggerCsvDownload(`tawreeda_catalog_${dateTag}.csv`, rows);
+        showToast(`تم تصدير ${state.products.length} صنف إلى ملف إكسل (CSV) ✓`);
+      }
+
+      function parseCsvLine(line, delimiter) {
+        const result = [];
+        let current = '';
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          const ch = line[i];
+          if (inQuotes) {
+            if (ch === '"') {
+              if (line[i + 1] === '"') {
+                current += '"';
+                i++;
+              } else {
+                inQuotes = false;
+              }
+            } else {
+              current += ch;
+            }
+          } else {
+            if (ch === '"') {
+              inQuotes = true;
+            } else if (ch === delimiter) {
+              result.push(current.trim());
+              current = '';
+            } else {
+              current += ch;
+            }
+          }
+        }
+        result.push(current.trim());
+        return result;
+      }
+
+      function parseUploadedCsv(rawText) {
+        const text = String(rawText || '').replace(/^\uFEFF/, '');
+        const lines = text
+          .split(/\r?\n/)
+          .map((l) => l.trim())
+          .filter((l) => l.length > 0);
+
+        if (lines.length === 0) {
+          return { rows: [], skipped: 0, error: 'الملف فارغ ولا يحتوي على بيانات.' };
+        }
+
+        // Auto-detect comma vs semicolon delimiter from header/first line
+        const firstLine = lines[0];
+        const commaCount = (firstLine.match(/,/g) || []).length;
+        const semiCount = (firstLine.match(/;/g) || []).length;
+        const delimiter = semiCount > commaCount ? ';' : ',';
+
+        let startIdx = 0;
+        const firstCols = parseCsvLine(firstLine, delimiter);
+        if (firstCols[0] && /اسم|صنف|name|product/i.test(firstCols[0])) {
+          startIdx = 1;
+        }
+
+        const existingMap = new Map(state.products.map((p) => [normalizeNameKey(p.name), p]));
+        const parsedRows = [];
+        let skipped = 0;
+
+        for (let i = startIdx; i < lines.length; i++) {
+          const cols = parseCsvLine(lines[i], delimiter);
+          const name = (cols[0] || '').trim();
+          const category = (cols[1] || '').trim() || 'معلبات ونواشف';
+          const brand = (cols[2] || '').trim() || 'توريد عام';
+          const cartonPrice = cleanNumericValue(cols[3]);
+          const packetRaw = (cols[4] || '').trim();
+          const packetNum = packetRaw ? cleanNumericValue(packetRaw) : NaN;
+          const packetPrice = Number.isFinite(packetNum) && packetNum > 0 ? packetNum : null;
+          const unitCostNum = cleanNumericValue(cols[5]);
+          const promoText = (cols[6] || '').trim();
+
+          if (!name || !Number.isFinite(cartonPrice) || cartonPrice <= 0) {
+            skipped += 1;
+            continue;
+          }
+
+          const existing = existingMap.get(normalizeNameKey(name));
+          const computedUnitCost =
+            Number.isFinite(unitCostNum) && unitCostNum > 0
+              ? +unitCostNum.toFixed(2)
+              : existing && existing.unitsPerCarton > 0
+              ? +(cartonPrice / existing.unitsPerCarton).toFixed(2)
+              : +(cartonPrice / 12).toFixed(2);
+
+          parsedRows.push({
+            action: existing ? 'update' : 'new',
+            existingId: existing ? existing.id : null,
+            oldCartonPrice: existing ? existing.cartonPrice : null,
+            name,
+            category,
+            brand,
+            cartonPrice: +cartonPrice.toFixed(2),
+            packetPrice: packetPrice != null ? +packetPrice.toFixed(2) : null,
+            unitCost: computedUnitCost,
+            promoText,
+          });
+        }
+
+        return { rows: parsedRows, skipped, error: null };
+      }
+
+      // =========================================================================
+      // HEADER & STICKY BARS UI
       // =========================================================================
       function updateHeaderUI() {
         const btnCustomer = document.getElementById('role-customer');
         const btnMerchant = document.getElementById('role-merchant');
         const ordersBadge = document.getElementById('header-orders-badge');
 
-        const pendingCount = state.orders.filter((o) => o.status === 'pending').length;
-        ordersBadge.textContent = state.orders.length;
-        ordersBadge.title = `${pendingCount} أوردرات قيد التحميل من إجمالي ${state.orders.length}`;
+        const activeOrders = state.orders.filter((o) => o.status !== 'rejected');
+        const needsAction = state.orders.filter((o) => o.status === 'new' || o.status === 'approved').length;
+        ordersBadge.textContent = needsAction || activeOrders.length;
+        ordersBadge.title = `${needsAction} أوردرات بانتظار الاعتماد أو التحميل`;
 
         if (state.role === 'customer') {
           btnCustomer.className =
@@ -887,8 +1290,40 @@
         document.getElementById('cart-bar-summary').innerHTML = parts.join('<span class="text-slate-600">•</span>');
 
         const deliveryEl = document.getElementById('cart-delivery-progress');
-        const pct = Math.min(100, Math.round((summary.totalAmount / FREE_DELIVERY_THRESHOLD) * 100));
-        if (summary.totalAmount >= FREE_DELIVERY_THRESHOLD) {
+        const checkoutBtn = document.getElementById('btn-open-checkout');
+        const checkoutLabel = document.getElementById('btn-open-checkout-label');
+
+        if (summary.totalAmount < MIN_ORDER_VALUE) {
+          const remainingMin = MIN_ORDER_VALUE - summary.totalAmount;
+          const pctMin = Math.min(100, Math.round((summary.totalAmount / MIN_ORDER_VALUE) * 100));
+          deliveryEl.innerHTML = `
+            <div class="flex items-center justify-between text-[11px] font-bold text-amber-300 mb-1 gap-2">
+              <span>⚠️ فاضلك <strong class="tabular-nums">${formatMoney(remainingMin)} جنيه</strong> للوصول للحد الأدنى للطلب (${formatMoney(MIN_ORDER_VALUE)} ج)</span>
+              <span class="tabular-nums flex-shrink-0">${pctMin}%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-full bg-red-400 rounded-full transition-all duration-300" style="width: ${pctMin}%"></div>
+            </div>
+          `;
+          checkoutBtn.className =
+            'min-h-[48px] px-4 sm:px-5 py-2.5 rounded-xl bg-slate-700 text-slate-300 border border-slate-600 font-extrabold text-xs sm:text-sm flex items-center gap-2 transition-all flex-shrink-0 cursor-not-allowed';
+          checkoutLabel.textContent = `الحد الأدنى ${formatMoney(MIN_ORDER_VALUE)} ج`;
+        } else if (summary.totalAmount < FREE_DELIVERY_THRESHOLD) {
+          const remainingFree = FREE_DELIVERY_THRESHOLD - summary.totalAmount;
+          const pctFree = Math.min(100, Math.round((summary.totalAmount / FREE_DELIVERY_THRESHOLD) * 100));
+          deliveryEl.innerHTML = `
+            <div class="flex items-center justify-between text-[11px] font-bold text-emerald-300 mb-1 gap-2">
+              <span>وصلت للحد الأدنى ✓ — فاضلك <strong class="text-amber-300 tabular-nums">${formatMoney(remainingFree)} جنيه</strong> وتاخد توصيل مجاني</span>
+              <span class="tabular-nums flex-shrink-0">${pctFree}%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: ${pctFree}%"></div>
+            </div>
+          `;
+          checkoutBtn.className =
+            'min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-900/30 flex items-center gap-2 transition-all flex-shrink-0';
+          checkoutLabel.textContent = 'مراجعة وإرسال الطلب';
+        } else {
           deliveryEl.innerHTML = `
             <div class="flex items-center justify-between text-[11px] font-bold text-emerald-300 mb-1">
               <span>🚚 مبروك! طلبك مؤهل للتوصيل المجاني لباب المحل</span>
@@ -898,17 +1333,9 @@
               <div class="h-full bg-emerald-400 rounded-full transition-all duration-300" style="width: 100%"></div>
             </div>
           `;
-        } else {
-          const remaining = FREE_DELIVERY_THRESHOLD - summary.totalAmount;
-          deliveryEl.innerHTML = `
-            <div class="flex items-center justify-between text-[11px] font-semibold text-slate-300 mb-1">
-              <span>فاضلك <strong class="text-amber-300 tabular-nums">${formatMoney(remaining)} ج</strong> وتاخد توصيل مجاني</span>
-              <span class="tabular-nums">${pct}%</span>
-            </div>
-            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-              <div class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
-            </div>
-          `;
+          checkoutBtn.className =
+            'min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-900/30 flex items-center gap-2 transition-all flex-shrink-0';
+          checkoutLabel.textContent = 'مراجعة وإرسال الطلب';
         }
       }
 
@@ -936,13 +1363,12 @@
             if (p.category !== state.activeCategory) return false;
           }
           if (q) {
-            const hay = `${p.name} ${p.category} ${p.promoText || ''}`.toLowerCase();
+            const hay = `${p.name} ${p.category} ${p.brand || ''} ${p.promoText || ''}`.toLowerCase();
             if (!hay.includes(q)) return false;
           }
           return true;
         });
 
-        // Sort: Available Clearance first -> Available Normal/Promo -> Out of Stock last
         return filtered.sort((a, b) => {
           const score = (item) => {
             if (!item.inStock) return 3;
@@ -957,24 +1383,24 @@
       function renderCustomerView() {
         const dealsCount = state.products.filter((p) => p.inStock && (p.isClearance || p.promoText)).length;
         const products = getFilteredCustomerProducts();
+        const allCategories = getAllCategories();
 
         const categoryPills = [
           { id: 'الكل', label: 'الكل' },
           { id: 'عروض', label: `🔥 عروض وحرق أسعار (${dealsCount})`, isSpecial: true },
-          ...CATEGORIES.map((c) => ({ id: c, label: c })),
+          ...allCategories.map((c) => ({ id: c, label: c })),
         ];
 
         return `
-          <!-- Merchant Store Banner -->
           <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 mb-3.5">
             <div class="flex items-start justify-between gap-3">
               <div>
                 <h1 class="text-base sm:text-xl font-black text-slate-900 leading-snug">
-                  مكتب الحاج محمود لتوزيع المواد الغذائية - جملة الجملة
+                  ${escapeHtml(STORE_NAME)}
                 </h1>
                 <div class="mt-2 inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1.5 rounded-xl text-xs font-bold">
                   <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                  <span>الأسعار محدثة لحظياً - التوصيل مجاني للطلبات فوق 3,000 ج</span>
+                  <span>الأسعار محدثة لحظياً - الحد الأدنى 1,000 ج والتوصيل مجاني فوق 3,000 ج</span>
                 </div>
               </div>
               <div class="hidden sm:flex flex-col items-end text-left flex-shrink-0">
@@ -983,7 +1409,6 @@
               </div>
             </div>
 
-            <!-- Instant Search Bar -->
             <div class="relative mt-3.5">
               <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-400">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -994,7 +1419,7 @@
                 id="customer-search-input"
                 type="search"
                 value="${escapeHtml(state.searchQuery)}"
-                placeholder="ابحث باسم الصنف... مثلاً: شيبسي، إندومي، تونة"
+                placeholder="ابحث باسم الصنف أو الشركة... مثلاً: شيبسي، بيبسيكو، إندومي"
                 class="w-full min-h-[48px] pr-11 pl-10 py-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-semibold text-slate-900 placeholder:text-slate-400 transition-all"
               />
               <button id="btn-clear-search" type="button" class="${
@@ -1004,7 +1429,6 @@
               </button>
             </div>
 
-            <!-- Horizontal Scrollable Category Pills -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-3 pb-0.5 -mx-1 px-1">
               ${categoryPills
                 .map((pill) => {
@@ -1031,7 +1455,6 @@
             </div>
           </section>
 
-          <!-- Product Cards Grid -->
           <section id="customer-products-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             ${
               products.length === 0
@@ -1065,6 +1488,9 @@
             ? p.originalCartonPrice - p.cartonPrice
             : 0;
 
+        const safePromoText =
+          p.promoText && !p.promoText.includes('صلاحية') ? p.promoText : '';
+
         const cardBorder = !p.inStock
           ? 'border-slate-200 opacity-75'
           : p.isClearance
@@ -1075,24 +1501,22 @@
 
         return `
           <article class="bg-white rounded-2xl border ${cardBorder} overflow-hidden flex flex-col justify-between transition-all" data-product-card="${p.id}">
-            <!-- Clearance Top Banner -->
             ${
               p.isClearance && p.inStock
                 ? `<div class="bg-gradient-to-l from-red-600 to-orange-500 text-white px-3.5 py-2 flex items-center justify-between gap-2">
                     <div class="flex items-center gap-1.5 text-xs font-extrabold">
                       <span>🔥</span>
-                      <span>تصفية سريعة - خصم خاص (صلاحية قريبة)</span>
+                      <span>لقطة اليوم / عرض تصفية - كمية محدودة</span>
                     </div>
                     ${
                       savings > 0
-                        ? `<span class="text-[11px] font-black bg-white text-red-700 px-2 py-0.5 rounded-full tabular-nums">وفر ${formatMoney(savings)} ج</span>`
-                        : `<span class="text-[11px] font-black bg-white/20 text-white px-2 py-0.5 rounded-full">حرق سعر</span>`
+                        ? `<span class="text-[11px] font-black bg-white text-red-700 px-2 py-0.5 rounded-full tabular-nums flex-shrink-0">وفر ${formatMoney(savings)} ج</span>`
+                        : `<span class="text-[11px] font-black bg-white/20 text-white px-2 py-0.5 rounded-full flex-shrink-0">عرض خاص</span>`
                     }
                   </div>`
                 : ''
             }
 
-            <!-- Out of Stock Top Banner -->
             ${
               !p.inStock
                 ? `<div class="bg-slate-200 text-slate-700 px-3.5 py-2 flex items-center justify-between gap-2">
@@ -1106,10 +1530,16 @@
             }
 
             <div class="p-3.5 sm:p-4 flex-1 flex flex-col">
-              <!-- Category & Name -->
               <div class="flex items-start justify-between gap-2">
                 <div>
-                  <span class="inline-block text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md mb-1.5">${escapeHtml(p.category)}</span>
+                  <div class="flex items-center gap-1.5 flex-wrap mb-1.5">
+                    <span class="inline-block text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">${escapeHtml(p.category)}</span>
+                    ${
+                      p.brand
+                        ? `<span class="inline-block text-[11px] font-bold text-sky-800 bg-sky-50 border border-sky-200/70 px-2 py-0.5 rounded-md">${escapeHtml(p.brand)}</span>`
+                        : ''
+                    }
+                  </div>
                   <h2 class="text-base font-extrabold text-slate-900 leading-snug">${escapeHtml(p.name)}</h2>
                 </div>
                 ${
@@ -1130,17 +1560,15 @@
                 }
               </div>
 
-              <!-- Promo Badge (Non-Clearance or Bonus) -->
               ${
-                p.promoText && !p.isClearance && p.inStock
+                safePromoText && !p.isClearance && p.inStock
                   ? `<div class="mt-2.5 flex items-center gap-1.5 bg-amber-50 border border-amber-300 text-amber-900 px-2.5 py-1.5 rounded-xl text-xs font-extrabold">
                       <span>🎁</span>
-                      <span>${escapeHtml(p.promoText)}</span>
+                      <span>${escapeHtml(safePromoText)}</span>
                     </div>`
                   : ''
               }
 
-              <!-- Unit Selector (Carton vs Packet) -->
               <div class="mt-3 grid grid-cols-2 gap-2">
                 <button
                   type="button"
@@ -1191,7 +1619,6 @@
                 }
               </div>
 
-              <!-- Single Piece Cost Highlight -->
               <div class="mt-2.5 flex items-center justify-between bg-slate-50 border border-slate-200/80 rounded-xl px-3 py-2">
                 <span class="text-xs font-bold text-slate-600">تقف عليك بـ</span>
                 <span class="text-sm font-black text-slate-900 tabular-nums">
@@ -1199,7 +1626,6 @@
                 </span>
               </div>
 
-              <!-- Bonus Earned / Progress Nudge -->
               ${
                 earnedBonus > 0
                   ? `<div class="mt-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-extrabold flex items-center justify-between">
@@ -1214,7 +1640,6 @@
                   : ''
               }
 
-              <!-- Quantity Controls -->
               <div class="mt-auto pt-3">
                 ${
                   !p.inStock
@@ -1279,10 +1704,11 @@
       // VIEW 2: MERCHANT DASHBOARD
       // =========================================================================
       function renderMerchantView() {
-        const pendingOrders = state.orders.filter((o) => o.status === 'pending').length;
+        const newOrdersCount = state.orders.filter((o) => o.status === 'new').length;
+        const approvedOrdersCount = state.orders.filter((o) => o.status === 'approved').length;
+        const badgeCount = newOrdersCount + approvedOrdersCount;
 
         return `
-          <!-- Merchant Sub-Tabs -->
           <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-2 mb-3.5 no-print">
             <div class="grid grid-cols-2 gap-1.5">
               <button
@@ -1313,12 +1739,12 @@
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
                 </svg>
-                <span>أوردرات اليوم وتحميل العربية</span>
+                <span>أوردرات اليوم وعهدة السواق</span>
                 ${
-                  pendingOrders > 0
+                  badgeCount > 0
                     ? `<span class="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 text-xs font-black rounded-full ${
                         state.merchantTab === 'orders' ? 'bg-amber-400 text-slate-950' : 'bg-red-500 text-white'
-                      } tabular-nums">${pendingOrders}</span>`
+                      } tabular-nums">${badgeCount}</span>`
                     : ''
                 }
               </button>
@@ -1329,7 +1755,156 @@
         `;
       }
 
-      // ---- Merchant Tab 1: Quick Price & Stock Manager ----
+      // ---- Merchant Tab 1: Inventory + Bulk Price Update + CSV ----
+      function renderBulkPricePanel() {
+        const categories = getAllCategories();
+        const brands = getAllBrands();
+
+        if (state.bulkScopeType === 'category' && !categories.includes(state.bulkScopeValue)) {
+          state.bulkScopeValue = categories[0] || '';
+        }
+        if (state.bulkScopeType === 'brand' && !brands.includes(state.bulkScopeValue)) {
+          state.bulkScopeValue = brands[0] || '';
+        }
+
+        const previewText = getBulkPreviewText();
+
+        return `
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm mb-3.5 overflow-hidden">
+            <button
+              id="btn-toggle-bulk-panel"
+              type="button"
+              class="w-full px-4 py-3 flex items-center justify-between gap-2 bg-slate-50 hover:bg-slate-100/80 transition-colors text-right"
+            >
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-black flex-shrink-0">⚡</span>
+                <div>
+                  <h2 class="text-sm font-black text-slate-900">تعديل جماعي سريع للأسعار</h2>
+                  <p class="text-[11px] font-semibold text-slate-500">ارفع أو خصم أسعار شركة كاملة أو فئة بضغطة واحدة مع إمكانية التراجع</p>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-slate-600 bg-white border border-slate-200 px-2.5 py-1 rounded-lg flex-shrink-0">
+                ${state.bulkPanelOpen ? 'إخفاء ▲' : 'فتح ▼'}
+              </span>
+            </button>
+
+            ${
+              state.bulkPanelOpen
+                ? `<div class="p-3.5 sm:p-4 border-t border-slate-200 space-y-3 animate-fade-in">
+                    <!-- Scope Row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1" for="bulk-scope-type">نطاق التعديل</label>
+                        <select id="bulk-scope-type" class="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:border-emerald-500 outline-none text-xs sm:text-sm font-extrabold text-slate-900">
+                          <option value="brand" ${state.bulkScopeType === 'brand' ? 'selected' : ''}>شركة مورّدة محددة</option>
+                          <option value="category" ${state.bulkScopeType === 'category' ? 'selected' : ''}>فئة محددة</option>
+                          <option value="all" ${state.bulkScopeType === 'all' ? 'selected' : ''}>كل الأصناف في الكتالوج</option>
+                        </select>
+                      </div>
+
+                      ${
+                        state.bulkScopeType === 'all'
+                          ? `<div class="flex items-end">
+                              <div class="w-full min-h-[44px] px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 flex items-center text-xs font-bold text-slate-600">
+                                يشمل جميع الأصناف (${state.products.length} صنف)
+                              </div>
+                            </div>`
+                          : `<div>
+                              <label class="block text-xs font-bold text-slate-600 mb-1" for="bulk-scope-value">
+                                ${state.bulkScopeType === 'brand' ? 'اختر الشركة المورّدة' : 'اختر الفئة'}
+                              </label>
+                              <select id="bulk-scope-value" class="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:border-emerald-500 outline-none text-xs sm:text-sm font-extrabold text-slate-900">
+                                ${(state.bulkScopeType === 'brand' ? brands : categories)
+                                  .map(
+                                    (opt) =>
+                                      `<option value="${escapeHtml(opt)}" ${state.bulkScopeValue === opt ? 'selected' : ''}>${escapeHtml(opt)}</option>`
+                                  )
+                                  .join('')}
+                              </select>
+                            </div>`
+                      }
+                    </div>
+
+                    <!-- Operation, Value & Unit Row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+                      <!-- Increase / Decrease -->
+                      <div class="sm:col-span-4 grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
+                        <button
+                          type="button"
+                          data-bulk-op="increase"
+                          class="min-h-[40px] rounded-lg text-xs font-extrabold transition-all ${
+                            state.bulkOperation === 'increase'
+                              ? 'bg-emerald-600 text-white shadow-sm'
+                              : 'text-slate-700 hover:bg-white'
+                          }"
+                        >زيادة (+)</button>
+                        <button
+                          type="button"
+                          data-bulk-op="decrease"
+                          class="min-h-[40px] rounded-lg text-xs font-extrabold transition-all ${
+                            state.bulkOperation === 'decrease'
+                              ? 'bg-red-600 text-white shadow-sm'
+                              : 'text-slate-700 hover:bg-white'
+                          }"
+                        >خصم (-)</button>
+                      </div>
+
+                      <!-- Numeric Value -->
+                      <div class="sm:col-span-4">
+                        <input
+                          id="bulk-value-input"
+                          type="number"
+                          inputmode="decimal"
+                          min="0.1"
+                          step="any"
+                          value="${escapeHtml(state.bulkValue)}"
+                          placeholder="أدخل القيمة..."
+                          class="w-full min-h-[48px] px-3.5 py-2 rounded-xl border-2 border-slate-200 focus:border-emerald-500 bg-slate-50 focus:bg-white outline-none text-base font-black text-slate-900 tabular-nums"
+                        />
+                      </div>
+
+                      <!-- Percent / Fixed -->
+                      <div class="sm:col-span-4 grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
+                        <button
+                          type="button"
+                          data-bulk-unit="percent"
+                          class="min-h-[40px] rounded-lg text-xs font-extrabold transition-all ${
+                            state.bulkUnit === 'percent'
+                              ? 'bg-slate-900 text-white shadow-sm'
+                              : 'text-slate-700 hover:bg-white'
+                          }"
+                        >نسبة (%)</button>
+                        <button
+                          type="button"
+                          data-bulk-unit="fixed"
+                          class="min-h-[40px] rounded-lg text-xs font-extrabold transition-all ${
+                            state.bulkUnit === 'fixed'
+                              ? 'bg-slate-900 text-white shadow-sm'
+                              : 'text-slate-700 hover:bg-white'
+                          }"
+                        >مبلغ (جنيه)</button>
+                      </div>
+                    </div>
+
+                    <!-- Live Preview & Apply Button -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 bg-amber-50/80 border border-amber-200 rounded-xl p-3">
+                      <div class="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-950">
+                        <span>👁️</span>
+                        <span id="bulk-preview-text">${escapeHtml(previewText)}</span>
+                      </div>
+                      <button
+                        id="btn-apply-bulk"
+                        type="button"
+                        class="min-h-[44px] px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold whitespace-nowrap shadow-sm transition-all flex-shrink-0"
+                      >تطبيق على الكتالوج</button>
+                    </div>
+                  </div>`
+                : ''
+            }
+          </section>
+        `;
+      }
+
       function renderMerchantInventoryTab() {
         const total = state.products.length;
         const available = state.products.filter((p) => p.inStock).length;
@@ -1339,28 +1914,36 @@
         const q = state.merchantSearchQuery.trim().toLowerCase();
         const filtered = state.products.filter((p) => {
           if (!q) return true;
-          return `${p.name} ${p.category}`.toLowerCase().includes(q);
+          return `${p.name} ${p.category} ${p.brand || ''}`.toLowerCase().includes(q);
         });
 
         return `
-          <!-- Quick Stats & Add New Item -->
           <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3.5 sm:p-4 mb-3.5">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
               <div>
                 <h1 class="text-base sm:text-lg font-black text-slate-900">تحديث الأسعار والمخزون لحظياً</h1>
                 <p class="text-xs text-slate-500 mt-0.5">عدّل أي سعر مباشرة أو فعّل "خلصان / حرق سعر" لينعكس فوراً عند السوبر ماركت</p>
               </div>
-              <button
-                id="btn-open-add-product"
-                type="button"
-                class="min-h-[44px] px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-sm transition-all"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-                <span>إضافة صنف جديد</span>
-              </button>
+              <div class="flex items-center gap-2 flex-wrap">
+                <button
+                  id="btn-open-csv-modal"
+                  type="button"
+                  class="min-h-[44px] px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition-all"
+                >
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+                  <span>استيراد / تصدير إكسل (CSV)</span>
+                </button>
+                <button
+                  id="btn-open-add-product"
+                  type="button"
+                  class="min-h-[44px] px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-sm transition-all"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                  <span>إضافة صنف جديد</span>
+                </button>
+              </div>
             </div>
 
-            <!-- Compact Inventory KPIs -->
             <div class="grid grid-cols-3 gap-2 mb-3">
               <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 text-center">
                 <div class="text-lg font-black text-emerald-700 tabular-nums">${available}</div>
@@ -1376,7 +1959,6 @@
               </div>
             </div>
 
-            <!-- Search in Merchant List -->
             <div class="relative">
               <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-400">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -1387,13 +1969,14 @@
                 id="merchant-search-input"
                 type="search"
                 value="${escapeHtml(state.merchantSearchQuery)}"
-                placeholder="فلترة الأصناف للتعديل السريع..."
+                placeholder="فلترة الأصناف أو الشركات للتعديل السريع..."
                 class="w-full min-h-[44px] pr-10 pl-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:bg-white outline-none text-sm font-semibold text-slate-900"
               />
             </div>
           </section>
 
-          <!-- Editable Product Rows -->
+          ${renderBulkPricePanel()}
+
           <section class="space-y-3">
             ${filtered.map(renderMerchantProductRow).join('')}
           </section>
@@ -1426,26 +2009,14 @@
               ? 'border-slate-200 bg-slate-50/70'
               : 'border-slate-200'
           } shadow-sm p-3.5 sm:p-4 transition-all" data-merchant-row="${p.id}">
-            <!-- Row Header -->
             <div class="flex items-start justify-between gap-2 mb-3">
               <div>
                 <div class="flex items-center gap-1.5 flex-wrap mb-1">
                   <span class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">${escapeHtml(p.category)}</span>
-                  ${
-                    !p.inStock
-                      ? `<span class="text-[11px] font-extrabold bg-slate-200 text-slate-700 px-2 py-0.5 rounded-md">خلصان</span>`
-                      : ''
-                  }
-                  ${
-                    p.isClearance
-                      ? `<span class="text-[11px] font-extrabold bg-orange-100 text-red-700 px-2 py-0.5 rounded-md">🔥 حرق سعر - مثبت بالأعلى</span>`
-                      : ''
-                  }
-                  ${
-                    p.promoText && !p.isClearance
-                      ? `<span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-md">🎁 ${escapeHtml(p.promoText)}</span>`
-                      : ''
-                  }
+                  ${p.brand ? `<span class="text-[11px] font-bold text-sky-800 bg-sky-50 border border-sky-200 px-2 py-0.5 rounded-md">🏢 ${escapeHtml(p.brand)}</span>` : ''}
+                  ${!p.inStock ? `<span class="text-[11px] font-extrabold bg-slate-200 text-slate-700 px-2 py-0.5 rounded-md">خلصان</span>` : ''}
+                  ${p.isClearance ? `<span class="text-[11px] font-extrabold bg-orange-100 text-red-700 px-2 py-0.5 rounded-md">🔥 حرق سعر - مثبت بالأعلى</span>` : ''}
+                  ${p.promoText && !p.isClearance ? `<span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-md">🎁 ${escapeHtml(p.promoText)}</span>` : ''}
                 </div>
                 <h2 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">${escapeHtml(p.name)}</h2>
               </div>
@@ -1455,7 +2026,6 @@
               </div>
             </div>
 
-            <!-- Inline Price Inputs -->
             <div class="grid grid-cols-2 gap-2.5 mb-3">
               <div>
                 <label class="block text-xs font-bold text-slate-600 mb-1" for="price-carton-${p.id}">سعر الكرتونة (ج)</label>
@@ -1498,18 +2068,12 @@
                         : 'border-slate-200 bg-slate-50 focus:bg-white focus:border-emerald-500'
                     } outline-none text-base font-black text-slate-900 placeholder:text-xs placeholder:font-semibold placeholder:text-slate-400 tabular-nums transition-colors"
                   />
-                  ${
-                    packetVal !== ''
-                      ? `<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">ج</span>`
-                      : ''
-                  }
+                  ${packetVal !== '' ? `<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">ج</span>` : ''}
                 </div>
               </div>
             </div>
 
-            <!-- Two Instant Toggle Switches -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2.5 border-t border-slate-100">
-              <!-- Toggle 1: In Stock / Out of Stock -->
               <div class="flex items-center justify-between gap-2 bg-slate-50 rounded-xl px-3 py-2 min-h-[48px]">
                 <div>
                   <span class="text-xs font-extrabold ${p.inStock ? 'text-emerald-800' : 'text-slate-600'}">
@@ -1530,7 +2094,6 @@
                 </button>
               </div>
 
-              <!-- Toggle 2: Clearance Mode -->
               <div class="flex items-center justify-between gap-2 ${
                 p.isClearance ? 'bg-orange-50 border border-orange-200' : 'bg-slate-50'
               } rounded-xl px-3 py-2 min-h-[48px]">
@@ -1539,7 +2102,7 @@
                     🔥 حرق سعر - صلاحية قريبة
                   </span>
                   <span class="block text-[10px] ${p.isClearance ? 'text-orange-700' : 'text-slate-500'}">
-                    تثبيت بأعلى القائمة بشارة خصم
+                    يظهر للعميل كـ "لقطة اليوم - كمية محدودة"
                   </span>
                 </div>
                 <button
@@ -1559,7 +2122,7 @@
         `;
       }
 
-      // ---- Merchant Tab 2: Today's Orders & Truck Loading List ----
+      // ---- Merchant Tab 2: Approval Gate, Truck Loading & Driver Settlement ----
       function getAggregatedPickingList(orders) {
         const map = {};
         orders.forEach((order) => {
@@ -1585,76 +2148,93 @@
       }
 
       function renderMerchantOrdersTab() {
-        const totalOrders = state.orders.length;
-        const pendingOrders = state.orders.filter((o) => o.status === 'pending');
-        const dispatchedCount = totalOrders - pendingOrders.length;
+        const activeOrders = state.orders.filter((o) => o.status !== 'rejected');
+        const newOrders = activeOrders.filter((o) => o.status === 'new');
+        const approvedOrders = activeOrders.filter((o) => o.status === 'approved');
+        const dispatchedOrders = activeOrders.filter((o) => o.status === 'dispatched');
+        const settledOrders = activeOrders.filter((o) => o.status === 'settled');
+        const outOrSettledCount = dispatchedOrders.length + settledOrders.length;
 
-        const totalSales = state.orders.reduce((s, o) => s + o.totalAmount, 0);
-        const cashSales = state.orders
-          .filter((o) => o.paymentMethod.includes('كاش'))
+        const totalSales = activeOrders.reduce((s, o) => s + o.totalAmount, 0);
+        const confirmedSales = activeOrders
+          .filter((o) => o.status !== 'new')
           .reduce((s, o) => s + o.totalAmount, 0);
-        const creditSales = totalSales - cashSales;
-        const cashPct = totalSales > 0 ? Math.round((cashSales / totalSales) * 100) : 0;
 
-        const targetOrders = state.pickingFilter === 'pending' ? pendingOrders : state.orders;
-        const aggregated = getAggregatedPickingList(targetOrders);
+        // Driver Cash & Remaining Credit KPIs
+        const actualCashCollected = settledOrders.reduce((s, o) => s + (Number(o.actualCashCollected) || 0), 0);
+        const settledRemainingCredit = settledOrders.reduce((s, o) => s + (Number(o.remainingCredit) || 0), 0);
+        const pendingCreditOrdersTotal = activeOrders
+          .filter((o) => o.status !== 'settled' && !o.paymentMethod.includes('كاش'))
+          .reduce((s, o) => s + o.totalAmount, 0);
+        const totalRemainingCredit = settledRemainingCredit + pendingCreditOrdersTotal;
+        const cashShareBase = actualCashCollected + totalRemainingCredit;
+        const cashBarPct = cashShareBase > 0 ? Math.round((actualCashCollected / cashShareBase) * 100) : 0;
+
+        // ONLY approved orders populate the Warehouse Truck Loading / Picking List!
+        const aggregated = getAggregatedPickingList(approvedOrders);
         const totalLoadCartons = aggregated.reduce((s, i) => s + i.cartons, 0);
         const totalLoadBonus = aggregated.reduce((s, i) => s + i.bonusCartons, 0);
         const totalLoadPackets = aggregated.reduce((s, i) => s + i.packets, 0);
         const checkedCount = aggregated.filter((i) => state.pickingChecked[i.key]).length;
 
         return `
-          <!-- Summary KPI Cards -->
+          <!-- Updated KPI Cards -->
           <section class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4 no-print">
-            <!-- KPI 1: Orders Count -->
+            <!-- KPI 1: Orders Lifecycle Breakdown -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-500">أوردرات اليوم</span>
+                <span class="text-xs font-bold text-slate-500">حالة أوردرات اليوم</span>
                 <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
                 </span>
               </div>
-              <div class="text-2xl font-black text-slate-900 mt-1.5 tabular-nums">${totalOrders} <span class="text-sm font-bold text-slate-500">أوردر</span></div>
-              <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
-                <span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">${pendingOrders.length} قيد التحميل</span>
-                <span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">${dispatchedCount} خرج للتوصيل</span>
+              <div class="text-2xl font-black text-slate-900 mt-1 tabular-nums">${activeOrders.length} <span class="text-sm font-bold text-slate-500">أوردر نشط</span></div>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5 text-[11px] font-extrabold">
+                <span class="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-md tabular-nums">${newOrders.length} جديد بانتظار الاعتماد</span>
+                <span class="bg-sky-100 text-sky-900 px-2 py-0.5 rounded-md tabular-nums">${approvedOrders.length} قيد التحميل</span>
+                <span class="bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-md tabular-nums">${outOrSettledCount} خرج للتوصيل أو مقفل</span>
               </div>
             </div>
 
-            <!-- KPI 2: Total Sales -->
+            <!-- KPI 2: Total Sales Value -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-500">إجمالي مبيعات اليوم</span>
+                <span class="text-xs font-bold text-slate-500">إجمالي المبيعات</span>
                 <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
                 </span>
               </div>
-              <div class="text-2xl font-black text-emerald-700 mt-1.5 tabular-nums">${formatMoney(totalSales)} <span class="text-sm font-bold">جنيه</span></div>
-              <p class="text-[11px] font-semibold text-slate-500 mt-1.5">متوسط الفاتورة: ${totalOrders > 0 ? formatMoney(Math.round(totalSales / totalOrders)) : 0} ج</p>
+              <div class="text-2xl font-black text-emerald-700 mt-1 tabular-nums">${formatMoney(totalSales)} <span class="text-sm font-bold">جنيه</span></div>
+              <p class="text-[11px] font-bold text-slate-600 mt-2 tabular-nums">معتمد ومؤكد: ${formatMoney(confirmedSales)} ج</p>
+              <p class="text-[11px] font-semibold text-slate-400 tabular-nums">متوسط الأوردر: ${activeOrders.length > 0 ? formatMoney(Math.round(totalSales / activeOrders.length)) : 0} ج</p>
             </div>
 
-            <!-- KPI 3: Cash vs Credit -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+            <!-- KPI 3: Driver Cash Custody & Remaining Credit -->
+            <div class="bg-white rounded-2xl border-2 border-emerald-200 shadow-sm p-4">
               <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold text-slate-500">كاش مقابل آجل (على الحساب)</span>
+                <span class="text-xs font-extrabold text-slate-800">💰 عهدة السواق والتحصيل</span>
+                <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full tabular-nums">${settledOrders.length} مقفل</span>
               </div>
               <div class="space-y-1.5">
                 <div class="flex items-center justify-between text-xs font-extrabold">
-                  <span class="text-emerald-700">💵 كاش: ${formatMoney(cashSales)} ج</span>
-                  <span class="text-amber-700">📒 آجل: ${formatMoney(creditSales)} ج</span>
+                  <span class="text-emerald-700">💵 كاش في جيب السواق:</span>
+                  <span class="text-emerald-800 font-black tabular-nums">${formatMoney(actualCashCollected)} ج</span>
                 </div>
-                <div class="w-full h-2.5 bg-amber-200 rounded-full overflow-hidden flex">
-                  <div class="h-full bg-emerald-500 transition-all" style="width: ${cashPct}%"></div>
+                <div class="flex items-center justify-between text-xs font-extrabold">
+                  <span class="text-amber-700">📒 الآجل المتبقي عند العملاء:</span>
+                  <span class="text-amber-900 font-black tabular-nums">${formatMoney(totalRemainingCredit)} ج</span>
                 </div>
-                <div class="flex items-center justify-between text-[11px] font-bold text-slate-500 tabular-nums">
-                  <span>كاش ${cashPct}%</span>
-                  <span>آجل ${totalSales > 0 ? 100 - cashPct : 0}%</span>
+                <div class="w-full h-2 bg-amber-200 rounded-full overflow-hidden flex mt-1">
+                  <div class="h-full bg-emerald-500 transition-all" style="width: ${cashBarPct}%"></div>
                 </div>
+                <p class="text-[10px] font-semibold text-slate-500">
+                  ${dispatchedOrders.length > 0 ? `بانتظار تقفيل ${dispatchedOrders.length} أوردر مع السواق حالياً` : 'يتم تحديث العهدة فور تقفيل حساب كل أوردر'}
+                </p>
               </div>
             </div>
           </section>
 
-          <!-- Aggregated Truck Loading Sheet -->
+          <!-- Aggregated Warehouse Truck Loading Sheet (Approved Orders ONLY) -->
           <section id="print-area" class="bg-white rounded-2xl border-2 border-slate-900 shadow-sm overflow-hidden mb-4">
             <div class="bg-slate-900 text-white p-4">
               <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1663,7 +2243,7 @@
                     <span>🚛</span>
                     <span>ورقة تحميل العربية للمخزن</span>
                   </h2>
-                  <p class="text-xs text-slate-300 mt-0.5">تجميع آلي لكل الأصناف المتشابهة + الكراتين الهدية لتجهيز العربية في دقائق</p>
+                  <p class="text-xs text-slate-300 mt-0.5">تظهر هنا الأوردرات <strong class="text-emerald-300">المعتمدة فقط</strong> (لا تدخل الأوردرات الجديدة قبل موافقتك)</p>
                 </div>
                 <div class="flex items-center gap-1.5 no-print">
                   <button
@@ -1681,37 +2261,15 @@
                 </div>
               </div>
 
-              <!-- Filter Toggle & Master Totals -->
               <div class="mt-3 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
-                <div class="inline-flex bg-slate-800 p-1 rounded-xl no-print">
-                  <button
-                    type="button"
-                    data-picking-filter="pending"
-                    class="min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                      state.pickingFilter === 'pending' ? 'bg-white text-slate-900' : 'text-slate-300 hover:text-white'
-                    }"
-                  >قيد التحميل فقط (${pendingOrders.length})</button>
-                  <button
-                    type="button"
-                    data-picking-filter="all"
-                    class="min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                      state.pickingFilter === 'all' ? 'bg-white text-slate-900' : 'text-slate-300 hover:text-white'
-                    }"
-                  >كل أوردرات اليوم (${totalOrders})</button>
-                </div>
+                <span class="text-xs font-bold text-sky-300 bg-sky-500/15 border border-sky-400/30 px-2.5 py-1 rounded-lg tabular-nums">
+                  أوردرات معتمدة قيد التحميل: ${approvedOrders.length}
+                </span>
 
                 <div class="flex items-center gap-2 text-xs font-extrabold flex-wrap">
                   <span class="bg-slate-800 border border-slate-700 px-2.5 py-1 rounded-lg tabular-nums">📦 ${totalLoadCartons} كرتونة</span>
-                  ${
-                    totalLoadBonus > 0
-                      ? `<span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-lg tabular-nums">🎁 +${totalLoadBonus} هدية</span>`
-                      : ''
-                  }
-                  ${
-                    totalLoadPackets > 0
-                      ? `<span class="bg-sky-400/20 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded-lg tabular-nums">🛍️ ${totalLoadPackets} شرنك</span>`
-                      : ''
-                  }
+                  ${totalLoadBonus > 0 ? `<span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-lg tabular-nums">🎁 +${totalLoadBonus} هدية</span>` : ''}
+                  ${totalLoadPackets > 0 ? `<span class="bg-sky-400/20 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded-lg tabular-nums">🛍️ ${totalLoadPackets} شرنك</span>` : ''}
                 </div>
               </div>
             </div>
@@ -1719,9 +2277,13 @@
             <div class="p-3.5 sm:p-4">
               ${
                 aggregated.length === 0
-                  ? `<div class="py-8 text-center">
-                      <p class="text-sm font-extrabold text-slate-700">كل الأوردرات تم تحميلها وخرجت للتوصيل ✓</p>
-                      <p class="text-xs text-slate-500 mt-1">يمكنك عرض "كل أوردرات اليوم" لمراجعة إجمالي مبيعات اليوم</p>
+                  ? `<div class="py-7 text-center">
+                      <p class="text-sm font-extrabold text-slate-700">لا توجد أوردرات معتمدة قيد التحميل حالياً</p>
+                      <p class="text-xs text-slate-500 mt-1">${
+                        newOrders.length > 0
+                          ? `يوجد ${newOrders.length} أوردر جديد بالأسفل — اضغط "اعتماد وتحويل للمخزن" لإضافته لورقة التحميل`
+                          : 'تم تحميل وخروج جميع الأوردرات المعتمدة ✓'
+                      }</p>
                     </div>`
                   : `
                     <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-2.5 no-print">
@@ -1746,26 +2308,14 @@
                                     <p class="text-sm font-extrabold ${isChecked ? 'line-through text-slate-400' : 'text-slate-900'} leading-snug">
                                       ${escapeHtml(item.name)}
                                     </p>
-                                    <p class="text-[11px] font-semibold text-slate-500 mt-0.5">مطلوب في ${item.orderCount} ${item.orderCount === 1 ? 'أوردر' : 'أوردرات'}</p>
+                                    <p class="text-[11px] font-semibold text-slate-500 mt-0.5">مجمع من ${item.orderCount} ${item.orderCount === 1 ? 'أوردر معتمد' : 'أوردرات معتمدة'}</p>
                                   </div>
                                 </div>
 
                                 <div class="flex items-center gap-1.5 flex-wrap justify-end flex-shrink-0">
-                                  ${
-                                    item.cartons > 0
-                                      ? `<span class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-black tabular-nums">${item.cartons} كرتونة</span>`
-                                      : ''
-                                  }
-                                  ${
-                                    item.bonusCartons > 0
-                                      ? `<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300 text-xs font-black tabular-nums">+${item.bonusCartons} هدية 🎁</span>`
-                                      : ''
-                                  }
-                                  ${
-                                    item.packets > 0
-                                      ? `<span class="px-2.5 py-1 rounded-lg bg-sky-100 text-sky-900 border border-sky-200 text-xs font-black tabular-nums">${item.packets} شرنك</span>`
-                                      : ''
-                                  }
+                                  ${item.cartons > 0 ? `<span class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-black tabular-nums">${item.cartons} كرتونة</span>` : ''}
+                                  ${item.bonusCartons > 0 ? `<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300 text-xs font-black tabular-nums">+${item.bonusCartons} هدية 🎁</span>` : ''}
+                                  ${item.packets > 0 ? `<span class="px-2.5 py-1 rounded-lg bg-sky-100 text-sky-900 border border-sky-200 text-xs font-black tabular-nums">${item.packets} شرنك</span>` : ''}
                                 </div>
                               </label>
                             </li>
@@ -1778,10 +2328,10 @@
             </div>
           </section>
 
-          <!-- Individual Orders Feed -->
+          <!-- Orders Feed with Approval Gate & Driver Settlement -->
           <section class="no-print">
             <div class="flex items-center justify-between mb-2.5 px-1">
-              <h2 class="text-base font-black text-slate-900">تفاصيل أوردرات العملاء (${state.orders.length})</h2>
+              <h2 class="text-base font-black text-slate-900">إدارة أوردرات العملاء (${state.orders.length})</h2>
               <span class="text-xs font-bold text-slate-500">الأحدث أولاً</span>
             </div>
 
@@ -1789,38 +2339,133 @@
               state.orders.length === 0
                 ? `<div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm font-bold text-slate-500">لا توجد أوردرات مستلمة اليوم بعد</div>`
                 : `<div class="space-y-3">
-                    ${state.orders.map(renderOrderAccordionCard).join('')}
+                    ${state.orders.map(renderOrderCard).join('')}
                   </div>`
             }
           </section>
         `;
       }
 
-      function renderOrderAccordionCard(order) {
+      function renderOrderCard(order) {
         const isExpanded = !!state.expandedOrders[order.id];
-        const isDispatched = order.status === 'dispatched';
         const isCash = order.paymentMethod.includes('كاش');
 
+        const statusMeta = {
+          new: {
+            label: '🔔 طلب جديد - بانتظار التأكيد',
+            badgeCls: 'bg-amber-100 text-amber-900 border border-amber-300',
+            cardBorder: 'border-amber-300 ring-1 ring-amber-200/70',
+          },
+          approved: {
+            label: '📦 معتمد - قيد التحميل',
+            badgeCls: 'bg-sky-100 text-sky-900 border border-sky-200',
+            cardBorder: 'border-sky-300',
+          },
+          dispatched: {
+            label: '🚚 خرج للتوصيل مع السواق',
+            badgeCls: 'bg-cyan-600 text-white',
+            cardBorder: 'border-cyan-300',
+          },
+          settled: {
+            label: '✅ تم التسليم والتقفيل',
+            badgeCls: 'bg-emerald-600 text-white',
+            cardBorder: 'border-emerald-300 bg-emerald-50/20',
+          },
+          rejected: {
+            label: '✕ مرفوض / ملغي',
+            badgeCls: 'bg-slate-200 text-slate-600',
+            cardBorder: 'border-slate-200 opacity-65',
+          },
+        };
+
+        const meta = statusMeta[order.status] || statusMeta.new;
+
+        let primaryActionsHtml = '';
+        if (order.status === 'new') {
+          primaryActionsHtml = `
+            <div class="px-3.5 sm:px-4 pb-3 flex items-center gap-2">
+              <button
+                type="button"
+                data-order-action="approve"
+                data-oid="${order.id}"
+                class="flex-1 min-h-[44px] px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold shadow-sm transition-all"
+              >✓ اعتماد وتحويل للمخزن</button>
+              <button
+                type="button"
+                data-order-action="reject"
+                data-oid="${order.id}"
+                class="min-h-[44px] px-3.5 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-extrabold transition-colors"
+              >رفض / إلغاء</button>
+            </div>
+          `;
+        } else if (order.status === 'approved') {
+          primaryActionsHtml = `
+            <div class="px-3.5 sm:px-4 pb-3 flex items-center gap-2">
+              <button
+                type="button"
+                data-order-action="dispatch"
+                data-oid="${order.id}"
+                class="flex-1 min-h-[44px] px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold shadow-sm transition-all"
+              >🚚 خرج للتوصيل مع السواق</button>
+            </div>
+          `;
+        } else if (order.status === 'dispatched') {
+          primaryActionsHtml = `
+            <div class="px-3.5 sm:px-4 pb-3 flex items-center gap-2">
+              <button
+                type="button"
+                data-order-action="open-settle"
+                data-oid="${order.id}"
+                class="flex-1 min-h-[44px] px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white text-xs sm:text-sm font-extrabold shadow-sm transition-all"
+              >💰 تسليم وتقفيل الحساب (عهدة السواق)</button>
+            </div>
+          `;
+        } else if (order.status === 'settled') {
+          primaryActionsHtml = `
+            <div class="px-3.5 sm:px-4 pb-3">
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-extrabold">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-emerald-800 tabular-nums">💵 كاش محصل: ${formatMoney(order.actualCashCollected || 0)} ج</span>
+                  <span class="text-slate-300">|</span>
+                  <span class="${(order.remainingCredit || 0) > 0 ? 'text-amber-800' : 'text-slate-500'} tabular-nums">📒 متبقي آجل: ${formatMoney(order.remainingCredit || 0)} ج</span>
+                </div>
+                <button
+                  type="button"
+                  data-order-action="open-settle"
+                  data-oid="${order.id}"
+                  class="text-[11px] font-bold text-slate-600 hover:text-slate-900 underline"
+                >تعديل التقفيل</button>
+              </div>
+            </div>
+          `;
+        } else if (order.status === 'rejected') {
+          primaryActionsHtml = `
+            <div class="px-3.5 sm:px-4 pb-3 flex items-center justify-end">
+              <button
+                type="button"
+                data-order-action="restore"
+                data-oid="${order.id}"
+                class="min-h-[38px] px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold"
+              >↩️ استرجاع كطلب جديد</button>
+            </div>
+          `;
+        }
+
         return `
-          <article class="bg-white rounded-2xl border ${
-            isDispatched ? 'border-emerald-200 bg-emerald-50/20' : 'border-slate-200'
-          } shadow-sm overflow-hidden">
-            <!-- Order Summary Header -->
+          <article class="bg-white rounded-2xl border ${meta.cardBorder} shadow-sm overflow-hidden">
             <button
               type="button"
               data-toggle-order="${order.id}"
               class="w-full p-3.5 sm:p-4 text-right flex items-center justify-between gap-3 hover:bg-slate-50/70 transition-colors"
             >
               <div class="min-w-0 flex-1">
-                <div class="flex items-center gap-2 flex-wrap mb-1">
+                <div class="flex items-center gap-1.5 flex-wrap mb-1.5">
                   <span class="text-xs font-black text-slate-500 tabular-nums">#${order.number}</span>
                   <span class="text-xs font-bold text-slate-400">• ${escapeHtml(order.createdAt)}</span>
                   <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full ${
                     isCash ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'
                   }">${escapeHtml(order.paymentMethod)}</span>
-                  <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full ${
-                    isDispatched ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-700'
-                  }">${isDispatched ? '✓ خرج للتوصيل' : '⏳ قيد التحميل'}</span>
+                  <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full ${meta.badgeCls}">${meta.label}</span>
                 </div>
                 <h3 class="text-sm sm:text-base font-black text-slate-900 truncate">${escapeHtml(order.shopName)}</h3>
                 <p class="text-xs font-semibold text-slate-500 truncate mt-0.5">📍 ${escapeHtml(order.address)}</p>
@@ -1840,10 +2485,11 @@
               </div>
             </button>
 
-            <!-- Expanded Details -->
+            ${primaryActionsHtml}
+
             ${
               isExpanded
-                ? `<div class="px-3.5 sm:px-4 pb-4 pt-2 border-t border-slate-100 bg-slate-50/50 animate-fade-in">
+                ? `<div class="px-3.5 sm:px-4 pb-4 pt-2 border-t border-slate-100 bg-slate-50/60 animate-fade-in">
                     <div class="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100 mb-3">
                       ${order.items
                         .map(
@@ -1873,29 +2519,14 @@
                         : ''
                     }
 
-                    <div class="flex items-center gap-2">
-                      <button
-                        type="button"
-                        data-dispatch-order="${order.id}"
-                        class="flex-1 min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all ${
-                          isDispatched
-                            ? 'bg-slate-200 hover:bg-slate-300 text-slate-800'
-                            : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
-                        }"
-                      >
-                        ${
-                          isDispatched
-                            ? `<span>↩️ إرجاع لقائمة "قيد التحميل"</span>`
-                            : `<span>✓ تم التحميل / خرج للتوصيل</span>`
-                        }
-                      </button>
+                    <div class="flex items-center justify-end">
                       <a
                         href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(order))}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="min-h-[44px] px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors"
+                        class="min-h-[42px] px-4 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-extrabold inline-flex items-center gap-1.5 transition-colors"
                       >
-                        <span>واتساب</span>
+                        <span>إعادة فتح الفاتورة في واتساب</span>
                       </a>
                     </div>
                   </div>`
@@ -1906,7 +2537,7 @@
       }
 
       // =========================================================================
-      // MODALS & DRAWERS (Checkout, Order Success, Add Product, Confirm Reset)
+      // MODALS & DRAWERS
       // =========================================================================
       function closeModal() {
         const root = document.getElementById('modal-root');
@@ -1934,22 +2565,41 @@
         const summary = getCartSummary();
         if (!summary.hasItems) return;
 
+        if (summary.totalAmount < MIN_ORDER_VALUE) {
+          const remaining = MIN_ORDER_VALUE - summary.totalAmount;
+          showToast(`الحد الأدنى للطلب ${formatMoney(MIN_ORDER_VALUE)} ج — فاضلك ${formatMoney(remaining)} جنيه`, 'warning');
+          return;
+        }
+
+        const profile = state.savedCustomerProfile;
+        if (profile) {
+          if (!state.checkoutDraft.shopName) state.checkoutDraft.shopName = profile.shopName || '';
+          if (!state.checkoutDraft.address) state.checkoutDraft.address = profile.address || '';
+          if (!state.checkoutDraft.phone) state.checkoutDraft.phone = profile.phone || '';
+        }
+
         openModal(`
           <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden animate-slide-up">
-            <!-- Drawer Header -->
             <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
               <div>
                 <h2 class="text-lg font-black text-slate-900">مراجعة وإرسال الطلب</h2>
-                <p class="text-xs font-semibold text-slate-500">فاتورة فورية عبر واتساب + تسجيل تلقائي في المخزن</p>
+                <p class="text-xs font-semibold text-slate-500">فاتورة فورية عبر واتساب + إرسال مباشر للمكتب للاعتماد</p>
               </div>
               <button type="button" id="btn-close-modal" class="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-600" aria-label="إغلاق">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             </div>
 
-            <!-- Drawer Body -->
             <div class="p-5 overflow-y-auto space-y-4">
-              <!-- Order Items Review -->
+              ${
+                profile && profile.shopName
+                  ? `<div class="bg-sky-50 border border-sky-200 text-sky-900 rounded-xl px-3.5 py-2.5 text-xs font-extrabold flex items-center gap-2">
+                      <span>👋</span>
+                      <span>أهلاً بعودتك يا ${escapeHtml(profile.shopName)} — بياناتك محفوظة للطلب السريع</span>
+                    </div>`
+                  : ''
+              }
+
               <div>
                 <div class="flex items-center justify-between mb-2">
                   <span class="text-xs font-extrabold text-slate-700">الأصناف المطلوبة (${summary.lines.length})</span>
@@ -1978,7 +2628,6 @@
                 </div>
               </div>
 
-              <!-- Totals Box -->
               <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 space-y-1.5">
                 <div class="flex items-center justify-between text-xs font-bold text-emerald-900">
                   <span>إجمالي الكميات:</span>
@@ -1999,7 +2648,6 @@
                 </div>
               </div>
 
-              <!-- Customer Form -->
               <form id="checkout-form" class="space-y-3.5" novalidate>
                 <div>
                   <label for="input-shop-name" class="block text-xs font-extrabold text-slate-800 mb-1.5">
@@ -2043,7 +2691,6 @@
                   />
                 </div>
 
-                <!-- Payment Method Radio Cards -->
                 <div>
                   <span class="block text-xs font-extrabold text-slate-800 mb-1.5">طريقة الدفع</span>
                   <div class="grid grid-cols-2 gap-2.5">
@@ -2051,7 +2698,7 @@
                       <input type="radio" name="paymentMethod" value="كاش عند الاستلام" class="peer sr-only" ${
                         state.checkoutDraft.paymentMethod === 'كاش عند الاستلام' ? 'checked' : ''
                       } />
-                      <div class="min-h-[54px] p-3 rounded-xl border-2 border-slate-200 peer-checked:border-emerald-600 peer-checked:bg-emerald-50 text-center transition-all flex flex-col justify-center">
+                      <div class="min-h-[62px] p-3 rounded-xl border-2 border-slate-200 peer-checked:border-emerald-600 peer-checked:bg-emerald-50 text-center transition-all flex flex-col justify-center">
                         <span class="text-xs sm:text-sm font-extrabold text-slate-900">💵 كاش عند الاستلام</span>
                         <span class="text-[10px] font-semibold text-slate-500 mt-0.5">نقدي للسواق</span>
                       </div>
@@ -2060,9 +2707,9 @@
                       <input type="radio" name="paymentMethod" value="آجل (على الحساب)" class="peer sr-only" ${
                         state.checkoutDraft.paymentMethod === 'آجل (على الحساب)' ? 'checked' : ''
                       } />
-                      <div class="min-h-[54px] p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 text-center transition-all flex flex-col justify-center">
+                      <div class="min-h-[62px] p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 text-center transition-all flex flex-col justify-center">
                         <span class="text-xs sm:text-sm font-extrabold text-slate-900">📒 آجل (على الحساب)</span>
-                        <span class="text-[10px] font-semibold text-slate-500 mt-0.5">للعملاء المسجلين</span>
+                        <span class="text-[10px] font-bold text-amber-800 mt-0.5 leading-tight">للعملاء المعتمدين لدى المكتب فقط</span>
                       </div>
                     </label>
                   </div>
@@ -2124,6 +2771,16 @@
             closeModal();
             return;
           }
+          if (currentSummary.totalAmount < MIN_ORDER_VALUE) {
+            errEl.textContent = `الحد الأدنى للطلب ${formatMoney(MIN_ORDER_VALUE)} جنيه.`;
+            errEl.classList.remove('hidden');
+            return;
+          }
+
+          // Save repeat customer profile automatically
+          const nextProfile = { shopName, address, phone };
+          state.savedCustomerProfile = nextProfile;
+          saveCustomerProfile(nextProfile);
 
           const newOrder = {
             id: `ORD-${state.nextOrderNumber}`,
@@ -2134,7 +2791,10 @@
             phone,
             paymentMethod,
             notes,
-            status: 'pending',
+            status: 'new', // Lands in approval gate first
+            actualCashCollected: null,
+            remainingCredit: null,
+            settledAt: null,
             totalAmount: currentSummary.totalAmount,
             totalCartons: currentSummary.totalCartons,
             totalPackets: currentSummary.totalPackets,
@@ -2154,19 +2814,19 @@
           state.orders.unshift(newOrder);
           state.nextOrderNumber += 1;
           state.cart = {};
+          state.checkoutDraft.notes = '';
           persistState();
           render();
 
           const waText = buildWhatsAppMessage(newOrder);
           const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
 
-          // Attempt to open WhatsApp in new tab
           try {
             window.open(waUrl, '_blank', 'noopener,noreferrer');
           } catch (_) {}
 
           openOrderSuccessModal(newOrder, waText, waUrl);
-          showToast(`تم تسجيل الأوردر #${newOrder.number} بنجاح في لوحة التاجر!`, 'success');
+          showToast(`تم تسجيل الأوردر #${newOrder.number} في بوابة اعتماد التاجر!`, 'success');
         });
       }
 
@@ -2177,8 +2837,8 @@
               <div class="w-12 h-12 rounded-full bg-white/20 mx-auto flex items-center justify-center mb-2">
                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
               </div>
-              <h2 class="text-xl font-black">تم تسجيل طلبك رقم #${order.number}</h2>
-              <p class="text-xs font-semibold text-emerald-100 mt-1">تمت إضافة الأوردر لحظياً لورقة تحميل العربية في لوحة تحكم التاجر</p>
+              <h2 class="text-xl font-black">تم إرسال طلبك رقم #${order.number}</h2>
+              <p class="text-xs font-semibold text-emerald-100 mt-1">الطلب وصل للوحة التاجر كـ "طلب جديد" وبانتظار الاعتماد والتحويل للمخزن</p>
             </div>
 
             <div class="p-5 overflow-y-auto space-y-4">
@@ -2204,7 +2864,7 @@
                   id="btn-go-merchant-orders"
                   class="min-h-[48px] px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-colors"
                 >
-                  <span>عرض في لوحة التاجر</span>
+                  <span>اعتماد في لوحة التاجر</span>
                 </button>
               </div>
 
@@ -2233,7 +2893,127 @@
         document.getElementById('btn-done-modal').addEventListener('click', closeModal);
       }
 
+      function openSettlementModal(order) {
+        const isCash = order.paymentMethod.includes('كاش');
+        const defaultCash =
+          order.actualCashCollected != null
+            ? order.actualCashCollected
+            : isCash
+            ? order.totalAmount
+            : 0;
+
+        openModal(`
+          <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden animate-slide-up">
+            <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <div>
+                <h2 class="text-lg font-black text-slate-900">💰 تسليم وتقفيل الحساب</h2>
+                <p class="text-xs font-semibold text-slate-500">أوردر #${order.number} — ${escapeHtml(order.shopName)}</p>
+              </div>
+              <button type="button" id="btn-close-modal" class="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-600" aria-label="إغلاق">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <form id="settlement-form" class="p-5 space-y-4" novalidate>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between text-xs font-bold">
+                <div>
+                  <span class="text-slate-500 block">إجمالي الفاتورة</span>
+                  <span class="text-lg font-black text-slate-900 tabular-nums">${formatMoney(order.totalAmount)} جنيه</span>
+                </div>
+                <span class="px-2.5 py-1 rounded-full ${isCash ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'} font-extrabold">
+                  ${escapeHtml(order.paymentMethod)}
+                </span>
+              </div>
+
+              <div>
+                <label for="input-actual-cash" class="block text-xs font-extrabold text-slate-800 mb-1.5">
+                  المبلغ الكاش المحصل فعلاً من العميل (ج)
+                </label>
+                <input
+                  id="input-actual-cash"
+                  type="number"
+                  inputmode="decimal"
+                  min="0"
+                  max="${order.totalAmount}"
+                  step="any"
+                  value="${defaultCash}"
+                  class="w-full min-h-[50px] px-4 py-2.5 rounded-xl border-2 border-emerald-400 focus:border-emerald-600 outline-none text-xl font-black text-slate-900 tabular-nums"
+                />
+                <div class="flex items-center gap-1.5 mt-2 flex-wrap">
+                  <button type="button" data-quick-cash="${order.totalAmount}" class="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-extrabold">كامل المبلغ (${formatMoney(order.totalAmount)} ج)</button>
+                  <button type="button" data-quick-cash="${Math.round(order.totalAmount / 2)}" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold">نصف المبلغ</button>
+                  <button type="button" data-quick-cash="0" class="px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-[11px] font-extrabold">آجل بالكامل (0 ج)</button>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 text-white rounded-xl p-3.5 space-y-1.5 text-xs font-extrabold">
+                <div class="flex items-center justify-between">
+                  <span class="text-emerald-300">💵 يُضاف لعهدة السواق (كاش):</span>
+                  <span id="settle-preview-cash" class="text-base font-black text-emerald-400 tabular-nums">${formatMoney(defaultCash)} ج</span>
+                </div>
+                <div class="flex items-center justify-between pt-1.5 border-t border-slate-700">
+                  <span class="text-amber-300">📒 يُرحّل كآجل على العميل:</span>
+                  <span id="settle-preview-credit" class="text-base font-black text-amber-300 tabular-nums">${formatMoney(Math.max(0, order.totalAmount - defaultCash))} ج</span>
+                </div>
+              </div>
+
+              <div id="settle-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-xs font-extrabold rounded-xl px-3 py-2"></div>
+
+              <button type="submit" class="w-full min-h-[48px] px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-md transition-colors">
+                تأكيد التسليم وتقفيل الحساب ✓
+              </button>
+            </form>
+          </div>
+        `);
+
+        const cashInput = document.getElementById('input-actual-cash');
+        const previewCash = document.getElementById('settle-preview-cash');
+        const previewCredit = document.getElementById('settle-preview-credit');
+
+        function updateSettlementPreview() {
+          const val = Math.max(0, parseFloat(cashInput.value) || 0);
+          const capped = Math.min(val, order.totalAmount);
+          const credit = Math.max(0, +(order.totalAmount - capped).toFixed(2));
+          previewCash.textContent = `${formatMoney(capped)} ج`;
+          previewCredit.textContent = `${formatMoney(credit)} ج`;
+        }
+
+        cashInput.addEventListener('input', updateSettlementPreview);
+        document.querySelectorAll('[data-quick-cash]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            cashInput.value = btn.getAttribute('data-quick-cash');
+            updateSettlementPreview();
+          });
+        });
+
+        document.getElementById('btn-close-modal').addEventListener('click', closeModal);
+        document.getElementById('settlement-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = parseFloat(normalizeArabicDigits(cashInput.value));
+          const errEl = document.getElementById('settle-error');
+          if (!Number.isFinite(val) || val < 0 || val > order.totalAmount) {
+            errEl.textContent = `برجاء إدخال مبلغ بين 0 و ${formatMoney(order.totalAmount)} جنيه.`;
+            errEl.classList.remove('hidden');
+            return;
+          }
+
+          order.actualCashCollected = +val.toFixed(2);
+          order.remainingCredit = +Math.max(0, order.totalAmount - order.actualCashCollected).toFixed(2);
+          order.status = 'settled';
+          order.settledAt = getNowArabicTime();
+          persistState();
+          closeModal();
+          render();
+          showToast(
+            `تم تقفيل أوردر #${order.number}: كاش ${formatMoney(order.actualCashCollected)} ج • آجل ${formatMoney(order.remainingCredit)} ج ✓`
+          );
+        });
+      }
+
       function openAddProductModal() {
+        const categories = getAllCategories();
+        const brands = getAllBrands();
+
         openModal(`
           <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden animate-slide-up">
             <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
@@ -2252,11 +3032,20 @@
                 <input id="new-prod-name" type="text" required placeholder="مثلاً: بسكويت أهلاوي شوكولاتة (24 باكو)" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold" />
               </div>
 
-              <div>
-                <label for="new-prod-cat" class="block text-xs font-extrabold text-slate-800 mb-1">القسم</label>
-                <select id="new-prod-cat" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold bg-white">
-                  ${CATEGORIES.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
-                </select>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label for="new-prod-cat" class="block text-xs font-extrabold text-slate-800 mb-1">القسم</label>
+                  <select id="new-prod-cat" class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold bg-white">
+                    ${categories.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label for="new-prod-brand" class="block text-xs font-extrabold text-slate-800 mb-1">الشركة المورّدة <span class="text-red-500">*</span></label>
+                  <input id="new-prod-brand" type="text" list="brands-datalist" required placeholder="اختر أو اكتب شركة..." class="w-full min-h-[46px] px-3.5 py-2 rounded-xl border border-slate-300 focus:border-emerald-500 outline-none text-sm font-bold" />
+                  <datalist id="brands-datalist">
+                    ${brands.map((b) => `<option value="${escapeHtml(b)}"></option>`).join('')}
+                  </datalist>
+                </div>
               </div>
 
               <div class="grid grid-cols-2 gap-3">
@@ -2302,6 +3091,7 @@
           e.preventDefault();
           const name = document.getElementById('new-prod-name').value.trim();
           const category = document.getElementById('new-prod-cat').value;
+          const brand = document.getElementById('new-prod-brand').value.trim() || 'توريد عام';
           const cartonPrice = parseFloat(document.getElementById('new-prod-carton').value);
           const packetRaw = document.getElementById('new-prod-packet').value.trim();
           const packetPrice = packetRaw ? parseFloat(packetRaw) : null;
@@ -2323,6 +3113,7 @@
             id: 'p-' + Date.now(),
             name,
             category,
+            brand,
             cartonPrice,
             originalCartonPrice: null,
             packetPrice: packetPrice && packetPrice > 0 ? packetPrice : null,
@@ -2341,7 +3132,209 @@
           persistState();
           closeModal();
           render();
-          showToast(`تمت إضافة "${name}" للكتالوج بنجاح ✓`);
+          showToast(`تمت إضافة "${name}" (${brand}) للكتالوج بنجاح ✓`);
+        });
+      }
+
+      function openCsvModal() {
+        let previewRows = [];
+
+        openModal(`
+          <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden animate-slide-up">
+            <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <div>
+                <h2 class="text-lg font-black text-slate-900">استيراد / تصدير الكتالوج (Excel / CSV)</h2>
+                <p class="text-xs font-semibold text-slate-500">حدّث مئات الأسعار أو أضف أصناف جديدة دفعة واحدة من ملف إكسل بدون أخطاء</p>
+              </div>
+              <button type="button" id="btn-close-modal" class="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-600" aria-label="إغلاق">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <div class="p-5 overflow-y-auto space-y-4">
+              <!-- Step 1 & 2: Download Template / Export Current -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <button
+                  id="btn-download-template"
+                  type="button"
+                  class="min-h-[52px] px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                  <span>تحميل قالب CSV جاهز</span>
+                </button>
+                <button
+                  id="btn-export-catalog"
+                  type="button"
+                  class="min-h-[52px] px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                  <span>تصدير الكتالوج الحالي (${state.products.length})</span>
+                </button>
+              </div>
+
+              <!-- Step 3: Upload CSV -->
+              <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 bg-slate-50 text-center">
+                <label for="csv-file-input" class="cursor-pointer block">
+                  <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 mx-auto flex items-center justify-center mb-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+                  </div>
+                  <span class="text-sm font-extrabold text-slate-900 block">رفع ملف CSV لمعاينة التعديلات قبل الحفظ</span>
+                  <span class="text-[11px] font-semibold text-slate-500 block mt-1">الأعمدة: اسم الصنف، الفئة، الشركة، سعر الكرتونة، سعر الشرنك، تكلفة القطعة، نص العرض</span>
+                  <span class="mt-3 inline-flex items-center justify-center min-h-[42px] px-4 py-2 rounded-xl bg-white border border-slate-300 text-xs font-extrabold text-slate-800 hover:bg-slate-100 shadow-sm">
+                    اختيار ملف CSV من جهازك
+                  </span>
+                  <input id="csv-file-input" type="file" accept=".csv,text/csv" class="hidden" />
+                </label>
+              </div>
+
+              <!-- Preview Area -->
+              <div id="csv-preview-area" class="hidden space-y-3"></div>
+            </div>
+          </div>
+        `);
+
+        document.getElementById('btn-close-modal').addEventListener('click', closeModal);
+        document.getElementById('btn-download-template').addEventListener('click', downloadCsvTemplate);
+        document.getElementById('btn-export-catalog').addEventListener('click', exportCurrentCatalogCsv);
+
+        const fileInput = document.getElementById('csv-file-input');
+        const previewArea = document.getElementById('csv-preview-area');
+
+        fileInput.addEventListener('change', (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            const parsed = parseUploadedCsv(reader.result);
+            previewArea.classList.remove('hidden');
+
+            if (parsed.error || parsed.rows.length === 0) {
+              previewRows = [];
+              previewArea.innerHTML = `
+                <div class="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3.5 text-xs font-extrabold">
+                  ${escapeHtml(parsed.error || 'لم يتم العثور على صفوف صالحة للاستيراد. تأكد من استخدام القالب الجاهز.')}
+                </div>
+              `;
+              return;
+            }
+
+            previewRows = parsed.rows;
+            const updateCount = previewRows.filter((r) => r.action === 'update').length;
+            const newCount = previewRows.filter((r) => r.action === 'new').length;
+
+            previewArea.innerHTML = `
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs sm:text-sm font-extrabold text-emerald-950">
+                ✓ تم قراءة ${previewRows.length} صنف (تحديث أسعار ${updateCount} صنف موجود + إضافة ${newCount} صنف جديد)
+                ${parsed.skipped > 0 ? `<span class="block text-[11px] font-semibold text-amber-800 mt-1">تم تجاهل ${parsed.skipped} سطر غير مكتمل.</span>` : ''}
+              </div>
+
+              <div class="border border-slate-200 rounded-xl overflow-x-auto max-h-64 overflow-y-auto">
+                <table class="w-full text-right text-xs">
+                  <thead class="bg-slate-100 text-slate-700 font-extrabold sticky top-0">
+                    <tr>
+                      <th class="px-2.5 py-2">الحالة</th>
+                      <th class="px-2.5 py-2">الصنف</th>
+                      <th class="px-2.5 py-2">الشركة</th>
+                      <th class="px-2.5 py-2">الكرتونة</th>
+                      <th class="px-2.5 py-2">الشرنك</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 bg-white">
+                    ${previewRows
+                      .map(
+                        (r) => `
+                          <tr>
+                            <td class="px-2.5 py-2 whitespace-nowrap">
+                              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold ${
+                                r.action === 'update' ? 'bg-amber-100 text-amber-900' : 'bg-emerald-100 text-emerald-900'
+                              }">${r.action === 'update' ? 'تحديث' : 'جديد'}</span>
+                            </td>
+                            <td class="px-2.5 py-2 font-bold text-slate-900">
+                              ${escapeHtml(r.name)}
+                              <span class="block text-[10px] text-slate-400 font-semibold">${escapeHtml(r.category)}</span>
+                            </td>
+                            <td class="px-2.5 py-2 font-semibold text-slate-600 whitespace-nowrap">${escapeHtml(r.brand)}</td>
+                            <td class="px-2.5 py-2 font-black text-slate-900 tabular-nums whitespace-nowrap">
+                              ${
+                                r.action === 'update' && r.oldCartonPrice !== r.cartonPrice
+                                  ? `<span class="text-slate-400 line-through ml-1">${formatMoney(r.oldCartonPrice)}</span>→ ${formatMoney(r.cartonPrice)} ج`
+                                  : `${formatMoney(r.cartonPrice)} ج`
+                              }
+                            </td>
+                            <td class="px-2.5 py-2 font-bold text-slate-700 tabular-nums whitespace-nowrap">
+                              ${r.packetPrice != null ? `${formatMoney(r.packetPrice)} ج` : '—'}
+                            </td>
+                          </tr>
+                        `
+                      )
+                      .join('')}
+                  </tbody>
+                </table>
+              </div>
+
+              <button
+                id="btn-confirm-csv-import"
+                type="button"
+                class="w-full min-h-[48px] px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-md transition-colors"
+              >تأكيد واعتماد الاستيراد (${previewRows.length} صنف)</button>
+            `;
+
+            document.getElementById('btn-confirm-csv-import').addEventListener('click', () => {
+              let updated = 0;
+              let added = 0;
+
+              previewRows.forEach((r) => {
+                const { bonusBuy, bonusFree } = parseBonusRule(r.promoText);
+                const existing = state.products.find((p) => p.id === r.existingId);
+                if (existing) {
+                  existing.category = r.category;
+                  existing.brand = r.brand;
+                  existing.cartonPrice = r.cartonPrice;
+                  existing.packetPrice = r.packetPrice;
+                  existing.unitCost = r.unitCost;
+                  if (existing.unitCost > 0) {
+                    existing.unitsPerCarton = Math.max(1, Math.round(existing.cartonPrice / existing.unitCost));
+                  }
+                  if (r.promoText) {
+                    existing.promoText = r.promoText;
+                    existing.bonusBuy = bonusBuy;
+                    existing.bonusFree = bonusFree;
+                  }
+                  updated += 1;
+                } else {
+                  const unitsPerCarton = r.unitCost > 0 ? Math.max(1, Math.round(r.cartonPrice / r.unitCost)) : 12;
+                  const unitsPerPacket = r.packetPrice ? Math.max(1, Math.round(unitsPerCarton / 2)) : null;
+                  state.products.unshift({
+                    id: 'p-csv-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+                    name: r.name,
+                    category: r.category,
+                    brand: r.brand,
+                    cartonPrice: r.cartonPrice,
+                    originalCartonPrice: null,
+                    packetPrice: r.packetPrice,
+                    unitsPerCarton,
+                    unitsPerPacket,
+                    unitCost: r.unitCost,
+                    unitLabel: 'قطعة',
+                    promoText: r.promoText,
+                    bonusBuy,
+                    bonusFree,
+                    inStock: true,
+                    isClearance: false,
+                  });
+                  added += 1;
+                }
+              });
+
+              state.pendingPriceEdits = {};
+              persistState();
+              closeModal();
+              render();
+              showToast(`تم اعتماد الاستيراد بنجاح: تحديث ${updated} صنف + إضافة ${added} صنف جديد ✓`);
+            });
+          };
+          reader.readAsText(file, 'UTF-8');
         });
       }
 
@@ -2356,7 +3349,7 @@
               </div>
               <h2 class="text-lg font-black text-slate-900">إعادة ضبط البيانات التجريبية؟</h2>
               <p class="text-xs font-semibold text-slate-600 mt-1.5 leading-relaxed">
-                سيتم استرجاع جميع الأسعار وحالات المخزون والأوردرات التجريبية لحالتها الافتراضية لبدء عرض جديد.
+                سيتم استرجاع جميع الأسعار وحالات المخزون والأوردرات التجريبية وبيانات العميل المحفوظة لحالتها الافتراضية.
               </p>
             </div>
             <div class="grid grid-cols-2 gap-2.5 mt-5">
@@ -2373,6 +3366,7 @@
         document.getElementById('btn-cancel-reset').addEventListener('click', closeModal);
         document.getElementById('btn-confirm-reset').addEventListener('click', () => {
           safeStorage.remove(STORAGE_KEY);
+          safeStorage.remove(CUSTOMER_PROFILE_KEY);
           const fresh = getInitialPersistedState();
           state.products = fresh.products;
           state.orders = fresh.orders;
@@ -2384,6 +3378,14 @@
           state.merchantSearchQuery = '';
           state.activeCategory = 'الكل';
           state.expandedOrders = {};
+          state.savedCustomerProfile = null;
+          state.checkoutDraft = {
+            shopName: '',
+            address: '',
+            phone: '',
+            paymentMethod: 'كاش عند الاستلام',
+            notes: '',
+          };
           persistState();
           closeModal();
           render();
@@ -2406,7 +3408,6 @@
       function bindViewEvents() {
         const main = document.getElementById('app-main');
 
-        // ---- Customer View Events ----
         if (state.role === 'customer') {
           const searchInput = document.getElementById('customer-search-input');
           const clearSearchBtn = document.getElementById('btn-clear-search');
@@ -2444,7 +3445,6 @@
           });
         }
 
-        // ---- Merchant View Events ----
         if (state.role === 'merchant') {
           const tabInv = document.getElementById('merchant-tab-inventory');
           const tabOrd = document.getElementById('merchant-tab-orders');
@@ -2462,9 +3462,49 @@
           }
 
           const addBtn = document.getElementById('btn-open-add-product');
-          if (addBtn) {
-            addBtn.addEventListener('click', openAddProductModal);
+          if (addBtn) addBtn.addEventListener('click', openAddProductModal);
+
+          const csvBtn = document.getElementById('btn-open-csv-modal');
+          if (csvBtn) csvBtn.addEventListener('click', openCsvModal);
+
+          const toggleBulkBtn = document.getElementById('btn-toggle-bulk-panel');
+          if (toggleBulkBtn) {
+            toggleBulkBtn.addEventListener('click', () => {
+              state.bulkPanelOpen = !state.bulkPanelOpen;
+              render();
+            });
           }
+
+          const scopeTypeEl = document.getElementById('bulk-scope-type');
+          if (scopeTypeEl) {
+            scopeTypeEl.addEventListener('change', (e) => {
+              state.bulkScopeType = e.target.value;
+              if (state.bulkScopeType === 'brand') state.bulkScopeValue = getAllBrands()[0] || '';
+              if (state.bulkScopeType === 'category') state.bulkScopeValue = getAllCategories()[0] || '';
+              render();
+            });
+          }
+
+          const scopeValEl = document.getElementById('bulk-scope-value');
+          if (scopeValEl) {
+            scopeValEl.addEventListener('change', (e) => {
+              state.bulkScopeValue = e.target.value;
+              const previewEl = document.getElementById('bulk-preview-text');
+              if (previewEl) previewEl.textContent = getBulkPreviewText();
+            });
+          }
+
+          const bulkValInput = document.getElementById('bulk-value-input');
+          if (bulkValInput) {
+            bulkValInput.addEventListener('input', (e) => {
+              state.bulkValue = e.target.value;
+              const previewEl = document.getElementById('bulk-preview-text');
+              if (previewEl) previewEl.textContent = getBulkPreviewText();
+            });
+          }
+
+          const applyBulkBtn = document.getElementById('btn-apply-bulk');
+          if (applyBulkBtn) applyBulkBtn.addEventListener('click', applyBulkPriceUpdate);
 
           const mSearch = document.getElementById('merchant-search-input');
           if (mSearch) {
@@ -2485,16 +3525,13 @@
           const copyPickBtn = document.getElementById('btn-copy-picking');
           if (copyPickBtn) {
             copyPickBtn.addEventListener('click', () => {
-              const targetOrders =
-                state.pickingFilter === 'pending'
-                  ? state.orders.filter((o) => o.status === 'pending')
-                  : state.orders;
-              const agg = getAggregatedPickingList(targetOrders);
+              const approved = state.orders.filter((o) => o.status === 'approved');
+              const agg = getAggregatedPickingList(approved);
               if (agg.length === 0) {
-                showToast('لا توجد أصناف في ورقة التحميل حالياً', 'warning');
+                showToast('لا توجد أوردرات معتمدة في ورقة التحميل حالياً', 'warning');
                 return;
               }
-              const txt = buildPickingListText(agg, state.pickingFilter);
+              const txt = buildPickingListText(agg);
               if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(txt).then(() => showToast('تم نسخ ورقة التحميل لإرسالها للمخزن ✓'));
               } else {
@@ -2511,12 +3548,11 @@
       }
 
       // =========================================================================
-      // DELEGATED INTERACTIONS (Fast & Resilient Across Re-renders)
+      // DELEGATED INTERACTIONS
       // =========================================================================
       document.getElementById('app-main').addEventListener('click', (e) => {
         const target = e.target;
 
-        // Reset customer filters
         if (target.closest('#btn-reset-filters')) {
           state.searchQuery = '';
           state.activeCategory = 'الكل';
@@ -2524,7 +3560,20 @@
           return;
         }
 
-        // Unit selector on product card
+        // Bulk op & unit buttons
+        const bulkOpBtn = target.closest('[data-bulk-op]');
+        if (bulkOpBtn) {
+          state.bulkOperation = bulkOpBtn.getAttribute('data-bulk-op');
+          render();
+          return;
+        }
+        const bulkUnitBtn = target.closest('[data-bulk-unit]');
+        if (bulkUnitBtn) {
+          state.bulkUnit = bulkUnitBtn.getAttribute('data-bulk-unit');
+          render();
+          return;
+        }
+
         const unitBtn = target.closest('[data-select-unit]');
         if (unitBtn && !unitBtn.disabled) {
           const pid = unitBtn.getAttribute('data-pid');
@@ -2534,7 +3583,6 @@
           return;
         }
 
-        // Quantity +/- buttons
         const qtyBtn = target.closest('[data-qty-delta]');
         if (qtyBtn) {
           const pid = qtyBtn.getAttribute('data-pid');
@@ -2544,7 +3592,6 @@
           return;
         }
 
-        // Quick-add promo button (+10 or complete promo)
         const quickBtn = target.closest('[data-quick-add]');
         if (quickBtn) {
           const pid = quickBtn.getAttribute('data-pid');
@@ -2554,7 +3601,6 @@
           return;
         }
 
-        // Merchant: Stock toggle
         const stockToggle = target.closest('[data-toggle-stock]');
         if (stockToggle) {
           const pid = stockToggle.getAttribute('data-toggle-stock');
@@ -2574,7 +3620,6 @@
           return;
         }
 
-        // Merchant: Clearance toggle
         const clearanceToggle = target.closest('[data-toggle-clearance]');
         if (clearanceToggle) {
           const pid = clearanceToggle.getAttribute('data-toggle-clearance');
@@ -2582,14 +3627,13 @@
           if (prod) {
             prod.isClearance = !prod.isClearance;
             if (prod.isClearance && !prod.originalCartonPrice) {
-              // Suggest an original price reference ~10% higher if not already set
               prod.originalCartonPrice = Math.round(prod.cartonPrice * 1.1);
             }
             persistState();
             render();
             showToast(
               prod.isClearance
-                ? `🔥 تم تثبيت "${prod.name}" في أعلى الكتالوج كـ حرق سعر`
+                ? `🔥 تم تثبيت "${prod.name}" بأعلى الكتالوج كـ "لقطة اليوم - كمية محدودة"`
                 : `تم إلغاء وضع حرق السعر عن "${prod.name}"`,
               prod.isClearance ? 'warning' : 'info'
             );
@@ -2597,15 +3641,6 @@
           return;
         }
 
-        // Merchant: Picking filter toggle
-        const pickFilterBtn = target.closest('[data-picking-filter]');
-        if (pickFilterBtn) {
-          state.pickingFilter = pickFilterBtn.getAttribute('data-picking-filter');
-          render();
-          return;
-        }
-
-        // Merchant: Order accordion toggle
         const orderToggle = target.closest('[data-toggle-order]');
         if (orderToggle) {
           const oid = orderToggle.getAttribute('data-toggle-order');
@@ -2614,32 +3649,46 @@
           return;
         }
 
-        // Merchant: Mark order dispatched / pending
-        const dispatchBtn = target.closest('[data-dispatch-order]');
-        if (dispatchBtn) {
-          const oid = dispatchBtn.getAttribute('data-dispatch-order');
+        // Order Lifecycle Actions
+        const orderActionBtn = target.closest('[data-order-action]');
+        if (orderActionBtn) {
+          const action = orderActionBtn.getAttribute('data-order-action');
+          const oid = orderActionBtn.getAttribute('data-oid');
           const order = state.orders.find((o) => o.id === oid);
-          if (order) {
-            order.status = order.status === 'dispatched' ? 'pending' : 'dispatched';
+          if (!order) return;
+
+          if (action === 'approve') {
+            order.status = 'approved';
             persistState();
             render();
-            showToast(
-              order.status === 'dispatched'
-                ? `تم تحديث أوردر #${order.number} (${order.shopName}) إلى: خرج للتوصيل ✓`
-                : `تم إرجاع أوردر #${order.number} لقائمة قيد التحميل`,
-              order.status === 'dispatched' ? 'success' : 'info'
-            );
+            showToast(`تم اعتماد أوردر #${order.number} (${order.shopName}) وإضافته لورقة تحميل العربية ✓`);
+          } else if (action === 'reject') {
+            order.status = 'rejected';
+            persistState();
+            render();
+            showToast(`تم رفض وإلغاء أوردر #${order.number}`, 'warning');
+          } else if (action === 'restore') {
+            order.status = 'new';
+            persistState();
+            render();
+            showToast(`تم استرجاع أوردر #${order.number} كطلب جديد بانتظار الاعتماد`, 'info');
+          } else if (action === 'dispatch') {
+            order.status = 'dispatched';
+            persistState();
+            render();
+            showToast(`🚚 تم تحويل أوردر #${order.number} (${order.shopName}) إلى: خرج للتوصيل مع السواق`);
+          } else if (action === 'open-settle') {
+            openSettlementModal(order);
           }
           return;
         }
       });
 
-      // Delegated inline price editing & picking checkboxes
       document.getElementById('app-main').addEventListener('input', (e) => {
         const priceInput = e.target.closest('[data-price-input]');
         if (priceInput) {
           const pid = priceInput.getAttribute('data-pid');
-          const field = priceInput.getAttribute('data-price-input'); // 'carton' | 'packet'
+          const field = priceInput.getAttribute('data-price-input');
           const prod = state.products.find((p) => p.id === pid);
           if (!prod) return;
 
@@ -2648,7 +3697,6 @@
 
           if (field === 'carton') {
             state.pendingPriceEdits[pid].cartonPrice = rawVal;
-            // Live update unit cost text without re-rendering input
             const num = parseFloat(rawVal);
             if (num > 0 && prod.unitsPerCarton) {
               const unitEl = document.getElementById(`live-unit-cost-${pid}`);
@@ -2658,7 +3706,6 @@
             state.pendingPriceEdits[pid].packetPrice = rawVal;
           }
 
-          // Clean up entry if values match original
           const edit = state.pendingPriceEdits[pid];
           const cartonUnchanged =
             edit.cartonPrice === undefined || String(edit.cartonPrice) === String(prod.cartonPrice);
@@ -2720,7 +3767,7 @@
       }
 
       // =========================================================================
-      // GLOBAL STATIC BUTTON LISTENERS
+      // GLOBAL STATIC LISTENERS
       // =========================================================================
       document.getElementById('role-customer').addEventListener('click', () => {
         state.role = 'customer';
@@ -2780,7 +3827,6 @@
         showToast(`تم حفظ الأسعار وتحديث كتالوج العملاء لحظياً (${updatedCount} ${updatedCount === 1 ? 'صنف' : 'أصناف'}) ✓`);
       });
 
-      // Escape key closes modal
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           const root = document.getElementById('modal-root');
@@ -2788,7 +3834,7 @@
         }
       });
 
-      // Initial Boot
+      // Boot
       render();
     })();
   </script>
