@@ -7,9 +7,10 @@ An interactive, Arabic RTL (`dir="rtl"`) client-side demo for FMCG wholesale ord
 ## Live Demo
 
 - **GitHub Pages:** [https://miro-zone.github.io/tawreeda/](https://miro-zone.github.io/tawreeda/)
-- **URL Personalization:** Customize the store name and WhatsApp number directly via query parameters:
+- **Demo Link Generator (Internal):** Open [`share.html`](https://miro-zone.github.io/tawreeda/share.html) to quickly generate a properly encoded demo link for any merchant by name and phone number, send it directly via WhatsApp, and keep a local history of recent merchants.
+- **URL Personalization:** Customize the store name and WhatsApp number directly via query parameters (Egyptian formats like `010...` or Arabic digits are normalized automatically to `201...`):
   ```text
-  https://miro-zone.github.io/tawreeda/?name=مكتب%20النور%20للتوزيع&wa=201000000000
+  https://miro-zone.github.io/tawreeda/?name=مكتب%20النور%20للتوزيع&wa=01000000000
   ```
 
 ---
@@ -50,10 +51,12 @@ An interactive, Arabic RTL (`dir="rtl"`) client-side demo for FMCG wholesale ord
 ```text
 tawreeda/
 ├── index.html          # Static HTML shell & layout containers
+├── share.html          # Internal demo link generator for sending personalized links
 ├── styles.css          # Custom CSS, animations, toggle styles, and print rules
 ├── js/
 │   ├── app.js          # Entry point, render loop, and event wiring
 │   ├── state.js        # Config, URL params, localStorage persistence, and app state
+│   ├── share.js        # Standalone script for share.html (phone normalization, template, history)
 │   ├── seed.js         # Default demo products and orders
 │   ├── utils.js        # Formatting, bonus/cart calculations, toasts, and message builders
 │   ├── customer.js     # Customer storefront view and sticky cart bar

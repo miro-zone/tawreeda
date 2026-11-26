@@ -8,8 +8,22 @@ const urlParams = new URLSearchParams(window.location.search);
 const DEFAULT_STORE_NAME = 'مكتب الحاج محمود لتوزيع المواد الغذائية - جملة الجملة';
 const DEFAULT_WHATSAPP = '201000000000';
 
+export function normalizeWhatsAppNumber(raw) {
+  let digits = String(raw == null ? '' : raw)
+    .replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+    .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+    .replace(/[^\d]/g, '');
+
+  if (!digits) return '';
+  if (digits.startsWith('00')) digits = digits.slice(2);
+  if (/^2001[0125]\d{8}$/.test(digits)) return `20${digits.slice(3)}`;
+  if (/^01[0125]\d{8}$/.test(digits)) return `2${digits}`;
+  if (/^1[0125]\d{8}$/.test(digits)) return `20${digits}`;
+  return digits;
+}
+
 export const STORE_NAME = (urlParams.get('name') || '').trim() || DEFAULT_STORE_NAME;
-const cleanedWa = (urlParams.get('wa') || '').replace(/[^\d]/g, '');
+const cleanedWa = normalizeWhatsAppNumber(urlParams.get('wa'));
 export const WHATSAPP_NUMBER = cleanedWa || DEFAULT_WHATSAPP;
 
 if (STORE_NAME !== DEFAULT_STORE_NAME) {
